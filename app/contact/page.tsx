@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { SectionHeading } from "@/components/ui/SectionPrimitives";
 import { SITE } from "@/lib/content/team";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact Kevin Shoun — Belton & Temple TX",
   description:
-    "Contact the Office of Kevin Shoun — Realty of America, Central Texas luxury real estate.",
+    "Contact the Office of Kevin Shoun at Realty of America. Call or inquire about Belton, Temple, and Central Texas homes.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
@@ -14,7 +16,12 @@ export default function ContactPage() {
     <div className="pt-32 lg:pt-36">
       <section className="mx-auto grid max-w-7xl gap-14 px-6 pb-24 lg:grid-cols-2 lg:gap-20 lg:px-10 lg:pb-32">
         <div>
+          <Breadcrumbs
+            items={[{ name: "Contact", path: "/contact" }]}
+            className="mb-8"
+          />
           <SectionHeading
+            as="h1"
             eyebrow="By appointment"
             title="Tell us what you’re seeking"
             description="Share a few details and our office will follow up. For time-sensitive matters, call directly."

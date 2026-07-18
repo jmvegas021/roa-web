@@ -9,7 +9,7 @@ export function Hero() {
       <div className="absolute inset-0">
         <Image
           src={HERO_IMAGE}
-          alt="Luxury Central Texas estate at dusk"
+          alt="Residential home exterior in the Belton and Temple Texas area"
           fill
           priority
           sizes="100vw"
@@ -23,14 +23,14 @@ export function Hero() {
         <p className="animate-fade-up text-xs uppercase tracking-[0.28em] text-gold">
           Central Texas
           <span className="mx-3 text-stone-400">·</span>
-          Austin · Hill Country
+          Belton · Temple
         </p>
         <h1 className="font-display animate-fade-up-delay-1 mt-6 max-w-3xl text-[clamp(2.85rem,7.5vw,5.75rem)] leading-[0.92] text-stone-50 text-balance">
           The finest addresses, quietly represented.
         </h1>
         <p className="animate-fade-up-delay-2 mt-6 max-w-lg text-base leading-relaxed text-stone-400 sm:text-lg">
-          {SITE.office} — boutique luxury representation across Austin, Round
-          Rock, Georgetown, and the Hill Country.
+          {SITE.office} — discreet residential representation across Belton,
+          Temple, and Central Texas.
         </p>
         <div className="animate-fade-up-delay-3 mt-10 flex flex-wrap gap-4">
           <ButtonLink href="/listings">View collection</ButtonLink>

@@ -12,7 +12,7 @@ export function NeighborhoodsTeaser() {
         <SectionHeading
           eyebrow="Central Texas"
           title="Markets we know by heart"
-          description="Editorial guides to the corridors where Kevin’s clients buy and sell — not a dense card grid, a sense of place."
+          description="Editorial guides to Belton, Temple, Salado, and the Bell County corridor — a sense of place, not a checklist."
         />
         <div className="mt-14 grid gap-10 md:grid-cols-3">
           {featured.map((place) => (

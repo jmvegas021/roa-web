@@ -2,15 +2,24 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { ButtonLink } from "@/components/ui/SectionPrimitives";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { agentsManager } from "@/lib/idx/listings-service";
 import { TEAM } from "@/lib/content/team";
 
 export const metadata: Metadata = {
-  title: "Kevin Shoun",
+  title: "Kevin Shoun — Belton & Temple TX Real Estate Agent",
   description:
-    "Kevin Shoun — Broker Associate, Realty of America. Luxury representation across Central Texas.",
+    "Kevin Shoun, Broker Associate at Realty of America. Residential buyer and seller representation in Belton, Temple, and Central Texas.",
+  alternates: { canonical: "/agents/kevin-shoun" },
+  openGraph: {
+    title: "Kevin Shoun — Belton & Temple TX Realtor",
+    description:
+      "Broker Associate at Realty of America serving Belton, Temple, and Central Texas.",
+    url: "/agents/kevin-shoun",
+    images: [{ url: "/images/kevin-shoun.webp" }],
+  },
 };
 
 export default async function KevinShounPage() {
@@ -26,7 +35,7 @@ export default async function KevinShounPage() {
         <div className="relative aspect-[4/5] overflow-hidden bg-stone-800">
           <Image
             src={agent.imageUrl}
-            alt={agent.name}
+            alt={`${agent.name}, Belton and Temple Texas real estate agent`}
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"
@@ -34,6 +43,13 @@ export default async function KevinShounPage() {
           />
         </div>
         <div>
+          <Breadcrumbs
+            items={[
+              { name: "Agents", path: "/agents" },
+              { name: agent.name, path: "/agents/kevin-shoun" },
+            ]}
+            className="mb-8"
+          />
           <p className="text-xs uppercase tracking-[0.22em] text-gold">
             {agent.title}
           </p>

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { SectionHeading, ButtonLink } from "@/components/ui/SectionPrimitives";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { SITE } from "@/lib/content/team";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Kevin Shoun & Realty of America",
   description:
-    "About Realty of America — Office of Kevin Shoun. Luxury real estate in Central Texas.",
+    "About the Office of Kevin Shoun at Realty of America — Belton, Temple, and Central Texas residential real estate.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
@@ -13,10 +15,15 @@ export default function AboutPage() {
     <div className="pt-32 lg:pt-36">
       <section className="px-6 pb-24 lg:px-10 lg:pb-32">
         <div className="mx-auto max-w-3xl">
+          <Breadcrumbs
+            items={[{ name: "About", path: "/about" }]}
+            className="mb-8"
+          />
           <SectionHeading
+            as="h1"
             eyebrow={SITE.brand}
             title="Discretion is our first offering."
-            description="The Office of Kevin Shoun represents discerning clients across Austin, Round Rock, Georgetown, and the Hill Country — with editorial clarity and white-glove care."
+            description="The Office of Kevin Shoun represents buyers and sellers across Belton, Temple, and Central Texas — with clarity, discretion, and white-glove care."
           />
           <div className="prose-luxury mt-14 space-y-6 text-base">
             <p>

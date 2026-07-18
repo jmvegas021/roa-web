@@ -6,58 +6,59 @@ export interface Neighborhood {
   imageUrl: string;
 }
 
+/** Primary local markets for Kevin Shoun / Belton–Temple SEO. */
 export const NEIGHBORHOODS: Neighborhood[] = [
   {
-    slug: "austin",
-    name: "Austin",
-    region: "Travis County",
+    slug: "belton",
+    name: "Belton",
+    region: "Bell County",
     summary:
-      "From Westlake estates to downtown penthouses — Austin remains Central Texas’ cultural and luxury anchor.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1531218150217-54595bc2b934?auto=format&fit=crop&w=1400&q=80",
-  },
-  {
-    slug: "round-rock",
-    name: "Round Rock",
-    region: "Williamson County",
-    summary:
-      "Master-planned communities, golf-course living, and strong schools with a polished suburban rhythm.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1400&q=80",
-  },
-  {
-    slug: "georgetown",
-    name: "Georgetown",
-    region: "Williamson County",
-    summary:
-      "Historic square charm meets refined new construction — one of the region’s most sought-after addresses.",
+      "Lake Belton living, established neighborhoods, and a walkable downtown — one of Central Texas’ most sought-after small-city addresses.",
     imageUrl:
       "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1400&q=80",
   },
   {
-    slug: "hill-country",
-    name: "Hill Country",
-    region: "Dripping Springs · Lakeway · Spicewood",
+    slug: "temple",
+    name: "Temple",
+    region: "Bell County",
     summary:
-      "Oak canopies, acreage compounds, and quiet luxury west of Austin — privacy without compromise.",
+      "Medical-hub energy, strong employment, and a wide range of housing — from classic mid-century streets to newer master-planned communities.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
+    slug: "salado",
+    name: "Salado",
+    region: "Bell County",
+    summary:
+      "Creek-side charm, boutique Main Street, and acreage homes — a quieter luxury alternative between Belton and Georgetown.",
     imageUrl:
       "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80",
   },
   {
-    slug: "cedar-park",
-    name: "Cedar Park",
-    region: "Williamson County",
+    slug: "harker-heights",
+    name: "Harker Heights",
+    region: "Bell County",
     summary:
-      "Elevated family living with trail systems, dining, and easy access to the greater Austin corridor.",
+      "Family-oriented neighborhoods with convenient access to Fort Cavazos, shopping, and the Belton–Temple corridor.",
     imageUrl:
       "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=1400&q=80",
   },
   {
-    slug: "lakeway",
-    name: "Lakeway",
-    region: "Travis County",
+    slug: "nolanville",
+    name: "Nolanville",
+    region: "Bell County",
     summary:
-      "Lake Travis living — resort amenities, panoramic water views, and a leisurely luxury lifestyle.",
+      "Growing residential pockets between Belton and Killeen — newer construction, value, and easy highway access.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
+    slug: "central-texas",
+    name: "Greater Central Texas",
+    region: "Belton · Temple · Surrounds",
+    summary:
+      "Beyond the core cities — ranch acreage, Lake Belton recreation, and neighboring towns Kevin’s clients relocate to and from.",
     imageUrl:
       "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1400&q=80",
   },
@@ -66,20 +67,20 @@ export const NEIGHBORHOODS: Neighborhood[] = [
 export const TESTIMONIALS = [
   {
     quote:
-      "Kevin’s guidance through our Westlake purchase was precise, discreet, and entirely without pressure. We felt represented — not sold to.",
+      "Kevin’s guidance through our Belton purchase was precise, discreet, and entirely without pressure. We felt represented — not sold to.",
     name: "A. & R. Morrison",
-    detail: "Westlake buyers",
+    detail: "Belton buyers",
   },
   {
     quote:
       "From pricing strategy to closing, the office moved with the calm confidence you want when a home of this caliber is on the line.",
     name: "Elena Vargas",
-    detail: "Hill Country seller",
+    detail: "Temple seller",
   },
   {
     quote:
-      "Relocating to Georgetown could have been chaotic. Kevin’s team made every step feel intentional.",
+      "Relocating to Salado could have been chaotic. Kevin’s team made every step feel intentional.",
     name: "David Chen",
-    detail: "Georgetown relocation",
+    detail: "Salado relocation",
   },
 ];

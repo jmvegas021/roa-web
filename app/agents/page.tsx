@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { SectionHeading } from "@/components/ui/SectionPrimitives";
 import { agentsManager } from "@/lib/idx/listings-service";
 
 export const metadata: Metadata = {
-  title: "Agents",
+  title: "Kevin Shoun — Belton & Temple TX Realtor",
   description:
-    "Meet Kevin Shoun — Realty of America, serving Central Texas luxury real estate.",
+    "Meet Kevin Shoun, Broker Associate with Realty of America. Residential real estate in Belton, Temple, and Central Texas.",
+  alternates: { canonical: "/agents" },
 };
 
 export const revalidate = 600;
@@ -19,10 +21,15 @@ export default async function AgentsPage() {
     <div className="pt-32 lg:pt-36">
       <section className="px-6 pb-24 lg:px-10 lg:pb-32">
         <div className="mx-auto max-w-7xl">
+          <Breadcrumbs
+            items={[{ name: "Agents", path: "/agents" }]}
+            className="mb-8"
+          />
           <SectionHeading
+            as="h1"
             eyebrow="The office"
             title="Kevin Shoun"
-            description="Luxury representation across Austin, Round Rock, Georgetown, and the Texas Hill Country."
+            description="Residential representation across Belton, Temple, and Central Texas."
           />
           <div className="mt-16 grid max-w-md gap-12">
             {agents.map((agent) => (

@@ -48,6 +48,8 @@ interface SectionHeadingProps {
   title: string;
   description?: string;
   align?: "left" | "center";
+  /** Use h1 for primary page titles; h2 for in-page sections. */
+  as?: "h1" | "h2";
 }
 
 export function SectionHeading({
@@ -55,16 +57,18 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  as = "h2",
 }: SectionHeadingProps) {
   const alignment = align === "center" ? "text-center mx-auto" : "text-left";
+  const HeadingTag = as;
   return (
     <div className={`max-w-2xl ${alignment}`}>
       {eyebrow ? (
         <p className="text-xs uppercase tracking-[0.24em] text-gold">{eyebrow}</p>
       ) : null}
-      <h2 className="font-display mt-4 text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.05] text-stone-50 text-balance">
+      <HeadingTag className="font-display mt-4 text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.05] text-stone-50 text-balance">
         {title}
-      </h2>
+      </HeadingTag>
       {description ? (
         <p className="mt-5 max-w-xl text-base leading-[1.7] text-stone-400">
           {description}

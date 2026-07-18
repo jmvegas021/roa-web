@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { SectionHeading } from "@/components/ui/SectionPrimitives";
 import { NEIGHBORHOODS } from "@/lib/content/neighborhoods";
 
 export const metadata: Metadata = {
-  title: "Neighborhoods",
+  title: "Belton, Temple & Central Texas Neighborhoods",
   description:
-    "Central Texas neighborhoods — Austin, Round Rock, Georgetown, Hill Country, Cedar Park, and Lakeway.",
+    "Neighborhood guides for Belton, Temple, and Central Texas — character-focused market notes from the Office of Kevin Shoun.",
+  alternates: { canonical: "/neighborhoods" },
 };
 
 export default function NeighborhoodsPage() {
@@ -14,10 +16,15 @@ export default function NeighborhoodsPage() {
     <div className="pt-28 lg:pt-32">
       <section className="px-6 pb-12 lg:px-10">
         <div className="mx-auto max-w-7xl">
+          <Breadcrumbs
+            items={[{ name: "Neighborhoods", path: "/neighborhoods" }]}
+            className="mb-8"
+          />
           <SectionHeading
+            as="h1"
             eyebrow="Central Texas"
             title="Neighborhoods & corridors"
-            description="Places we know intimately — written for buyers and sellers who want a sense of character, not a checklist."
+            description="Markets we know intimately across Belton, Temple, Salado, and Bell County — written for buyers and sellers who want a sense of character, not a checklist."
           />
         </div>
       </section>

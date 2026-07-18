@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { IdxBrokerWidget } from "@/components/idx/IdxBrokerWidget";
 import { IdxHostedSearch } from "@/components/idx/IdxHostedSearch";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { ButtonLink, SectionHeading } from "@/components/ui/SectionPrimitives";
 import { getPublicIdxConfig } from "@/lib/idx/public-config";
 import { SITE } from "@/lib/content/team";
 
 export const metadata: Metadata = {
-  title: "MLS Search",
+  title: "MLS Search — Belton, Temple & Central Texas Homes",
   description:
-    "Search Central Texas MLS inventory with IDX Broker map search — Office of Kevin Shoun, Realty of America.",
+    "Search Belton, Temple, and Central Texas MLS inventory with IDX Broker map search — Office of Kevin Shoun, Realty of America.",
+  alternates: { canonical: "/search" },
 };
 
 /**
@@ -29,11 +31,16 @@ export default function SearchPage() {
     <div className="pt-28 lg:pt-32">
       <section className="px-6 lg:px-10">
         <div className="mx-auto max-w-7xl">
+          <Breadcrumbs
+            items={[{ name: "MLS Search", path: "/search" }]}
+            className="mb-8"
+          />
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <SectionHeading
+              as="h1"
               eyebrow="MLS search"
               title="Explore the market"
-              description="Live inventory from participating MLSs via IDX Broker. Search the map, filter by beds and price, then open any home for full details."
+              description="Live Belton, Temple, and Central Texas inventory from participating MLSs via IDX Broker. Search the map, filter by beds and price, then open any home for full details."
             />
             <div className="flex shrink-0 flex-wrap gap-3 pb-1">
               <ButtonLink href={advancedSearchUrl}>Advanced filters</ButtonLink>

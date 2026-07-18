@@ -3,7 +3,18 @@ import { Cormorant_Garamond, Outfit } from "next/font/google";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { IdxScript } from "@/components/idx/IdxScript";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE } from "@/lib/content/team";
+import {
+  buildKevinPersonSchema,
+  buildOrganizationSchema,
+  buildWebSiteSchema,
+} from "@/lib/seo/structuredData";
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_KEYWORDS,
+  getSiteUrl,
+} from "@/lib/site/siteUrl";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -20,33 +31,51 @@ const outfit = Outfit({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${SITE.brand} · ${SITE.office}`,
+    default: `${SITE.office} | ${SITE.brand} · Belton & Temple TX`,
     template: `%s · ${SITE.brand}`,
   },
-  description:
-    "Luxury real estate representation across Austin, Round Rock, Georgetown, and the Texas Hill Country. Office of Kevin Shoun — Realty of America.",
+  description: DEFAULT_DESCRIPTION,
+  keywords: DEFAULT_KEYWORDS,
+  applicationName: SITE.brand,
+  authors: [{ name: "Kevin Shoun", url: `${siteUrl}/agents/kevin-shoun` }],
+  creator: SITE.office,
+  publisher: SITE.brand,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
+    url: siteUrl,
     siteName: SITE.brand,
-    title: `${SITE.brand} · ${SITE.office}`,
-    description:
-      "Central Texas luxury real estate — discreet representation for exceptional homes.",
+    title: `${SITE.office} | ${SITE.brand}`,
+    description: DEFAULT_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.brand} · ${SITE.office}`,
-    description:
-      "Central Texas luxury real estate — discreet representation for exceptional homes.",
+    title: `${SITE.office} | ${SITE.brand}`,
+    description: DEFAULT_DESCRIPTION,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  category: "real estate",
+  icons: {
+    icon: [{ url: "/images/realty-of-america-logo.png", type: "image/png" }],
+    apple: [{ url: "/images/realty-of-america-logo.png", type: "image/png" }],
   },
 };
 
@@ -60,6 +89,13 @@ export default function RootLayout({
       <body
         className={`${cormorant.variable} ${outfit.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
       >
+        <JsonLd
+          data={[
+            buildOrganizationSchema(),
+            buildWebSiteSchema(),
+            buildKevinPersonSchema(),
+          ]}
+        />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-gold focus:px-4 focus:py-2 focus:text-stone-950"

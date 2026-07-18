@@ -18,9 +18,23 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const agent = await agentsManager.getBySlug(slug);
+  if (!agent) {
+    return { title: "Agent not found", robots: { index: false } };
+  }
+  const title = `${agent.name} — Belton & Temple TX Realtor`;
+  const description =
+    agent.bio?.slice(0, 155).trim() ||
+    `${agent.name}, ${agent.title} with Realty of America.`;
   return {
-    title: agent?.name ?? "Agent",
-    description: agent?.bio?.slice(0, 160),
+    title,
+    description,
+    alternates: { canonical: `/agents/${agent.slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `/agents/${agent.slug}`,
+      images: agent.imageUrl ? [{ url: agent.imageUrl }] : [],
+    },
   };
 }
 
