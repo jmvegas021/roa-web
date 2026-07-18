@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* Chrome MCP profile lives under .cursor and contains Unix sockets that
+   crash Turbopack/PostCSS when Tailwind auto-scans the project tree. */
+@source not "../.cursor";
+
+:root {
+  /* Cool ink / slate surfaces — Powersuit Blue (#10295A) deepened for luxury */
+  --color-stone-950: #070e1c;
+  --color-stone-900: #0e1830;
+  --color-stone-800: #1a2744;
+  --color-stone-700: #2a3a56;
+  --color-stone-50: #f2f4f7;
+  --color-stone-400: #9aa6b8;
+  /* Champagne platinum — metallic accent on navy (not flat yellow gold) */
+  --color-gold: #c5a87a;
+  --color-gold-muted: #a88f63;
+  /* Official ROA brand cues */
+  --color-roa-blue: #10295a;
+  --color-roa-green: #1a9175;
+  --background: var(--color-stone-950);
+  --foreground: var(--color-stone-50);
+  --muted: var(--color-stone-400);
+  --accent: var(--color-gold);
+  --surface: var(--color-stone-800);
+  --elevated: var(--color-stone-900);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-muted: var(--color-gold-muted);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-stone-950: var(--color-stone-950);
+  --color-stone-900: var(--color-stone-900);
+  --color-stone-800: var(--color-stone-800);
+  --color-stone-700: var(--color-stone-700);
+  --color-stone-50: var(--color-stone-50);
+  --color-stone-400: var(--color-stone-400);
+  --color-gold: var(--color-gold);
+  --color-roa-blue: var(--color-roa-blue);
+  --color-roa-green: var(--color-roa-green);
+  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-outfit);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  touch-action: manipulation;
+}
+
+a,
+button,
+[role="button"],
+summary {
+  cursor: pointer;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-gold) 35%, transparent);
+  color: var(--color-stone-50);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.font-display {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.36s both;
+}
+
+.animate-ken-burns {
+  animation: ken-burns 28s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-fade-up,
+  .animate-fade-up-delay-1,
+  .animate-fade-up-delay-2,
+  .animate-fade-up-delay-3,
+  .animate-ken-burns {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.hairline-gold {
+  border-color: color-mix(in srgb, var(--color-gold) 40%, transparent);
+}
+
+.prose-luxury p {
+  color: var(--color-stone-400);
+  line-height: 1.7;
+  max-width: 40rem;
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" fill="none">
+  <rect width="900" height="1200" fill="#292524"/>
+  <circle cx="450" cy="420" r="120" stroke="#C9A227" stroke-opacity="0.4" stroke-width="1"/>
+  <text x="450" y="700" text-anchor="middle" fill="#A8A29E" font-family="Georgia, serif" font-size="28">Agent</text>
+</svg>
