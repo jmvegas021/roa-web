@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "preview": "node scripts/preview-static.mjs",
-    "deploy": "node scripts/deploy-ftp.mjs",
-    "verify": "node scripts/verify-deploy.mjs",
+    "build:static": "STATIC_EXPORT=1 NEXT_PUBLIC_BASE_PATH=/kevin NEXT_PUBLIC_SITE_URL=https://www.dudewheresmyweb.site/kevin next build",
+    "start": "next start",
+    "preview:static": "node scripts/preview-static.mjs",
+    "deploy:ftp": "node scripts/deploy-ftp.mjs",
+    "verify:static": "node scripts/verify-deploy.mjs",
     "lint": "eslint app components lib"
   },
   "dependencies": {

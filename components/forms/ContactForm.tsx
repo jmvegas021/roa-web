@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { buildMailtoInquiry } from "@/lib/forms/buildMailtoInquiry";
+import { useState, useTransition } from "react";
+import { createLead } from "@/lib/idx/actions";
 
 interface ContactFormProps {
   listingId?: string;
@@ -17,59 +17,21 @@ export function ContactForm({
   propertyAddress,
   submitLabel = "Send inquiry",
 }: ContactFormProps) {
+  const [pending, startTransition] = useTransition();
   const [result, setResult] = useState<{ ok: boolean; message: string } | null>(
     null
   );
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function handleSubmit(formData: FormData) {
     setResult(null);
-
-    const formData = new FormData(event.currentTarget);
-
-    // Honeypot — bots that fill this are ignored quietly.
-    if (String(formData.get("website") ?? "")) {
-      setResult({
-        ok: true,
-        message: "Thank you. We will be in touch shortly.",
-      });
-      return;
-    }
-
-    const firstName = String(formData.get("firstName") ?? "").trim();
-    const lastName = String(formData.get("lastName") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const phone = String(formData.get("phone") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
-
-    if (!firstName || !lastName || !email) {
-      setResult({
-        ok: false,
-        message: "Please fill in your name and email.",
-      });
-      return;
-    }
-
-    const mailto = buildMailtoInquiry({
-      firstName,
-      lastName,
-      email,
-      phone: phone || undefined,
-      message: message || undefined,
-      listingId,
-      propertyAddress,
-    });
-
-    window.location.href = mailto;
-    setResult({
-      ok: true,
-      message:
-        "Your email app should open with this inquiry. If it does not, please call or email the office directly.",
+    startTransition(async () => {
+      const response = await createLead(formData);
+      setResult(response);
     });
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+    <form action={handleSubmit} className="space-y-5" noValidate>
       <input
         type="text"
         name="website"
@@ -134,9 +96,10 @@ export function ContactForm({
 
       <button
         type="submit"
-        className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center bg-gold px-6 py-3 text-xs uppercase tracking-[0.2em] text-stone-950 transition duration-200 hover:bg-accent-muted"
+        disabled={pending}
+        className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center bg-gold px-6 py-3 text-xs uppercase tracking-[0.2em] text-stone-950 transition duration-200 hover:bg-accent-muted disabled:cursor-wait disabled:opacity-70"
       >
-        {submitLabel}
+        {pending ? "Sending…" : submitLabel}
       </button>
 
       {result ? (

@@ -74,57 +74,43 @@ The IDX API **does not** return full MLS search results. This site intentionally
 | `/wrapper` | IDX dynamic wrapper template |
 | `/agents` · `/agents/kevin-shoun` | Team |
 | `/about` · `/contact` · `/neighborhoods` | Marketing |
-
-All routes are served under **`/kevin`** in production (e.g. `/kevin/listings/`).
+| `/api/idx/featured` | JSON proxy of featured listings (server) |
 
 ## Design system
 
 See [`design-system/MASTER.md`](./design-system/MASTER.md) for tokens, composition rules, and anti-patterns.
 
-## Deploy (static → dudewheresmyweb.site/kevin)
+## Deploy (Vercel — primary)
 
-This site is a **static export**, not an SPA. Each route is a real HTML file under `/kevin` (e.g. `/kevin/listings/index.html`). There is no client-side catch-all router.
+Default build is a **Next.js server app** (SSR, Server Actions, Image Optimization). The IDX API key stays in Vercel env vars and never reaches the browser.
 
-| Script | Purpose |
-|--------|---------|
-| `npm run build` | Next.js `output: 'export'` → `out/` with `basePath: /kevin` |
-| `npm run preview` | Local check at http://localhost:4173/kevin/ |
-| `npm run deploy` | FTP upload of `out/` → `ftp.dudewheresmyweb.site/kevin` |
+1. Import [jmvegas021/roa-web](https://github.com/jmvegas021/roa-web) in Vercel (already linked if using this repo).
+2. Set Production env:
+   - `NEXT_PUBLIC_SITE_URL=https://roa-web-tau.vercel.app` (or your custom domain)
+   - `IDX_API_KEY=…` (optional until live MLS)
+   - widget vars as needed
+3. Deploy — Framework Preset: Next.js, Build Command: `npm run build`, Output: default (no static export).
 
 ```bash
-cp .env.example .env.local
-# set NEXT_PUBLIC_SITE_URL=https://www.dudewheresmyweb.site/kevin
-# optional: IDX_* at build time to bake live featured listings into HTML
-
-npm install
 npm run build
-npm run preview   # sanity-check locally
-
-FTP_PASSWORD='your-ftp-password' npm run deploy
-npm run verify
+npm start
 ```
 
-If the page loads but CSS/JS 404 with MIME `text/html`, **Cloudflare cached an early 404**. Purge cache for `www.dudewheresmyweb.site/kevin` (CF Dashboard → Caching → Purge), then hard-refresh. Also turn **Rocket Loader off** for this host/path — it rewrites Next script tags and breaks the app.
-
-**Deploy layout**
+IDX Dynamic Wrapper URL:
 
 ```
-out/                    ← Next export (asset URLs already use /kevin/…)
-  index.html
-  listings/index.html
-  _next/…
-  .htaccess
-
-FTP remote:
-  /kevin/               ← upload contents of out/ here
+https://roa-web-tau.vercel.app/wrapper
 ```
 
-Contact form uses `mailto:` (no server actions on static hosting). IDX widgets still load client-side when subdomain/IDs are set. Featured listings/agents are snapshotted at **build** time.
+## Optional: static FTP export (`/kevin`)
 
-### IDX Dynamic Wrapper (when ready)
+For Apache hosting under `https://www.dudewheresmyweb.site/kevin`:
 
-Point IDX Control Panel → Wrappers → Dynamic Wrapper URL to:
-
+```bash
+npm run build:static   # output: 'export' + basePath /kevin → out/
+npm run preview:static
+FTP_PASSWORD='…' npm run deploy:ftp
+npm run verify:static
 ```
-https://www.dudewheresmyweb.site/kevin/wrapper/
-```
+
+Static mode has no Server Actions; use the Vercel deploy for live IDX leads.

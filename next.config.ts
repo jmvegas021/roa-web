@@ -1,18 +1,23 @@
 import type { NextConfig } from "next";
 
 /**
- * Static site under https://www.dudewheresmyweb.site/kevin
+ * Default: full Next.js App Router on Vercel (SSR, Server Actions, Image Optimization).
  *
- * - output: 'export' → HTML/CSS/JS only (no Node server / SPA fallback)
- * - basePath → all routes & assets prefixed with /kevin
- * - trailingSlash → /kevin/listings/ maps to listings/index.html on Apache
+ * Optional Apache static export for /kevin:
+ *   npm run build:static
  */
+const isStaticExport = process.env.STATIC_EXPORT === "1";
+
 const nextConfig: NextConfig = {
-  output: "export",
-  basePath: "/kevin",
-  trailingSlash: true,
+  ...(isStaticExport
+    ? {
+        output: "export" as const,
+        basePath: "/kevin",
+        trailingSlash: true,
+      }
+    : {}),
   images: {
-    unoptimized: true,
+    unoptimized: isStaticExport,
     remotePatterns: [
       {
         protocol: "https",
