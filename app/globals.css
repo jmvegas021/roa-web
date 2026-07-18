@@ -155,7 +155,9 @@ summary {
 .prose-luxury p {
   color: var(--color-stone-400);
   line-height: 1.7;
-  max-width: 40rem;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* IDX Broker Prime Map Search fills its host */

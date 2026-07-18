@@ -10,11 +10,11 @@ interface ListingDetailProps {
 
 export function ListingDetail({ listing }: ListingDetailProps) {
   return (
-    <article className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
+    <article className="mx-auto w-full max-w-7xl overflow-x-hidden px-6 py-16 lg:px-10 lg:py-24">
       <p className="text-xs uppercase tracking-[0.22em] text-gold">
         {listing.status} · Featured listing
       </p>
-      <h1 className="font-display mt-4 text-4xl text-stone-50 md:text-5xl">
+      <h1 className="font-display mt-4 max-w-full text-balance break-words text-4xl text-stone-50 md:text-5xl">
         {listing.address}
       </h1>
       <p className="mt-2 text-lg text-stone-400">
@@ -24,8 +24,8 @@ export function ListingDetail({ listing }: ListingDetailProps) {
         {formatPrice(listing.price)}
       </p>
 
-      <div className="mt-10 grid gap-12 lg:grid-cols-[1.4fr_0.8fr]">
-        <div>
+      <div className="mt-10 grid max-w-full gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)]">
+        <div className="min-w-0 max-w-full">
           <ListingGallery
             images={listing.gallery}
             alt={`${listing.address}, ${listing.city}`}
@@ -35,26 +35,28 @@ export function ListingDetail({ listing }: ListingDetailProps) {
               <dt className="text-xs uppercase tracking-[0.16em] text-stone-400">
                 Beds
               </dt>
-              <dd className="mt-2 text-xl text-stone-50">{listing.bedrooms}</dd>
+              <dd className="mt-2 text-xl text-stone-50">{listing.bedrooms || "—"}</dd>
             </div>
             <div>
               <dt className="text-xs uppercase tracking-[0.16em] text-stone-400">
                 Baths
               </dt>
-              <dd className="mt-2 text-xl text-stone-50">{listing.bathrooms}</dd>
+              <dd className="mt-2 text-xl text-stone-50">{listing.bathrooms || "—"}</dd>
             </div>
-            <div>
+            <div className="min-w-0">
               <dt className="text-xs uppercase tracking-[0.16em] text-stone-400">
                 Size
               </dt>
-              <dd className="mt-2 text-xl text-stone-50">
+              <dd className="mt-2 break-words text-xl text-stone-50">
                 {formatSqft(listing.sqft)}
               </dd>
             </div>
           </dl>
-          <div className="prose-luxury mt-8">
+          <div className="prose-luxury mt-8 max-w-full">
             <h2 className="font-display text-2xl text-stone-50">About this home</h2>
-            <p className="mt-4">{listing.description}</p>
+            <p className="mt-4 max-w-full break-words whitespace-pre-line">
+              {listing.description}
+            </p>
             {listing.agentName ? (
               <p className="mt-4 text-sm">Listed by {listing.agentName}</p>
             ) : null}
@@ -62,7 +64,7 @@ export function ListingDetail({ listing }: ListingDetailProps) {
               <p className="mt-6">
                 <Link
                   href={listing.idxDetailUrl}
-                  className="text-gold hover:underline"
+                  className="break-all text-gold hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -79,13 +81,13 @@ export function ListingDetail({ listing }: ListingDetailProps) {
           </div>
         </div>
 
-        <aside className="border border-stone-800 bg-stone-900 p-6 lg:p-8">
+        <aside className="min-w-0 max-w-full border border-stone-800 bg-stone-900 p-6 lg:p-8">
           <h2 className="font-display text-2xl text-stone-50">Request details</h2>
           <p className="mt-2 text-sm text-stone-400">
             Inquire privately about this property. Your message reaches the Office
             of Kevin Shoun.
           </p>
-          <div className="mt-6">
+          <div className="mt-6 max-w-full">
             <ContactForm
               listingId={listing.listingId}
               propertyAddress={`${listing.address}, ${listing.city}`}

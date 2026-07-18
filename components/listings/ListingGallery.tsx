@@ -15,8 +15,8 @@ export function ListingGallery({ images, alt }: ListingGalleryProps) {
   const [active, setActive] = useState(0);
 
   return (
-    <div>
-      <div className="relative aspect-[16/10] overflow-hidden bg-stone-800">
+    <div className="w-full max-w-full min-w-0">
+      <div className="relative aspect-[16/10] w-full max-w-full overflow-hidden bg-stone-800">
         <Image
           src={safeImages[active]}
           alt={`${alt} — photo ${active + 1}`}
@@ -27,9 +27,12 @@ export function ListingGallery({ images, alt }: ListingGalleryProps) {
         />
       </div>
       {safeImages.length > 1 ? (
-        <ul className="mt-4 flex gap-3 overflow-x-auto pb-2" aria-label="Gallery thumbnails">
+        <ul
+          className="mt-4 flex max-w-full gap-3 overflow-x-auto pb-2"
+          aria-label="Gallery thumbnails"
+        >
           {safeImages.map((src, index) => (
-            <li key={`${src}-${index}`}>
+            <li key={`${src}-${index}`} className="shrink-0">
               <button
                 type="button"
                 onClick={() => setActive(index)}

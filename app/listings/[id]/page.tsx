@@ -39,7 +39,7 @@ export default async function ListingDetailPage({ params }: PageProps) {
   }
 
   return (
-    <div className="pt-24 lg:pt-28">
+    <div className="overflow-x-hidden pt-24 lg:pt-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Link
           href="/listings"
