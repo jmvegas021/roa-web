@@ -8,33 +8,62 @@ import { withBasePath } from "@/lib/site/basePath";
 
 function toNumber(value: string | number | undefined, fallback = 0): number {
   if (value === undefined || value === null || value === "") return fallback;
-  const n = typeof value === "number" ? value : Number(String(value).replace(/[^0-9.]/g, ""));
+  const n =
+    typeof value === "number"
+      ? value
+      : Number(String(value).replace(/[^0-9.]/g, ""));
   return Number.isFinite(n) ? n : fallback;
 }
 
-function extractImage(raw: IdxFeaturedListingRaw): string {
-  if (typeof raw.image === "string" && raw.image) return raw.image;
-  if (raw.image && typeof raw.image === "object" && raw.image.url) return raw.image.url;
-  if (typeof raw.imageUrl === "string" && raw.imageUrl) return raw.imageUrl;
-  if (Array.isArray(raw.images) && raw.images.length > 0) {
-    const first = raw.images[0];
-    if (typeof first === "string") return first;
-    if (first && typeof first === "object" && first.url) return first.url;
+function normalizeState(state: string): string {
+  const trimmed = state.trim();
+  if (/^texas$/i.test(trimmed)) return "TX";
+  return trimmed || "TX";
+}
+
+/** IDX often returns `image` as { "0": { url }, "1": { url }, ... }. */
+function collectImageUrls(raw: IdxFeaturedListingRaw): string[] {
+  const urls: string[] = [];
+
+  const push = (value: unknown) => {
+    if (typeof value === "string" && value.startsWith("http")) {
+      urls.push(value);
+      return;
+    }
+    if (value && typeof value === "object" && "url" in value) {
+      const url = (value as { url?: unknown }).url;
+      if (typeof url === "string" && url.startsWith("http")) urls.push(url);
+    }
+  };
+
+  if (typeof raw.image === "string") push(raw.image);
+  else if (raw.image && typeof raw.image === "object") {
+    const entries = Object.entries(raw.image as Record<string, unknown>).sort(
+      ([a], [b]) => Number(a) - Number(b)
+    );
+    for (const [, value] of entries) push(value);
   }
-  return withBasePath("/images/listing-placeholder.svg");
+
+  if (typeof raw.imageUrl === "string") push(raw.imageUrl);
+
+  if (Array.isArray(raw.images)) {
+    for (const item of raw.images) push(item);
+  }
+
+  return [...new Set(urls)];
+}
+
+function extractImage(raw: IdxFeaturedListingRaw): string {
+  return (
+    collectImageUrls(raw)[0] ?? withBasePath("/images/listing-placeholder.svg")
+  );
 }
 
 function extractGallery(raw: IdxFeaturedListingRaw): string[] {
-  const primary = extractImage(raw);
-  if (!Array.isArray(raw.images) || raw.images.length === 0) return [primary];
-  const urls = raw.images
-    .map((item) => {
-      if (typeof item === "string") return item;
-      if (item && typeof item === "object" && item.url) return item.url;
-      return "";
-    })
-    .filter(Boolean);
-  return urls.length > 0 ? urls : [primary];
+  const urls = collectImageUrls(raw);
+  return urls.length > 0
+    ? urls
+    : [withBasePath("/images/listing-placeholder.svg")];
 }
 
 function buildAddress(raw: IdxFeaturedListingRaw): string {
@@ -43,20 +72,37 @@ function buildAddress(raw: IdxFeaturedListingRaw): string {
   return "Address upon request";
 }
 
+/** Unwrap IDX paginated envelopes: `{ data: { id: listing } }` or `{ data: [...] }`. */
+export function unwrapIdxCollection(payload: unknown): unknown {
+  if (!payload || typeof payload !== "object") return payload;
+  if (Array.isArray(payload)) return payload;
+
+  const record = payload as Record<string, unknown>;
+  if ("data" in record) {
+    const inner = record.data;
+    if (Array.isArray(inner)) return inner;
+    if (inner && typeof inner === "object") return inner;
+  }
+  return payload;
+}
+
 export function mapFeaturedListing(raw: IdxFeaturedListingRaw): LuxuryListing {
   const listingId = String(
-    raw.listingID ?? raw.idxID ?? `listing-${buildAddress(raw)}`.replace(/\s+/g, "-")
+    raw.listingID ??
+      raw.idxID ??
+      `listing-${buildAddress(raw)}`.replace(/\s+/g, "-")
   );
+
   return {
     id: listingId,
     listingId,
     address: buildAddress(raw),
     city: String(raw.cityName ?? raw.city ?? "Central Texas"),
-    state: String(raw.state ?? "TX"),
+    state: normalizeState(String(raw.state ?? "TX")),
     zip: String(raw.zipcode ?? raw.zip ?? ""),
-    price: toNumber(raw.listingPrice ?? raw.price),
+    price: toNumber(raw.price ?? raw.listingPrice),
     bedrooms: toNumber(raw.bedrooms),
-    bathrooms: toNumber(raw.totalBaths ?? raw.bathrooms),
+    bathrooms: toNumber(raw.totalBaths ?? raw.bathrooms ?? raw.fullBaths),
     sqft: toNumber(raw.sqFt),
     status: String(raw.propStatus ?? raw.status ?? "Active"),
     imageUrl: extractImage(raw),
@@ -70,19 +116,23 @@ export function mapFeaturedListing(raw: IdxFeaturedListingRaw): LuxuryListing {
   };
 }
 
-export function mapFeaturedListings(
-  payload: unknown
-): LuxuryListing[] {
-  if (!payload) return [];
-  if (Array.isArray(payload)) {
-    return payload.map((item) => mapFeaturedListing(item as IdxFeaturedListingRaw));
+export function mapFeaturedListings(payload: unknown): LuxuryListing[] {
+  const collection = unwrapIdxCollection(payload);
+  if (!collection) return [];
+
+  if (Array.isArray(collection)) {
+    return collection.map((item) =>
+      mapFeaturedListing(item as IdxFeaturedListingRaw)
+    );
   }
-  if (typeof payload === "object") {
-    const values = Object.values(payload as Record<string, IdxFeaturedListingRaw>);
-    return values
-      .filter((item) => item && typeof item === "object")
+
+  if (typeof collection === "object") {
+    return Object.values(collection as Record<string, IdxFeaturedListingRaw>)
+      .filter((item) => item && typeof item === "object" && !Array.isArray(item))
+      .filter((item) => Boolean(item.listingID || item.address || item.idxID))
       .map((item) => mapFeaturedListing(item));
   }
+
   return [];
 }
 
@@ -117,12 +167,13 @@ export function mapAgent(raw: IdxAgentRaw): AgentProfile {
 }
 
 export function mapAgents(payload: unknown): AgentProfile[] {
-  if (!payload) return [];
-  if (Array.isArray(payload)) {
-    return payload.map((item) => mapAgent(item as IdxAgentRaw));
+  const collection = unwrapIdxCollection(payload);
+  if (!collection) return [];
+  if (Array.isArray(collection)) {
+    return collection.map((item) => mapAgent(item as IdxAgentRaw));
   }
-  if (typeof payload === "object") {
-    return Object.values(payload as Record<string, IdxAgentRaw>)
+  if (typeof collection === "object") {
+    return Object.values(collection as Record<string, IdxAgentRaw>)
       .filter((item) => item && typeof item === "object")
       .map((item) => mapAgent(item));
   }

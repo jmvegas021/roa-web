@@ -56,11 +56,13 @@ export interface IdxFeaturedListingRaw {
   bedrooms?: string | number;
   totalBaths?: string | number;
   bathrooms?: string | number;
+  fullBaths?: string | number;
+  halfBaths?: string | number;
   sqFt?: string | number;
   acres?: string | number;
   propStatus?: string;
   status?: string;
-  image?: string | { url?: string };
+  image?: string | Record<string, string | { url?: string }>;
   imageUrl?: string;
   images?: Array<string | { url?: string }>;
   remarksConcat?: string;

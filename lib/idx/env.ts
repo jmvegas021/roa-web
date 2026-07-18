@@ -9,6 +9,7 @@ const envSchema = z.object({
   NEXT_PUBLIC_IDX_SUBDOMAIN: z.string().optional(),
   NEXT_PUBLIC_IDX_QUICK_SEARCH_ID: z.string().optional(),
   NEXT_PUBLIC_IDX_SHOWCASE_ID: z.string().optional(),
+  NEXT_PUBLIC_IDX_MAP_SEARCH_ID: z.string().optional(),
 });
 
 export type IdxEnv = z.infer<typeof envSchema>;
@@ -25,6 +26,8 @@ export function getIdxEnv(): IdxEnv {
       process.env.NEXT_PUBLIC_IDX_QUICK_SEARCH_ID || undefined,
     NEXT_PUBLIC_IDX_SHOWCASE_ID:
       process.env.NEXT_PUBLIC_IDX_SHOWCASE_ID || undefined,
+    NEXT_PUBLIC_IDX_MAP_SEARCH_ID:
+      process.env.NEXT_PUBLIC_IDX_MAP_SEARCH_ID || undefined,
   });
 
   if (!parsed.success) {

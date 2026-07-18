@@ -1,6 +1,7 @@
 import { ButtonLink, SectionHeading } from "@/components/ui/SectionPrimitives";
 import { IdxWidget } from "@/components/idx/IdxWidget";
 
+/** Home teaser — full map search lives on /search. */
 export function SearchEntry() {
   return (
     <section className="bg-stone-900 px-6 py-24 lg:px-10 lg:py-28">
@@ -8,18 +9,18 @@ export function SearchEntry() {
         <SectionHeading
           eyebrow="MLS search"
           title="Begin with intention"
-          description="Use our branded search to explore the full MLS. Featured office listings are presented in our custom gallery; complete market inventory lives in IDX search."
+          description="Explore the full MLS on an interactive map — filter by price, beds, and location, then open any home for details."
         />
         <div className="space-y-6">
           <IdxWidget
-            type="quicksearch"
-            title="Quick search"
+            type="mapsearch"
+            title="Map search"
             fallbackHref="/search"
           />
           <div className="flex flex-wrap gap-4">
-            <ButtonLink href="/search">Open search</ButtonLink>
-            <ButtonLink href="/wrapper" variant="ghost">
-              Advanced IDX
+            <ButtonLink href="/search">Open MLS search</ButtonLink>
+            <ButtonLink href="/listings" variant="ghost">
+              Featured collection
             </ButtonLink>
           </div>
         </div>

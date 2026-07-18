@@ -39,6 +39,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "mlsphotos.idxbroker.com",
       },
+      {
+        protocol: "https",
+        hostname: "api.cotality.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.cotality.com",
+      },
     ],
   },
 };

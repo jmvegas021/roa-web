@@ -10,6 +10,7 @@
     "preview:static": "node scripts/preview-static.mjs",
     "deploy:ftp": "node scripts/deploy-ftp.mjs",
     "verify:static": "node scripts/verify-deploy.mjs",
+    "test:idx": "node scripts/test-idx.mjs",
     "lint": "eslint app components lib"
   },
   "dependencies": {
