@@ -39,9 +39,9 @@ export function ListingCard({ listing }: ListingCardProps) {
             alt={`${listing.address}, ${listing.city}`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            className="object-cover transition duration-[650ms] ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/50 via-transparent to-transparent opacity-80 transition duration-300 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/50 via-transparent to-transparent opacity-80 transition duration-200 group-hover:opacity-100" />
           <span className="absolute left-4 top-4 border border-gold/35 bg-stone-950/35 px-3 py-1.5 text-[0.65rem] uppercase tracking-[0.18em] text-stone-50 backdrop-blur-[2px]">
             {label}
           </span>

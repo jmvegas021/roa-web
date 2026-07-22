@@ -5,6 +5,10 @@ import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { ButtonLink, SectionHeading } from "@/components/ui/SectionPrimitives";
 import { getPublicIdxConfig } from "@/lib/idx/public-config";
 import { SITE } from "@/lib/content/team";
+import {
+  HERO_CITY_CHIPS,
+  buildIdxCityResultsUrl,
+} from "@/lib/content/hero-media";
 
 export const metadata: Metadata = {
   title: "MLS Search — Belton, Temple & Central Texas Homes",
@@ -13,11 +17,23 @@ export const metadata: Metadata = {
   alternates: { canonical: "/search" },
 };
 
+interface SearchPageProps {
+  searchParams: Promise<{ q?: string | string[] }>;
+}
+
+function firstParam(value: string | string[] | undefined): string {
+  if (Array.isArray(value)) return value[0]?.trim() ?? "";
+  return value?.trim() ?? "";
+}
+
 /**
  * Primary MLS search: prefer in-page widget; also offer hosted IDX iframe
  * for a reliable full experience (especially on http://localhost).
+ * Honors ?q= from the homepage hero for address/city handoff.
  */
-export default function SearchPage() {
+export default async function SearchPage({ searchParams }: SearchPageProps) {
+  const params = await searchParams;
+  const query = firstParam(params.q);
   const { subdomain, mapSearchId } = getPublicIdxConfig();
   const advancedSearchUrl = subdomain
     ? `https://${subdomain}/idx/search/advanced`
@@ -25,6 +41,17 @@ export default function SearchPage() {
   const mapSearchUrl = subdomain
     ? `https://${subdomain}/idx/map/mapsearch`
     : advancedSearchUrl;
+
+  const cityChip = HERO_CITY_CHIPS.find(
+    (chip) => chip.city.toLowerCase() === query.toLowerCase()
+  );
+  const idxResultsUrl =
+    subdomain && cityChip
+      ? buildIdxCityResultsUrl(subdomain, cityChip.city)
+      : subdomain && query
+        ? `https://${subdomain}/idx/results/listings?pt=sfr&a_statusCategory[]=active&idxID=a001&aw_address=${encodeURIComponent(query)}`
+        : null;
+
   const canEmbedWidget = Boolean(subdomain && mapSearchId);
 
   return (
@@ -39,22 +66,51 @@ export default function SearchPage() {
             <SectionHeading
               as="h1"
               eyebrow="MLS search"
-              title="Explore the market"
-              description="Live Belton, Temple, and Central Texas inventory from participating MLSs via IDX Broker. Search the map, filter by beds and price, then open any home for full details."
+              title={query ? `Results for “${query}”` : "Explore the market"}
+              description={
+                query
+                  ? "Your homepage search handed off here. Use the map below, or open IDX results for a filtered listing view."
+                  : "Live Belton, Temple, and Central Texas inventory from participating MLSs via IDX Broker. Search the map, filter by beds and price, then open any home for full details."
+              }
             />
             <div className="flex shrink-0 flex-wrap gap-3 pb-1">
-              <ButtonLink href={advancedSearchUrl}>Advanced filters</ButtonLink>
+              {idxResultsUrl ? (
+                <ButtonLink href={idxResultsUrl}>Open IDX results</ButtonLink>
+              ) : (
+                <ButtonLink href={advancedSearchUrl}>Advanced filters</ButtonLink>
+              )}
               <ButtonLink href="/listings" variant="ghost">
                 Featured collection
               </ButtonLink>
             </div>
           </div>
+
+          {query ? (
+            <p className="mt-6 max-w-2xl border-l border-gold/40 pl-4 text-sm leading-relaxed text-stone-400">
+              Searching for <span className="text-stone-50">{query}</span>
+              {idxResultsUrl ? (
+                <>
+                  . Prefer a dedicated results page?{" "}
+                  <a
+                    href={idxResultsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gold transition duration-200 hover:underline"
+                  >
+                    Open in IDX Broker
+                  </a>
+                  .
+                </>
+              ) : (
+                ". Refine on the map or try advanced IDX filters."
+              )}
+            </p>
+          ) : null}
         </div>
       </section>
 
       <section className="mt-10 px-6 pb-6 lg:px-10">
         <div className="mx-auto max-w-7xl space-y-8">
-          {/* Hosted IDX map is the reliable primary experience */}
           {subdomain ? (
             <IdxHostedSearch
               src={mapSearchUrl}

@@ -1,0 +1,9 @@
+Hero placeholder video
+----------------------
+File: hero-placeholder.mp4
+Source: Pexels — “Aerial view of luxury and modern design home”
+URL: https://www.pexels.com/video/aerial-view-of-luxury-and-modern-design-home-17224719/
+License: Pexels License (free for commercial use; no attribution required, credit appreciated)
+Poster: hero-placeholder.jpg (frame extracted from the same clip)
+
+Swap later: replace these files and update paths in lib/content/hero-media.ts.

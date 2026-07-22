@@ -126,6 +126,20 @@ summary {
   animation: ken-burns 28s ease-out forwards;
 }
 
+/* Scroll reveal — toggled by RevealOnScroll (IntersectionObserver) */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -137,6 +151,12 @@ summary {
   .animate-fade-up-delay-3,
   .animate-ken-burns {
     animation: none;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   *,

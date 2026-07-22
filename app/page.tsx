@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
+import { QuickPaths } from "@/components/home/QuickPaths";
+import { MeetKevin } from "@/components/home/MeetKevin";
 import { FeaturedListings } from "@/components/home/FeaturedListings";
-import { SearchEntry } from "@/components/home/SearchEntry";
-import { TeamTeaser } from "@/components/home/TeamTeaser";
-import { NeighborhoodsTeaser } from "@/components/home/NeighborhoodsTeaser";
+import { JourneyPaths } from "@/components/home/JourneyPaths";
 import { Testimonials } from "@/components/home/Testimonials";
+import { HomeValuation } from "@/components/home/HomeValuation";
+import { NeighborhoodsTeaser } from "@/components/home/NeighborhoodsTeaser";
 import { ContactCta } from "@/components/home/ContactCta";
 import { listingsManager } from "@/lib/idx/listings-service";
 import { DEFAULT_DESCRIPTION } from "@/lib/site/siteUrl";
@@ -30,11 +32,13 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
+      <QuickPaths />
+      <MeetKevin />
       <FeaturedListings listings={listings} source={source} />
-      <SearchEntry />
-      <TeamTeaser />
-      <NeighborhoodsTeaser />
+      <JourneyPaths />
       <Testimonials />
+      <HomeValuation />
+      <NeighborhoodsTeaser />
       <ContactCta />
     </>
   );
