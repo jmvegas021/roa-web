@@ -15,12 +15,13 @@ export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Kevin Shoun | Realty of America — Belton & Temple TX Realtor",
+    absolute:
+      "Kevin Shoun | Realty of America — Salado & Central Texas Realtor",
   },
   description: DEFAULT_DESCRIPTION,
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Kevin Shoun | Realty of America — Belton & Temple TX",
+    title: "Kevin Shoun | Realty of America — Salado & Central Texas",
     description: DEFAULT_DESCRIPTION,
     url: "/",
   },

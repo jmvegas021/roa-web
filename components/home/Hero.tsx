@@ -62,10 +62,10 @@ export function Hero() {
         <p className="animate-fade-up-delay-1 mt-3 text-xs uppercase tracking-[0.28em] text-gold">
           {SITE.brand}
           <span className="mx-3 text-stone-400">·</span>
-          Belton · Temple · Central Texas
+          Salado · Belton · Temple · Georgetown
         </p>
         <p className="animate-fade-up-delay-2 mt-5 max-w-md text-base leading-relaxed text-stone-300 sm:text-lg">
-          Discreet residential representation across Central Texas.
+          Precision representation for professionals across Central Texas.
         </p>
         <div className="animate-fade-up-delay-3 mt-10">
           <HeroSearch />

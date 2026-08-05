@@ -12,8 +12,8 @@ export function SiteFooter() {
             officeClassName="mt-3 text-sm uppercase tracking-[0.2em] text-gold"
           />
           <p className="mt-5 max-w-sm text-base leading-relaxed text-stone-400">
-            Quiet luxury representation across Austin, Round Rock, Georgetown,
-            and the Texas Hill Country. By appointment.
+            Quiet luxury representation across Salado, Belton, Temple,
+            Georgetown, and Central Texas. By appointment.
           </p>
         </div>
 

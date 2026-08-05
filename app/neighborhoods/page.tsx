@@ -5,9 +5,9 @@ import { SectionHeading } from "@/components/ui/SectionPrimitives";
 import { NEIGHBORHOODS } from "@/lib/content/neighborhoods";
 
 export const metadata: Metadata = {
-  title: "Belton, Temple & Central Texas Neighborhoods",
+  title: "Salado, Belton, Temple & Georgetown Neighborhoods",
   description:
-    "Neighborhood guides for Belton, Temple, and Central Texas — character-focused market notes from the Office of Kevin Shoun.",
+    "Neighborhood guides for Salado, Belton, Temple, Georgetown, and Central Texas — character-focused market notes from the Office of Kevin Shoun.",
   alternates: { canonical: "/neighborhoods" },
 };
 
@@ -24,7 +24,7 @@ export default function NeighborhoodsPage() {
             as="h1"
             eyebrow="Central Texas"
             title="Neighborhoods & corridors"
-            description="Markets we know intimately across Belton, Temple, Salado, and Bell County — written for buyers and sellers who want a sense of character, not a checklist."
+            description="Markets we know intimately across Salado, Belton, Temple, Georgetown, and Bell–Williamson Counties — written for buyers and sellers who want a sense of character, not a checklist."
           />
         </div>
       </section>

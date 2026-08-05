@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionPrimitives";
 import { agentsManager } from "@/lib/idx/listings-service";
 
 export const metadata: Metadata = {
-  title: "Kevin Shoun — Belton & Temple TX Realtor",
+  title: "Kevin Shoun — Salado & Central Texas Realtor",
   description:
     "Meet Kevin Shoun, Broker Associate with Realty of America. Residential real estate in Belton, Temple, and Central Texas.",
   alternates: { canonical: "/agents" },

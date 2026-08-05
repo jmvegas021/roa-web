@@ -16,19 +16,26 @@ export function buildOrganizationSchema() {
     logo: absoluteUrl("/images/realty-of-america-logo.png"),
     telephone: SITE.phone,
     email: SITE.email,
-    description: `${SITE.office} provides residential real estate representation in Belton, Temple, and Central Texas.`,
+    description: `${SITE.office} provides residential, land, and relocation representation in Salado, Belton, Temple, Georgetown, and Central Texas.`,
     areaServed: [
+      { "@type": "City", name: "Salado", containedInPlace: { "@type": "State", name: "Texas" } },
       { "@type": "City", name: "Belton", containedInPlace: { "@type": "State", name: "Texas" } },
       { "@type": "City", name: "Temple", containedInPlace: { "@type": "State", name: "Texas" } },
+      { "@type": "City", name: "Georgetown", containedInPlace: { "@type": "State", name: "Texas" } },
       { "@type": "AdministrativeArea", name: "Central Texas" },
     ],
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Temple",
+      addressLocality: "Salado",
       addressRegion: "TX",
       addressCountry: "US",
     },
-    sameAs: [`https://kevinshoun.idxbroker.com`],
+    sameAs: [
+      "https://www.realtyofamerica.com/real-estate-agents/Texas/kevin-shoun",
+      "https://www.facebook.com/KevinShounYourREALTOR",
+      "https://www.linkedin.com/in/kevin-d-shoun-629a8b56/",
+      "https://www.instagram.com/kevin.d.shoun/",
+    ],
     employee: {
       "@id": absoluteUrl("/agents/kevin-shoun#person"),
     },
@@ -48,7 +55,13 @@ export function buildKevinPersonSchema() {
     email: kevin.email,
     description: kevin.bio,
     worksFor: { "@id": absoluteUrl("/#organization") },
-    areaServed: ["Belton, TX", "Temple, TX", "Central Texas"],
+    areaServed: [
+      "Salado, TX",
+      "Belton, TX",
+      "Temple, TX",
+      "Georgetown, TX",
+      "Central Texas",
+    ],
     knowsAbout: kevin.specialties,
   };
 }
@@ -60,7 +73,7 @@ export function buildWebSiteSchema() {
     "@id": absoluteUrl("/#website"),
     name: `${SITE.brand} · ${SITE.office}`,
     url: absoluteUrl("/"),
-    description: `${SITE.office} — Belton, Temple, and Central Texas real estate.`,
+    description: `${SITE.office} — Salado, Belton, Temple, Georgetown, and Central Texas real estate.`,
     publisher: { "@id": absoluteUrl("/#organization") },
   };
 }

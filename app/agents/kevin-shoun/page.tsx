@@ -9,14 +9,14 @@ import { agentsManager } from "@/lib/idx/listings-service";
 import { TEAM } from "@/lib/content/team";
 
 export const metadata: Metadata = {
-  title: "Kevin Shoun — Belton & Temple TX Real Estate Agent",
+  title: "Kevin Shoun — Salado & Central Texas Real Estate Agent",
   description:
-    "Kevin Shoun, Broker Associate at Realty of America. Residential buyer and seller representation in Belton, Temple, and Central Texas.",
+    "Kevin Shoun, Broker Associate at Realty of America. Buyers, sellers, military relocation, land, and farm & ranch across Salado, Belton, Temple, and Georgetown.",
   alternates: { canonical: "/agents/kevin-shoun" },
   openGraph: {
-    title: "Kevin Shoun — Belton & Temple TX Realtor",
+    title: "Kevin Shoun — Salado & Central Texas Realtor",
     description:
-      "Broker Associate at Realty of America serving Belton, Temple, and Central Texas.",
+      "Broker Associate at Realty of America serving Salado, Belton, Temple, Georgetown, and Central Texas.",
     url: "/agents/kevin-shoun",
     images: [{ url: "/images/kevin-shoun.webp" }],
   },
@@ -35,7 +35,7 @@ export default async function KevinShounPage() {
         <div className="relative aspect-[4/5] overflow-hidden bg-stone-800">
           <Image
             src={agent.imageUrl}
-            alt={`${agent.name}, Belton and Temple Texas real estate agent`}
+            alt={`${agent.name}, Salado and Central Texas real estate agent`}
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"

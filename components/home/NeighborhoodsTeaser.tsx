@@ -14,7 +14,7 @@ export function NeighborhoodsTeaser() {
           <SectionHeading
             eyebrow="Central Texas"
             title="Markets we know by heart"
-            description="Editorial guides to Belton, Temple, Salado, and the Bell County corridor — a sense of place, not a checklist."
+            description="Editorial guides to Salado, Belton, Temple, Georgetown, and the Bell–Williamson corridor — a sense of place, not a checklist."
           />
         </RevealOnScroll>
         <div className="mt-14 grid gap-10 md:grid-cols-3">

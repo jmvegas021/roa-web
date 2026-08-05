@@ -15,13 +15,15 @@ export function absoluteUrl(path = "/"): string {
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-export const DEFAULT_DESCRIPTION = `${SITE.office} at ${SITE.brand} — Belton, Temple, and Central Texas real estate. Discreet buyer and seller representation for residential homes.`;
+export const DEFAULT_DESCRIPTION = `${SITE.office} at ${SITE.brand} — Salado, Belton, Temple, Georgetown, and Central Texas real estate. Precision buyer, seller, land, and military relocation representation.`;
 
 export const DEFAULT_KEYWORDS = [
   "Kevin Shoun",
   "Realty of America",
+  "Salado TX realtor",
   "Belton TX real estate",
   "Temple TX realtor",
+  "Georgetown TX realtor",
   "Belton TX realtor",
   "Temple TX real estate",
   "Salado TX homes",
@@ -30,4 +32,7 @@ export const DEFAULT_KEYWORDS = [
   "Belton homes for sale",
   "Temple homes for sale",
   "Bell County realtor",
+  "Williamson County realtor",
+  "military relocation Texas",
+  "farm and ranch Central Texas",
 ];

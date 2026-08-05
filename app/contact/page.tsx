@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionPrimitives";
 import { SITE } from "@/lib/content/team";
 
 export const metadata: Metadata = {
-  title: "Contact Kevin Shoun — Belton & Temple TX",
+  title: "Contact Kevin Shoun — Salado & Central Texas",
   description:
     "Contact the Office of Kevin Shoun at Realty of America. Call or inquire about Belton, Temple, and Central Texas homes.",
   alternates: { canonical: "/contact" },

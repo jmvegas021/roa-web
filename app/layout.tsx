@@ -36,7 +36,7 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${SITE.office} | ${SITE.brand} · Belton & Temple TX`,
+    default: `${SITE.office} | ${SITE.brand} · Central Texas`,
     template: `%s · ${SITE.brand}`,
   },
   description: DEFAULT_DESCRIPTION,

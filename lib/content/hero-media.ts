@@ -14,9 +14,10 @@ export const HERO_MEDIA = {
 
 /** City chips → IDX Broker results deep links (csv_city + csv_state). */
 export const HERO_CITY_CHIPS = [
+  { label: "Salado", city: "Salado" },
   { label: "Belton", city: "Belton" },
   { label: "Temple", city: "Temple" },
-  { label: "Salado", city: "Salado" },
+  { label: "Georgetown", city: "Georgetown" },
 ] as const;
 
 export function buildIdxCityResultsUrl(

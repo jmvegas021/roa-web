@@ -6,9 +6,9 @@ import { ButtonLink } from "@/components/ui/SectionPrimitives";
 import { NEIGHBORHOODS } from "@/lib/content/neighborhoods";
 import { TEAM } from "@/lib/content/team";
 
-/** Belton market exterior — parallax backdrop (not the profile portrait). */
+/** Salado limestone estate — parallax backdrop (not the profile portrait). */
 const MEET_KEVIN_BACKGROUND =
-  NEIGHBORHOODS.find((n) => n.slug === "belton")?.imageUrl ??
+  NEIGHBORHOODS.find((n) => n.slug === "salado")?.imageUrl ??
   NEIGHBORHOODS[0].imageUrl;
 
 /** Meet Kevin — bio + portrait over a real-estate parallax band. */
@@ -53,7 +53,7 @@ export function MeetKevin() {
             <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden bg-stone-800 lg:ml-auto">
               <Image
                 src={kevin.imageUrl}
-                alt={`${kevin.name}, Belton and Temple Texas real estate agent`}
+                alt={`${kevin.name}, Salado and Central Texas real estate agent`}
                 fill
                 sizes="(max-width: 1024px) 90vw, 28rem"
                 className="object-cover object-top"

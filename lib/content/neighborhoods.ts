@@ -1,3 +1,5 @@
+import { withBasePath } from "@/lib/site/basePath";
+
 export interface Neighborhood {
   slug: string;
   name: string;
@@ -6,16 +8,23 @@ export interface Neighborhood {
   imageUrl: string;
 }
 
-/** Primary local markets for Kevin Shoun / Belton–Temple SEO. */
+/** Primary local markets for Kevin Shoun — Bell & Williamson Counties. */
 export const NEIGHBORHOODS: Neighborhood[] = [
+  {
+    slug: "salado",
+    name: "Salado",
+    region: "Bell County",
+    summary:
+      "Creek-side charm, boutique Main Street, and limestone estates under live oaks — a quieter luxury address between Belton and Georgetown.",
+    imageUrl: withBasePath("/images/neighborhoods/salado.webp"),
+  },
   {
     slug: "belton",
     name: "Belton",
     region: "Bell County",
     summary:
       "Lake Belton living, established neighborhoods, and a walkable downtown — one of Central Texas’ most sought-after small-city addresses.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1400&q=80",
+    imageUrl: withBasePath("/images/neighborhoods/belton.webp"),
   },
   {
     slug: "temple",
@@ -23,44 +32,31 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     region: "Bell County",
     summary:
       "Medical-hub energy, strong employment, and a wide range of housing — from classic mid-century streets to newer master-planned communities.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1400&q=80",
+    imageUrl: withBasePath("/images/neighborhoods/temple.webp"),
   },
   {
-    slug: "salado",
-    name: "Salado",
-    region: "Bell County",
+    slug: "georgetown",
+    name: "Georgetown",
+    region: "Williamson County",
     summary:
-      "Creek-side charm, boutique Main Street, and acreage homes — a quieter luxury alternative between Belton and Georgetown.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80",
+      "Historic square living with room to grow — a Williamson County favorite for professionals seeking character, schools, and northern corridor access.",
+    imageUrl: withBasePath("/images/neighborhoods/georgetown.webp"),
   },
   {
     slug: "harker-heights",
     name: "Harker Heights",
     region: "Bell County",
     summary:
-      "Family-oriented neighborhoods with convenient access to Fort Cavazos, shopping, and the Belton–Temple corridor.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=1400&q=80",
-  },
-  {
-    slug: "nolanville",
-    name: "Nolanville",
-    region: "Bell County",
-    summary:
-      "Growing residential pockets between Belton and Killeen — newer construction, value, and easy highway access.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80",
+      "Family-oriented neighborhoods with convenient access to Fort Cavazos, shopping, and the Belton–Temple corridor — a natural fit for military relocation.",
+    imageUrl: withBasePath("/images/neighborhoods/harker-heights.webp"),
   },
   {
     slug: "central-texas",
     name: "Greater Central Texas",
-    region: "Belton · Temple · Surrounds",
+    region: "Bell · Williamson · Surrounds",
     summary:
-      "Beyond the core cities — ranch acreage, Lake Belton recreation, and neighboring towns Kevin’s clients relocate to and from.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1400&q=80",
+      "Beyond the core cities — ranch acreage, vacant land, Lake Belton recreation, and neighboring towns Kevin’s clients relocate to and from.",
+    imageUrl: withBasePath("/images/neighborhoods/central-texas.webp"),
   },
 ];
 

@@ -1,128 +1,124 @@
 import type { LuxuryListing } from "@/lib/idx/types";
+import { withBasePath } from "@/lib/site/basePath";
 
-const hero =
-  "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1600&q=80";
-const lake =
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80";
-const modern =
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80";
-const ranch =
-  "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1600&q=80";
-const hill =
-  "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1600&q=80";
-const estate =
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80";
+const lake = withBasePath("/images/neighborhoods/listing-lake.webp");
+const estate = withBasePath("/images/neighborhoods/listing-estate.webp");
+const suburban = withBasePath("/images/neighborhoods/listing-suburban.webp");
+const ranch = withBasePath("/images/neighborhoods/listing-ranch.webp");
+const georgetown = withBasePath("/images/neighborhoods/georgetown.webp");
+const temple = withBasePath("/images/neighborhoods/temple.webp");
 
 export const MOCK_LISTINGS: LuxuryListing[] = [
   {
-    id: "mock-westlake-1",
-    listingId: "mock-westlake-1",
-    address: "4200 Westlake Drive",
-    city: "Austin",
+    id: "mock-salado-1",
+    listingId: "mock-salado-1",
+    address: "3248 Hester Way",
+    city: "Salado",
     state: "TX",
-    zip: "78746",
-    price: 4250000,
-    bedrooms: 5,
-    bathrooms: 5.5,
-    sqft: 6200,
+    zip: "76571",
+    price: 875000,
+    bedrooms: 4,
+    bathrooms: 3.5,
+    sqft: 3200,
     status: "Active",
-    imageUrl: lake,
-    gallery: [lake, modern, estate],
+    imageUrl: estate,
+    gallery: [estate, lake],
     description:
-      "A refined Westlake estate with hill-country views, a chef’s kitchen, and seamless indoor-outdoor living across landscaped terraces.",
+      "Limestone estate living under mature live oaks — refined Main Street proximity with the privacy professionals expect in Salado.",
     agentName: "Kevin Shoun",
   },
   {
-    id: "mock-georgetown-2",
-    listingId: "mock-georgetown-2",
+    id: "mock-belton-2",
+    listingId: "mock-belton-2",
+    address: "6166 Lavaca Drive",
+    city: "Belton",
+    state: "TX",
+    zip: "76513",
+    price: 485000,
+    bedrooms: 4,
+    bathrooms: 3,
+    sqft: 2400,
+    status: "Active",
+    imageUrl: suburban,
+    gallery: [suburban, lake],
+    description:
+      "Lake Belton corridor residence with easy downtown access — built for professionals who want space, schools, and weekend water nearby.",
+    agentName: "Kevin Shoun",
+  },
+  {
+    id: "mock-georgetown-3",
+    listingId: "mock-georgetown-3",
     address: "188 Berry Creek Lane",
     city: "Georgetown",
     state: "TX",
     zip: "78628",
-    price: 1875000,
+    price: 725000,
     bedrooms: 4,
-    bathrooms: 4,
-    sqft: 4100,
+    bathrooms: 3.5,
+    sqft: 3100,
     status: "Active",
-    imageUrl: modern,
-    gallery: [modern, hill],
+    imageUrl: georgetown,
+    gallery: [georgetown, suburban],
     description:
-      "Contemporary Georgetown residence with soaring ceilings, a private courtyard, and proximity to the historic square.",
+      "Williamson County living near the historic square — a Georgetown address with room to entertain and commute with intention.",
     agentName: "Kevin Shoun",
   },
   {
-    id: "mock-dripping-3",
-    listingId: "mock-dripping-3",
-    address: "910 Ranch Road 12",
-    city: "Dripping Springs",
+    id: "mock-temple-4",
+    listingId: "mock-temple-4",
+    address: "3111 Morning Glory Drive",
+    city: "Temple",
     state: "TX",
-    zip: "78620",
-    price: 2650000,
-    bedrooms: 4,
-    bathrooms: 3.5,
-    sqft: 3850,
+    zip: "76502",
+    price: 395000,
+    bedrooms: 3,
+    bathrooms: 2.5,
+    sqft: 2100,
+    status: "Active",
+    imageUrl: temple,
+    gallery: [temple, suburban],
+    description:
+      "Temple medical-corridor convenience with a quiet residential street — ideal for relocating professionals who need calendars to stay intact.",
+    agentName: "Kevin Shoun",
+  },
+  {
+    id: "mock-ranch-5",
+    listingId: "mock-ranch-5",
+    address: "County Road 226",
+    city: "Salado",
+    state: "TX",
+    zip: "76571",
+    price: 1250000,
+    bedrooms: 3,
+    bathrooms: 2.5,
+    sqft: 2800,
     status: "Active",
     imageUrl: ranch,
-    gallery: [ranch, hill, estate],
+    gallery: [ranch, estate],
     description:
-      "Hill Country compound on oak-studded acreage — quiet luxury with a pool pavilion and guest casita.",
+      "Farm-and-ranch acreage with bluebonnet pasture views — vacant land and homestead opportunity for clients building long-term wealth.",
     agentName: "Kevin Shoun",
   },
   {
-    id: "mock-roundrock-4",
-    listingId: "mock-roundrock-4",
-    address: "2501 Teravista Club Drive",
-    city: "Round Rock",
+    id: "mock-harker-6",
+    listingId: "mock-harker-6",
+    address: "1204 Knights Way",
+    city: "Harker Heights",
     state: "TX",
-    zip: "78665",
-    price: 1125000,
-    bedrooms: 4,
-    bathrooms: 3.5,
-    sqft: 3400,
-    status: "Active",
-    imageUrl: estate,
-    gallery: [estate, modern],
-    description:
-      "Elevated golf-course living in Round Rock with a light-filled great room and resort-style backyard.",
-    agentName: "Kevin Shoun",
-  },
-  {
-    id: "mock-lakeway-5",
-    listingId: "mock-lakeway-5",
-    address: "105 Lohmans Crossing Road",
-    city: "Lakeway",
-    state: "TX",
-    zip: "78734",
-    price: 3190000,
-    bedrooms: 5,
-    bathrooms: 5,
-    sqft: 5100,
-    status: "Active",
-    imageUrl: hero,
-    gallery: [hero, lake, modern],
-    description:
-      "Lakeway statement home with panoramic water glimpses, a wine cellar, and a private primary wing.",
-    agentName: "Kevin Shoun",
-  },
-  {
-    id: "mock-cedarpark-6",
-    listingId: "mock-cedarpark-6",
-    address: "702 Buttercup Creek Boulevard",
-    city: "Cedar Park",
-    state: "TX",
-    zip: "78613",
-    price: 895000,
+    zip: "76548",
+    price: 425000,
     bedrooms: 4,
     bathrooms: 3,
-    sqft: 2900,
+    sqft: 2650,
     status: "Active",
-    imageUrl: hill,
-    gallery: [hill, ranch],
+    imageUrl: suburban,
+    gallery: [suburban, lake],
     description:
-      "Polished Cedar Park residence designed for effortless entertaining and everyday Central Texas living.",
+      "Harker Heights home positioned for Fort Cavazos proximity — military relocation without chaos, from offer to keys.",
     agentName: "Kevin Shoun",
   },
 ];
 
-export const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2400&q=80";
+export const HERO_IMAGE = withBasePath(
+  "/images/neighborhoods/listing-lake.webp"
+);

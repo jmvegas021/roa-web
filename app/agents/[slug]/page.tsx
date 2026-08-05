@@ -21,7 +21,7 @@ export async function generateMetadata({
   if (!agent) {
     return { title: "Agent not found", robots: { index: false } };
   }
-  const title = `${agent.name} — Belton & Temple TX Realtor`;
+  const title = `${agent.name} — Salado & Central Texas Realtor`;
   const description =
     agent.bio?.slice(0, 155).trim() ||
     `${agent.name}, ${agent.title} with Realty of America.`;
