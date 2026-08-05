@@ -52,16 +52,14 @@ export default function WrapperPage() {
             </code>
             .
           </p>
-          {subdomain ? (
-            <p className="mt-6">
-              <a
-                href={`https://${subdomain}/idx/search/advanced`}
-                className="text-xs uppercase tracking-[0.18em] text-gold hover:underline"
-              >
-                Open IDX advanced search →
-              </a>
-            </p>
-          ) : null}
+          <p className="mt-6">
+            <a
+              href="/search"
+              className="text-xs uppercase tracking-[0.18em] text-gold hover:underline"
+            >
+              Open on-site MLS search →
+            </a>
+          </p>
         </div>
 
         {/* Required MLS disclaimer region for compliance */}

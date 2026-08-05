@@ -19,8 +19,8 @@ export function IdxHostedSearch({
       <iframe
         title={title}
         src={src}
-        className="h-[70vh] min-h-[32rem] w-full bg-stone-900 lg:h-[75vh]"
-        loading="lazy"
+        className="h-[75vh] min-h-[36rem] w-full bg-stone-900 lg:h-[80vh]"
+        loading="eager"
         referrerPolicy="no-referrer-when-downgrade"
         allow="geolocation; fullscreen"
       />

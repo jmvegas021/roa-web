@@ -1,4 +1,5 @@
 import { withBasePath } from "@/lib/site/basePath";
+import { IDX_CITY_MARKETS } from "@/lib/idx/search-urls";
 
 /**
  * Homepage hero media. Swap files under public/videos/ and update paths here
@@ -12,22 +13,10 @@ export const HERO_MEDIA = {
     "https://www.pexels.com/video/aerial-view-of-luxury-and-modern-design-home-17224719/",
 } as const;
 
-/** City chips → IDX Broker results deep links (csv_city + csv_state). */
-export const HERO_CITY_CHIPS = [
-  { label: "Salado", city: "Salado" },
-  { label: "Belton", city: "Belton" },
-  { label: "Temple", city: "Temple" },
-  { label: "Georgetown", city: "Georgetown" },
-] as const;
-
-export function buildIdxCityResultsUrl(
-  subdomain: string,
-  city: string,
-  state = "TX"
-): string {
-  const params = new URLSearchParams({
-    csv_city: city,
-    csv_state: state,
-  });
-  return `https://${subdomain}/idx/results/listings?${params.toString()}`;
-}
+/** City chips → on-site /search (IDX results embed via city IDs). */
+export const HERO_CITY_CHIPS = IDX_CITY_MARKETS.filter((city) =>
+  ["Salado", "Belton", "Temple", "Georgetown"].includes(city.label)
+).map((city) => ({
+  label: city.label,
+  city: city.label,
+}));

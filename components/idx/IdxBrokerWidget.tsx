@@ -139,8 +139,6 @@ export function IdxBrokerWidget({
     );
   }
 
-  const hostedMapUrl = `https://${config.subdomain}/idx/map/mapsearch`;
-
   return (
     <div className={className}>
       {title ? (
@@ -157,24 +155,21 @@ export function IdxBrokerWidget({
       {hasError ? (
         <div className="mt-4 border border-stone-800 bg-stone-950 p-6">
           <p className="text-sm text-stone-400">
-            The embedded map widget failed to load. Open the hosted IDX search
-            instead:
+            The embedded map widget failed to load. Continue on-site:
           </p>
           <Link
-            href={hostedMapUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={fallbackHref}
             className="mt-4 inline-flex text-xs uppercase tracking-[0.2em] text-gold hover:underline"
           >
-            Open IDX map search →
+            Open MLS search →
           </Link>
         </div>
       ) : null}
       <noscript>
         <p className="mt-4 text-sm text-stone-400">
           Enable JavaScript to use MLS search, or{" "}
-          <Link href={hostedMapUrl} className="text-gold">
-            open IDX map search
+          <Link href={fallbackHref} className="text-gold">
+            open MLS search
           </Link>
           .
         </p>

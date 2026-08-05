@@ -1,26 +1,18 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import {
-  HERO_CITY_CHIPS,
-  buildIdxCityResultsUrl,
-} from "@/lib/content/hero-media";
-import { getPublicIdxConfig } from "@/lib/idx/public-config";
+import { HERO_CITY_CHIPS } from "@/lib/content/hero-media";
+import { buildOnSiteSearchPath } from "@/lib/idx/search-urls";
 
 export function HeroSearch() {
   const router = useRouter();
   const [query, setQuery] = useState("");
-  const { subdomain } = getPublicIdxConfig();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const trimmed = query.trim();
-    if (!trimmed) {
-      router.push("/search");
-      return;
-    }
-    router.push(`/search?q=${encodeURIComponent(trimmed)}`);
+    router.push(buildOnSiteSearchPath(query));
   }
 
   return (
@@ -55,23 +47,15 @@ export function HeroSearch() {
         <span className="text-[0.65rem] uppercase tracking-[0.2em] text-stone-400">
           Browse
         </span>
-        {HERO_CITY_CHIPS.map((chip) => {
-          const href = subdomain
-            ? buildIdxCityResultsUrl(subdomain, chip.city)
-            : `/search?q=${encodeURIComponent(chip.city)}`;
-          return (
-            <a
-              key={chip.city}
-              href={href}
-              className="text-sm text-stone-300 transition duration-200 hover:text-gold"
-              {...(subdomain
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-            >
-              {chip.label}
-            </a>
-          );
-        })}
+        {HERO_CITY_CHIPS.map((chip) => (
+          <Link
+            key={chip.city}
+            href={buildOnSiteSearchPath(chip.city)}
+            className="text-sm text-stone-300 transition duration-200 hover:text-gold"
+          >
+            {chip.label}
+          </Link>
+        ))}
       </div>
     </div>
   );
