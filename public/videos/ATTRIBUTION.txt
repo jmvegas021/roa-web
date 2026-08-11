@@ -1,9 +1,11 @@
-Hero placeholder video
-----------------------
-File: hero-placeholder.mp4
-Source: Pexels — “Aerial view of luxury and modern design home”
-URL: https://www.pexels.com/video/aerial-view-of-luxury-and-modern-design-home-17224719/
-License: Pexels License (free for commercial use; no attribution required, credit appreciated)
-Poster: hero-placeholder.jpg (frame extracted from the same clip)
+Hero video (Cloudinary)
+-----------------------
+Cloud: kut8hlrv
+MP4 public ID:  hero-720p_tyhlpd
+WebM public ID: hero-720p_himmfb
+Poster: Cloudinary frame at so_2 from the MP4 asset
 
-Swap later: replace these files and update paths in lib/content/hero-media.ts.
+Delivery uses q_auto:eco + w_1280 transforms (~3–7MB).
+Configured in lib/content/hero-media.ts.
+
+Legacy local placeholders (hero-placeholder.*) may remain unused.

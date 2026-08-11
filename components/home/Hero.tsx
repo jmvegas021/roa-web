@@ -49,7 +49,8 @@ export function Hero() {
           poster={HERO_MEDIA.posterSrc}
           aria-hidden
         >
-          <source src={HERO_MEDIA.videoSrc} type="video/mp4" />
+          <source src={HERO_MEDIA.webmSrc} type="video/webm" />
+          <source src={HERO_MEDIA.mp4Src} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-r from-stone-950/92 via-stone-950/58 to-stone-950/25" />
         <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/45" />
