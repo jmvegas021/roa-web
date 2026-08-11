@@ -7,10 +7,7 @@ export function SiteFooter() {
     <footer className="border-t border-stone-800 bg-stone-900">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1.4fr_1fr_1fr] lg:px-10 lg:py-20">
         <div>
-          <BrandLockup
-            logoWidth={300}
-            officeClassName="mt-3 text-sm uppercase tracking-[0.2em] text-gold"
-          />
+          <BrandLockup logoWidth={340} />
           <p className="mt-5 max-w-sm text-base leading-relaxed text-stone-400">
             Quiet luxury representation across Salado, Belton, Temple,
             Georgetown, and Central Texas. By appointment.

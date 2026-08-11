@@ -40,15 +40,15 @@ Public site CTAs use Powersuit Blue on white. This office site elevates that blu
 
 ## Logo
 
-Asset: `/images/realty-of-america-logo.svg` — official horizontal white lettering (Legacy Green A accents).
+Asset: `/images/roa-kevin-shoun-logo.png` — combined ROA + Kevin Shoun lockup (white lettering, Legacy Green accents) for dark chrome.
 
 | Location | Rule |
 |----------|------|
-| **Header** | Required — `BrandLockup` ~220px + Office of Kevin Shoun |
-| **Footer** | Required — `BrandLockup` ~260px + office line in champagne |
+| **Header** | Required — `BrandLockup` ~300px (Kevin already in mark; no office subtitle) |
+| **Footer** | Required — `BrandLockup` ~340px |
 | **Hero** | Forbidden — typography/copy brand only |
 
-Alt text: `Realty of America`. Never place the SVG in the first viewport hero stack.
+Alt text: `Realty of America — Kevin Shoun`. Never place the logo image in the first viewport hero stack.
 
 ## Typography
 

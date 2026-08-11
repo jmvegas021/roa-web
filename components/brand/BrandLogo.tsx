@@ -2,10 +2,13 @@ import Link from "next/link";
 import { SITE } from "@/lib/content/team";
 import { withBasePath } from "@/lib/site/basePath";
 
-/** Exact ROA footer/header wordmark PNG (623×56). Do not replace with SVG paths. */
-const LOGO_SRC = withBasePath("/images/realty-of-america-logo.png");
-const LOGO_NATIVE_WIDTH = 623;
-const LOGO_NATIVE_HEIGHT = 56;
+/**
+ * Combined ROA + Kevin Shoun lockup (white ink + Legacy Green accents)
+ * processed for dark navy chrome. Native 1024×178.
+ */
+const LOGO_SRC = withBasePath("/images/roa-kevin-shoun-logo.png");
+const LOGO_NATIVE_WIDTH = 1024;
+const LOGO_NATIVE_HEIGHT = 178;
 const LOGO_ASPECT = LOGO_NATIVE_WIDTH / LOGO_NATIVE_HEIGHT;
 
 interface BrandLogoProps {
@@ -18,11 +21,11 @@ interface BrandLogoProps {
 }
 
 /**
- * Official ROA white horizontal logo for dark ink/navy chrome.
- * White lettering + teal triangle accents — no light plate.
+ * Official ROA × Kevin Shoun horizontal logo for dark ink/navy chrome.
+ * White lettering + Legacy Green accents — no light plate.
  */
 export function BrandLogo({
-  width = 240,
+  width = 280,
   className = "",
   priority = false,
   linked = false,
@@ -33,11 +36,13 @@ export function BrandLogo({
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={LOGO_SRC}
-      alt="Realty of America"
+      alt="Realty of America — Kevin Shoun"
       width={width}
       height={height}
       decoding="async"
-      {...(priority ? { fetchPriority: "high" as const } : { loading: "lazy" as const })}
+      {...(priority
+        ? { fetchPriority: "high" as const }
+        : { loading: "lazy" as const })}
       className={`block max-w-full ${className}`}
       style={{ width, height, maxWidth: "100%" }}
     />
@@ -49,7 +54,7 @@ export function BrandLogo({
     <Link
       href="/"
       className="inline-block max-w-full cursor-pointer focus-visible:outline-offset-4"
-      aria-label="Realty of America — home"
+      aria-label={`${SITE.brand} — ${SITE.office} — home`}
     >
       {image}
     </Link>
@@ -58,16 +63,17 @@ export function BrandLogo({
 
 interface BrandLockupProps {
   logoWidth?: number;
+  /** Logo already includes Kevin Shoun — office line off by default. */
   showOffice?: boolean;
   priority?: boolean;
   className?: string;
   officeClassName?: string;
 }
 
-/** Logo + Kevin Shoun office attribution for header / footer only (never hero). */
+/** Logo lockup for header / footer only (never hero). */
 export function BrandLockup({
-  logoWidth = 240,
-  showOffice = true,
+  logoWidth = 280,
+  showOffice = false,
   priority = false,
   className = "",
   officeClassName = "mt-2 text-[0.65rem] uppercase tracking-[0.22em] text-stone-400 sm:text-xs",

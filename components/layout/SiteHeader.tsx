@@ -23,10 +23,9 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 lg:px-10 lg:py-5">
         <BrandLockup
-          logoWidth={240}
+          logoWidth={300}
           priority
-          className="group max-w-[min(100%,16rem)] sm:max-w-none"
-          officeClassName="mt-1.5 text-[0.65rem] uppercase tracking-[0.22em] text-stone-400 transition duration-200 group-hover:text-stone-50 sm:text-xs"
+          className="max-w-[min(100%,18rem)] sm:max-w-[min(100%,20rem)] lg:max-w-none"
         />
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
