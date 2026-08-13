@@ -53,7 +53,7 @@ export function MeetKevin() {
             <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden bg-stone-800 lg:ml-auto">
               <Image
                 src={kevin.imageUrl}
-                alt={`${kevin.name}, Salado and Central Texas real estate agent`}
+                alt={`${kevin.name}, Salado and Central Texas real estate professional`}
                 fill
                 sizes="(max-width: 1024px) 90vw, 28rem"
                 className="object-cover object-top"

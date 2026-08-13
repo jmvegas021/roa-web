@@ -1,4 +1,5 @@
 import { getIdxEnv, hasIdxCredentials, type IdxEnv } from "./env";
+import { buildIdxLeadBody } from "./build-idx-lead-body";
 import type { LeadPayload } from "./types";
 
 interface IdxRequestOptions {
@@ -7,6 +8,7 @@ interface IdxRequestOptions {
   query?: Record<string, string | number | undefined>;
   body?: Record<string, unknown>;
   revalidate?: number | false;
+  okStatuses?: number[];
 }
 
 interface IdxResponse<T> {
@@ -62,21 +64,12 @@ export class IdxBrokerClient {
   }
 
   async createLead(payload: LeadPayload): Promise<IdxResponse<unknown>> {
-    const body: Record<string, unknown> = {
-      firstName: payload.firstName,
-      lastName: payload.lastName,
-      email: payload.email,
-    };
-    if (payload.phone) body.phone = payload.phone;
-    if (payload.message) body.notes = payload.message;
-    if (payload.listingId) body.listingID = payload.listingId;
-    if (payload.propertyAddress) body.property = payload.propertyAddress;
-
     return this.request({
       method: "PUT",
       path: "/leads/lead",
-      body,
+      body: buildIdxLeadBody(payload),
       revalidate: false,
+      okStatuses: [409],
     });
   }
 
@@ -160,7 +153,8 @@ export class IdxBrokerClient {
       data = text as unknown as T;
     }
 
-    if (!response.ok) {
+    const isAccepted = (options.okStatuses ?? []).includes(response.status);
+    if (!response.ok && !isAccepted) {
       const message =
         typeof data === "object" && data !== null
           ? JSON.stringify(data)

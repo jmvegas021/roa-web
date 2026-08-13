@@ -1,12 +1,12 @@
 "use server";
 
-import { createIdxClient } from "./IdxBrokerClient";
+import { deliverLead, type LeadDeliverySource } from "./deliver-lead";
 import { leadSchema } from "./env";
 
 export interface LeadActionResult {
   ok: boolean;
   message: string;
-  source?: "idx" | "local";
+  source?: LeadDeliverySource;
 }
 
 const recentSubmissions = new Map<string, number>();
@@ -46,39 +46,5 @@ export async function createLead(
   }
   recentSubmissions.set(rateKey, Date.now());
 
-  const client = createIdxClient();
-  if (!client.isConfigured()) {
-    console.info("[createLead] mock accept (no IDX credentials)", {
-      email: parsed.data.email,
-    });
-    return {
-      ok: true,
-      message: "Thank you. Our office will follow up shortly.",
-      source: "local",
-    };
-  }
-
-  try {
-    await client.createLead({
-      firstName: parsed.data.firstName,
-      lastName: parsed.data.lastName,
-      email: parsed.data.email,
-      phone: parsed.data.phone,
-      message: parsed.data.message,
-      listingId: parsed.data.listingId,
-      propertyAddress: parsed.data.propertyAddress,
-    });
-    return {
-      ok: true,
-      message: "Thank you. Kevin’s office will be in touch shortly.",
-      source: "idx",
-    };
-  } catch (error) {
-    console.error("[createLead] IDX lead failed", error);
-    return {
-      ok: false,
-      message:
-        "We could not submit your inquiry right now. Please call the office or try again.",
-    };
-  }
+  return deliverLead(parsed.data);
 }

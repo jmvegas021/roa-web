@@ -8,7 +8,7 @@ import { agentsManager } from "@/lib/idx/listings-service";
 export const metadata: Metadata = {
   title: "Kevin Shoun — Salado & Central Texas Realtor",
   description:
-    "Meet Kevin Shoun, real estate agent with Realty of America. Residential real estate in Belton, Temple, and Central Texas.",
+    "Meet Kevin Shoun, real estate professional with Realty of America. Residential real estate in Belton, Temple, and Central Texas.",
   alternates: { canonical: "/agents" },
 };
 
