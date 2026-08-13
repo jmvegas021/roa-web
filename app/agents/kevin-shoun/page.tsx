@@ -11,12 +11,12 @@ import { TEAM } from "@/lib/content/team";
 export const metadata: Metadata = {
   title: "Kevin Shoun — Salado & Central Texas Real Estate Agent",
   description:
-    "Kevin Shoun, Broker Associate at Realty of America. Buyers, sellers, military relocation, land, and farm & ranch across Salado, Belton, Temple, and Georgetown.",
+    "Kevin Shoun, real estate agent at Realty of America. Buyers, sellers, military relocation, land, and farm & ranch across Salado, Belton, Temple, and Georgetown.",
   alternates: { canonical: "/agents/kevin-shoun" },
   openGraph: {
     title: "Kevin Shoun — Salado & Central Texas Realtor",
     description:
-      "Broker Associate at Realty of America serving Salado, Belton, Temple, Georgetown, and Central Texas.",
+      "Real estate agent at Realty of America serving Salado, Belton, Temple, Georgetown, and Central Texas.",
     url: "/agents/kevin-shoun",
     images: [{ url: "/images/kevin-shoun.webp" }],
   },
