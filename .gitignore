@@ -26,8 +26,12 @@
 *.pem
 
 # Editor / agent local tooling (do not publish)
-.cursor/
-.claude/
+.cursor/*
+!.cursor/skills/
+!.cursor/skills/**
+.claude/*
+!.claude/skills/
+!.claude/skills/**
 
 # debug
 npm-debug.log*

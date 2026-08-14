@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { IdxScript } from "@/components/idx/IdxScript";
@@ -89,23 +90,25 @@ export default function RootLayout({
       <body
         className={`${cormorant.variable} ${outfit.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
       >
-        <JsonLd
-          data={[
-            buildOrganizationSchema(),
-            buildWebSiteSchema(),
-            buildKevinPersonSchema(),
-          ]}
-        />
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-gold focus:px-4 focus:py-2 focus:text-stone-950"
-        >
-          Skip to content
-        </a>
-        <SiteHeader transparent />
-        <main id="main-content">{children}</main>
-        <SiteFooter />
-        <IdxScript />
+        <NuqsAdapter>
+          <JsonLd
+            data={[
+              buildOrganizationSchema(),
+              buildWebSiteSchema(),
+              buildKevinPersonSchema(),
+            ]}
+          />
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-gold focus:px-4 focus:py-2 focus:text-stone-950"
+          >
+            Skip to content
+          </a>
+          <SiteHeader transparent />
+          <main id="main-content">{children}</main>
+          <SiteFooter />
+          <IdxScript />
+        </NuqsAdapter>
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { loadPostSummaries } from "@/lib/blog/load-posts";
 import { listingsManager } from "@/lib/idx/listings-service";
 import { TEAM } from "@/lib/content/team";
 import { getSiteUrl } from "@/lib/site/siteUrl";
@@ -16,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/agents",
     "/agents/kevin-shoun",
     "/neighborhoods",
+    "/blog",
     "/about",
     "/contact",
   ].map((path) => ({
@@ -42,5 +44,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...listingRoutes, ...agentRoutes];
+  const journalRoutes: MetadataRoute.Sitemap = loadPostSummaries().map(
+    (post) => ({
+      url: `${base}/blog/${post.slug}`,
+      lastModified: new Date(post.updatedAt ?? post.publishedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })
+  );
+
+  return [...staticRoutes, ...listingRoutes, ...agentRoutes, ...journalRoutes];
 }

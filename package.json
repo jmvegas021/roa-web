@@ -14,9 +14,12 @@
     "lint": "eslint app components lib"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "next": "15.5.20",
+    "nuqs": "^2.9.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-markdown": "^10.1.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {

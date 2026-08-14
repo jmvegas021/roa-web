@@ -8,6 +8,8 @@ import type { NextConfig } from "next";
  */
 const isStaticExport = process.env.STATIC_EXPORT === "1";
 
+const blogMarkdown = ["./content/blog/**/*"];
+
 const nextConfig: NextConfig = {
   ...(isStaticExport
     ? {
@@ -16,6 +18,13 @@ const nextConfig: NextConfig = {
         trailingSlash: true,
       }
     : {}),
+  outputFileTracingIncludes: {
+    "/blog": blogMarkdown,
+    "/blog/[slug]": blogMarkdown,
+    "/blog/rss.xml": blogMarkdown,
+    "/blog/feed.json": blogMarkdown,
+    "/sitemap.xml": blogMarkdown,
+  },
   images: {
     unoptimized: isStaticExport,
     remotePatterns: [

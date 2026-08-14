@@ -45,6 +45,14 @@ export function SiteFooter() {
             </li>
             <li>
               <Link
+                href="/blog"
+                className="inline-flex min-h-11 cursor-pointer items-center transition duration-200 hover:text-gold"
+              >
+                Journal
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/agents/kevin-shoun"
                 className="inline-flex min-h-11 cursor-pointer items-center transition duration-200 hover:text-gold"
               >
