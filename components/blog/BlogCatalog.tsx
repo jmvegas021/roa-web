@@ -32,7 +32,7 @@ export function BlogCatalog({ posts }: BlogCatalogProps) {
       />
       {paginated.total === 0 ? (
         <p className="border-t border-stone-800 py-16 text-base text-stone-400">
-          No journal pieces match that search. Try a town, a tag, or a quieter
+          No blog posts match that search. Try a town, a tag, or a quieter
           phrase.
         </p>
       ) : (

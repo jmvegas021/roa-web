@@ -17,7 +17,7 @@ export function BlogPagination({
 
   return (
     <nav
-      aria-label="Journal pages"
+      aria-label="Blog pages"
       className="mt-12 flex flex-wrap items-center justify-center gap-1 border-t border-stone-800 pt-10"
     >
       <PageButton

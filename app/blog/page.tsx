@@ -8,7 +8,7 @@ import { POSTS_PER_PAGE } from "@/lib/blog/constants";
 import { loadPostSummaries } from "@/lib/blog/load-posts";
 
 export const metadata: Metadata = {
-  title: "Journal — Salado, Belton & Central Texas",
+  title: "Blog — Salado, Belton & Central Texas",
   description:
     "Guides and market notes from the Office of Kevin Shoun — Salado, Belton, Temple, Georgetown, and Central Texas, written for buyers and relocation.",
   alternates: {
@@ -30,12 +30,12 @@ export default function BlogIndexPage() {
       <section className="px-6 pb-6 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <Breadcrumbs
-            items={[{ name: "Journal", path: "/blog" }]}
+            items={[{ name: "Blog", path: "/blog" }]}
             className="mb-8"
           />
           <SectionHeading
             as="h1"
-            eyebrow="Journal"
+            eyebrow="Blog"
             title="Notes from the corridor"
             description="Editorial guides to Salado, Belton, Temple, Georgetown, and Central Texas — character, cadence, and the decisions that actually matter."
           />

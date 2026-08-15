@@ -25,7 +25,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = loadPostBySlug(slug);
-  if (!post) return { title: "Journal piece not found" };
+  if (!post) return { title: "Blog post not found" };
 
   const url = `/blog/${post.slug}`;
   return {
@@ -71,7 +71,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Breadcrumbs
           items={[
-            { name: "Journal", path: "/blog" },
+            { name: "Blog", path: "/blog" },
             { name: post.title, path: `/blog/${post.slug}` },
           ]}
           className="mb-8"

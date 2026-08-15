@@ -18,7 +18,7 @@ export function BlogToolbar({
 }: BlogToolbarProps) {
   return (
     <div className="flex flex-col gap-8 border-t border-stone-800 py-8 lg:flex-row lg:items-end lg:justify-between">
-      <div role="tablist" aria-label="Sort journal" className="flex flex-wrap gap-1">
+      <div role="tablist" aria-label="Sort blog" className="flex flex-wrap gap-1">
         {BLOG_SORT_VALUES.map((value) => {
           const isActive = sort === value;
           return (
@@ -40,7 +40,7 @@ export function BlogToolbar({
         })}
       </div>
       <label className="block w-full max-w-sm">
-        <span className="sr-only">Search journal</span>
+        <span className="sr-only">Search blog</span>
         <input
           type="search"
           value={query}

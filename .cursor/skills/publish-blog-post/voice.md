@@ -16,7 +16,7 @@ Prefer: *collection / consult / discretion / by appointment / representation / c
 
 Avoid: *inventory* (for homes), *inquire*, *deals*, *hot property*, *steal*, *unlock*, *dive in*, *game-changer*, *crush it*, *let’s get started*, emoji, hashtag walls.
 
-Prefer *journal* / *piece* in asides if needed; the public nav may say Journal. In the post itself, just write the article — do not call it a “blog” in the body.
+Prefer *piece* or *article* in asides if needed; the public nav and index are **Blog** at `/blog`. In the post itself, just write the article — do not narrate that it is a “blog post”.
 
 ## Lead
 
@@ -41,7 +41,7 @@ No: “Buying a home is one of the biggest decisions you’ll ever make.”
 
 ## CTA
 
-Dual spirit of the site: collection + private consult. In a journal post, one quiet close is enough:
+Dual spirit of the site: collection + private consult. In a blog post, one quiet close is enough:
 
 - Work with Kevin → `/contact` or `/agents/kevin-shoun`
 - See the collection → `/listings`

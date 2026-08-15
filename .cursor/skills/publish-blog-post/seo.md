@@ -35,7 +35,7 @@ SEO create:
 - [ ] 4–7 `##` headings that map to search intent
 - [ ] Lead: 1–2 sentence extractable definition/answer in the first 200 words
 - [ ] `## FAQ` or `## Frequently asked questions` with 3–5 `###` real-query Q&As
-- [ ] 2–4 internal links in prose (evergreen pages and/or related journal posts)
+- [ ] 2–4 internal links in prose (evergreen pages and/or related blog posts)
 - [ ] `heroImage` always set; `heroAlt` ≥ 8 chars, descriptive, not stuffed
 - [ ] `keywords` filled with real secondary phrases (empty array = fail)
 - [ ] `author: Kevin Shoun`; no fake stats; citations are name + year + URL
@@ -90,7 +90,7 @@ Do not skip this section. Without it the page emits BlogPosting only.
 
 - `/neighborhoods` with anchors `#salado` `#belton` `#temple` `#georgetown` `#harker-heights` `#central-texas`
 - `/listings`, `/search`, `/contact`, `/agents/kevin-shoun`
-- Related journal posts from `feed.json` (`/blog/{slug}`)
+- Related blog posts from `feed.json` (`/blog/{slug}`)
 
 Anchor text names the destination. Never “click here”.
 

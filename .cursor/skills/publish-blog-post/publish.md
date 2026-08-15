@@ -24,8 +24,8 @@ This is the default even if a local clone has unrelated dirty files.
 3. If there are new binaries under `public/images/blog/{slug}/`, commit each on `main` (base64 for GitHub Contents API). Skip this when using a neighborhood fallback path.
 4. Prefer one commit that includes all allowlisted files if the host can push multiple files; otherwise sequential commits on `main` are acceptable.
 5. Commit messages, sentence case, why-focused:
-   - Create: `Publish journal post: Buying in Salado vs Belton.`
-   - Edit: `Update journal post: Buying in Salado vs Belton — Fort Cavazos commute.`
+   - Create: `Publish blog post: Buying in Salado vs Belton.`
+   - Edit: `Update blog post: Buying in Salado vs Belton — Fort Cavazos commute.`
 
 Do not force-push. Do not change Git config. Do not skip hooks on a local commit unless the user explicitly asks.
 

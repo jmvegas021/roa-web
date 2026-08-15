@@ -1,20 +1,20 @@
 ---
 name: publish-blog-post
 description: >-
-  Creates or edits Kevin Shoun journal posts as Markdown in jmvegas021/roa-web
+  Creates or edits Kevin Shoun blog posts as Markdown in jmvegas021/roa-web
   with required SEO (primary keyword, meta description, FAQ, BlogPosting and
   FAQPage schema, internal links) and commits only content/blog/ and
-  public/images/blog/ to main so Vercel deploys. Use when the user asks to
-  write a blog post, publish a journal piece, optimize keywords or FAQ schema,
-  update the post, edit the article at a URL, or change the blog titled
-  something. Also use for "write a journal post", "publish to the blog",
-  "SEO the Salado article", "add FAQ", "fix the Salado vs Belton article",
-  or similar create/edit requests.
+  public/images/blog/ to main so Vercel deploys at /blog. Use when the user
+  asks to write a blog post, publish a journal piece, optimize keywords or
+  FAQ schema, update the post, edit the article at a URL, or change the blog
+  titled something. Also use for "write a journal post", "publish to the
+  blog", "SEO the Salado article", "add FAQ", "fix the Salado vs Belton
+  article", or similar create/edit requests.
 ---
 
 # Publish blog post
 
-Portable skill for Claude Desktop, Claude Agent, Claude Code, and Cursor. Writes Kevin Shoun journal posts. GitHub Write on `jmvegas021/roa-web` is what goes live. This skill contains no Vercel, Git, or Resend secrets.
+Portable skill for Claude Desktop, Claude Agent, Claude Code, and Cursor. Writes Kevin Shoun blog posts to `/blog`. GitHub Write on `jmvegas021/roa-web` is what goes live. This skill contains no Vercel, Git, or Resend secrets.
 
 Read supporting files when needed (one level deep):
 
@@ -42,7 +42,7 @@ Allowlist (commit these prefixes only): `content/blog/` and `public/images/blog/
 
 ## Mode
 
-**Create** if the user wants a new post (topic, “write”, “publish a journal piece”).
+**Create** if the user wants a new post (topic, “write”, “publish a blog post”).
 
 **Edit** if they name an existing post — title, `https://…/blog/{slug}`, `/blog/{slug}`, “update the post”, “edit the article at”, “change the blog titled”, “fix the … article”. Follow [edit.md](edit.md).
 

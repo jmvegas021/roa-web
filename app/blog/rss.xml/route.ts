@@ -14,7 +14,7 @@ export function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXml(`${SITE.office} Journal`)}</title>
+    <title>${escapeXml(`${SITE.office} Blog`)}</title>
     <link>${escapeXml(absoluteUrl("/blog"))}</link>
     <description>${escapeXml(`Guides and market notes from ${SITE.office} at ${SITE.brand}.`)}</description>
     <language>en-us</language>

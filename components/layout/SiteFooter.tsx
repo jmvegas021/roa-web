@@ -48,7 +48,7 @@ export function SiteFooter() {
                 href="/blog"
                 className="inline-flex min-h-11 cursor-pointer items-center transition duration-200 hover:text-gold"
               >
-                Journal
+                Blog
               </Link>
             </li>
             <li>

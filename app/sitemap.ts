@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const journalRoutes: MetadataRoute.Sitemap = loadPostSummaries().map(
+  const blogRoutes: MetadataRoute.Sitemap = loadPostSummaries().map(
     (post) => ({
       url: `${base}/blog/${post.slug}`,
       lastModified: new Date(post.updatedAt ?? post.publishedAt),
@@ -53,5 +53,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   );
 
-  return [...staticRoutes, ...listingRoutes, ...agentRoutes, ...journalRoutes];
+  return [...staticRoutes, ...listingRoutes, ...agentRoutes, ...blogRoutes];
 }
