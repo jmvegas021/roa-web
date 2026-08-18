@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
+import { LocalExpertise } from "@/components/home/LocalExpertise";
 import { QuickPaths } from "@/components/home/QuickPaths";
 import { MeetKevin } from "@/components/home/MeetKevin";
 import { FeaturedListings } from "@/components/home/FeaturedListings";
@@ -34,6 +35,7 @@ export default async function HomePage() {
     <>
       <Hero />
       <QuickPaths />
+      <LocalExpertise />
       <MeetKevin />
       <FeaturedListings listings={listings} source={source} />
       <JourneyPaths />

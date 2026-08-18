@@ -21,7 +21,7 @@ export function NeighborhoodsTeaser() {
           {featured.map((place, index) => (
             <RevealOnScroll key={place.slug} delayMs={index * 80}>
               <Link
-                href={`/neighborhoods#${place.slug}`}
+                href={`/neighborhoods/${place.slug}`}
                 className="group block cursor-pointer focus-visible:outline-offset-4"
               >
                 <div className="relative aspect-[3/4] overflow-hidden bg-stone-800">

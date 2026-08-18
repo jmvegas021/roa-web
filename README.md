@@ -94,7 +94,7 @@ Default build is a **Next.js server app** (SSR, Server Actions, Image Optimizati
 
 1. Import [jmvegas021/roa-web](https://github.com/jmvegas021/roa-web) in Vercel (already linked if using this repo).
 2. Set Production env:
-   - `NEXT_PUBLIC_SITE_URL=https://roa-web-tau.vercel.app` (or your custom domain)
+   - `NEXT_PUBLIC_SITE_URL=https://www.kevinshoun.com`
    - `IDX_API_KEY=…` (optional until live MLS)
    - `RESEND_API_KEY=…` (required for inbox delivery)
    - `LEAD_NOTIFY_EMAIL=kevin.shoun@realtyofamerica.com` (optional; this is the default)
@@ -110,7 +110,7 @@ npm start
 IDX Dynamic Wrapper URL:
 
 ```
-https://roa-web-tau.vercel.app/wrapper
+https://www.kevinshoun.com/wrapper
 ```
 
 ## Optional: static FTP export (`/kevin`)

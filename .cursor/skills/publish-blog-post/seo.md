@@ -88,7 +88,7 @@ Do not skip this section. Without it the page emits BlogPosting only.
 
 2–4 in running prose (not a dump at the end). Choose from:
 
-- `/neighborhoods` with anchors `#salado` `#belton` `#temple` `#georgetown` `#harker-heights` `#central-texas`
+- `/neighborhoods` and `/neighborhoods/{market}` local guides
 - `/listings`, `/search`, `/contact`, `/agents/kevin-shoun`
 - Related blog posts from `feed.json` (`/blog/{slug}`)
 

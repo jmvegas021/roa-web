@@ -53,7 +53,7 @@ Return the full Markdown (and note image paths) in the reply. State clearly: **n
 
 ## After a successful push
 
-- Canonical / live URL: `https://roa-web-tau.vercel.app/blog/{slug}`
+- Canonical / live URL: `https://www.kevinshoun.com/blog/{slug}`
 - Vercel often needs 1–2 minutes. If the URL 404s immediately, say so.
 - `feed.json` may lag until the deploy finishes. Do not re-fetch it as proof of failure within that window.
 

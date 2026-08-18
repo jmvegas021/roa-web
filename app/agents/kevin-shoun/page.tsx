@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { KevinLocalExpertise } from "@/components/agents/KevinLocalExpertise";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { ButtonLink } from "@/components/ui/SectionPrimitives";
 import { ContactForm } from "@/components/forms/ContactForm";
@@ -59,6 +60,7 @@ export default async function KevinShounPage() {
           <p className="mt-6 text-lg leading-relaxed text-stone-400">
             {agent.bio}
           </p>
+          <KevinLocalExpertise />
           {agent.specialties.length > 0 ? (
             <ul className="mt-8 flex flex-wrap gap-3">
               {agent.specialties.map((item) => (

@@ -17,7 +17,18 @@ const nextConfig: NextConfig = {
         basePath: "/kevin",
         trailingSlash: true,
       }
-    : {}),
+    : {
+        async redirects() {
+          return [
+            {
+              source: "/:path*",
+              has: [{ type: "host" as const, value: "kevinshoun.com" }],
+              destination: "https://www.kevinshoun.com/:path*",
+              permanent: true,
+            },
+          ];
+        },
+      }),
   outputFileTracingIncludes: {
     "/blog": blogMarkdown,
     "/blog/[slug]": blogMarkdown,
