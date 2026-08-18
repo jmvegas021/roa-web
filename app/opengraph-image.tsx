@@ -1,7 +1,6 @@
 import { ImageResponse } from "next/og";
 import { SITE } from "@/lib/content/team";
 
-export const dynamic = "force-static";
 export const runtime = "edge";
 export const alt = `${SITE.brand} · ${SITE.office}`;
 export const size = { width: 1200, height: 630 };
