@@ -26,6 +26,14 @@ test("production canonical ignores a Vercel preview hostname", () => {
   assert.equal(absoluteUrl("/about"), `${PRODUCTION_SITE_URL}/about`);
 });
 
+test("production canonical ignores NEXT_PUBLIC_SITE_URL when it is a Vercel app host", () => {
+  process.env.NEXT_PUBLIC_SITE_URL = "https://roa-web-tau.vercel.app";
+  process.env.NODE_ENV = "production";
+
+  assert.equal(getSiteUrl(), PRODUCTION_SITE_URL);
+  assert.equal(getPublicIdxConfig().siteUrl, PRODUCTION_SITE_URL);
+});
+
 test("configured canonical origin is normalized and shared with IDX", () => {
   process.env.NEXT_PUBLIC_SITE_URL = "https://example.com///";
 

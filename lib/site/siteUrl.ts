@@ -5,9 +5,13 @@ export const PRODUCTION_SITE_URL = "https://www.kevinshoun.com";
 /** Production canonical origin for metadata, sitemap, and JSON-LD. */
 export function getSiteUrl(): string {
   const configured = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "");
-  if (configured) return configured;
+  if (configured && !isVercelAppOrigin(configured)) return configured;
   if (process.env.NODE_ENV === "development") return "http://localhost:3000";
   return PRODUCTION_SITE_URL;
+}
+
+function isVercelAppOrigin(origin: string): boolean {
+  return origin.includes(".vercel.app");
 }
 
 export function absoluteUrl(path = "/"): string {
