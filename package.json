@@ -5,12 +5,13 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "build:static": "STATIC_EXPORT=1 NEXT_PUBLIC_BASE_PATH=/kevin NEXT_PUBLIC_SITE_URL=https://www.dudewheresmyweb.site/kevin next build",
+    "build:static": "STATIC_EXPORT=1 NEXT_PUBLIC_BASE_PATH=/kevin NEXT_PUBLIC_SITE_URL=https://www.kevinshoun.com next build",
     "start": "next start",
     "preview:static": "node scripts/preview-static.mjs",
     "deploy:ftp": "node scripts/deploy-ftp.mjs",
     "verify:static": "node scripts/verify-deploy.mjs",
     "test:idx": "node scripts/test-idx.mjs",
+    "test:seo": "tsx --test tests/seo/*.test.ts",
     "lint": "eslint app components lib"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.5.20",
     "tailwindcss": "^4",
+    "tsx": "^4.23.12",
     "typescript": "^5"
   }
 }
