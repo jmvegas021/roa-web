@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { SectionHeading } from "@/components/ui/SectionPrimitives";
 import { NEIGHBORHOODS } from "@/lib/content/neighborhoods";
@@ -26,6 +27,14 @@ export default function NeighborhoodsPage() {
             title="Neighborhoods & corridors"
             description="Markets we know intimately across Salado, Belton, Temple, Georgetown, and Bell–Williamson Counties — written for buyers and sellers who want a sense of character, not a checklist."
           />
+          <p className="mt-8 max-w-3xl text-base leading-8 text-stone-300">
+            A Central Texas move is shaped by the details of a specific
+            property and its surroundings. These guides introduce the housing,
+            routines, and due diligence that distinguish each market. Use them
+            to compare possible settings, then confirm commute routes,
+            services, restrictions, and property conditions before making a
+            decision.
+          </p>
         </div>
       </section>
 
@@ -51,12 +60,20 @@ export default function NeighborhoodsPage() {
               <p className="text-xs uppercase tracking-[0.22em] text-gold">
                 {place.region}
               </p>
-              <h2 className="font-display mt-3 text-4xl text-stone-50 md:text-5xl">
-                {place.name}
-              </h2>
+              <Link href={`/neighborhoods/${place.slug}`} className="group">
+                <h2 className="font-display mt-3 text-4xl text-stone-50 transition group-hover:text-gold md:text-5xl">
+                  {place.name}
+                </h2>
+              </Link>
               <p className="mt-5 max-w-md text-base leading-relaxed text-stone-400">
                 {place.summary}
               </p>
+              <Link
+                href={`/neighborhoods/${place.slug}`}
+                className="mt-6 inline-flex text-xs uppercase tracking-[0.18em] text-gold hover:underline"
+              >
+                Read the local guide
+              </Link>
             </div>
           </section>
         ))}

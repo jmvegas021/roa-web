@@ -46,6 +46,13 @@ export default function AboutPage() {
               Georgetown, we bring calm expertise and a network built for
               Central Texas.
             </p>
+            <p>
+              The process begins with the property and the decision around it.
+              We coordinate pricing, presentation, inspections, contract
+              strategy, and local diligence with the appropriate specialists,
+              while keeping the client’s timing and long-term objectives at the
+              center of every recommendation.
+            </p>
           </div>
           <div className="mt-14 flex flex-wrap gap-4">
             <ButtonLink href="/agents/kevin-shoun">Meet Kevin</ButtonLink>
