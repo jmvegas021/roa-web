@@ -96,9 +96,7 @@ export function buildListingSchema(listing: LuxuryListing) {
       "@type": "Offer",
       price: listing.price || undefined,
       priceCurrency: "USD",
-      availability: /pending|under contract/i.test(listing.status)
-        ? "https://schema.org/PreOrder"
-        : "https://schema.org/InStock",
+      availability: getListingAvailability(listing.status),
       seller: { "@id": absoluteUrl("/#organization") },
     },
     contentLocation: {
@@ -123,6 +121,13 @@ export function buildListingSchema(listing: LuxuryListing) {
         : undefined,
     },
   };
+}
+
+export function getListingAvailability(status: string): string {
+  if (/sold|closed/i.test(status)) return "https://schema.org/SoldOut";
+  if (/pending|under contract/i.test(status))
+    return "https://schema.org/PreOrder";
+  return "https://schema.org/InStock";
 }
 
 export function buildBreadcrumbSchema(
