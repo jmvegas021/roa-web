@@ -78,7 +78,7 @@ heroAlt: Twelve Oaks and creek-side canopy in Salado, Texas.
 
 - ATX headings (`##`, `###`). The site uses `title` as the article H1 — do not add a body `#`. Start with a lead paragraph (extractable definition in the first 200 words), then 4–7 `##` sections.
 - Images in body: `![descriptive alt](/images/blog/{slug}/name.webp)`
-- Internal links: 2–4 in prose, e.g. `[label](/neighborhoods#belton)`
+- Internal links: 2–4 in prose, e.g. `[Belton guide](/neighborhoods/belton)`
 - External citations: full `https://` URLs with source name + year
 - FAQ block **required on create** (either H2 works for FAQPage JSON-LD extraction):
 

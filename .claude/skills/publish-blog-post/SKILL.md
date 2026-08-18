@@ -31,7 +31,7 @@ Read supporting files when needed (one level deep):
 |-----|--------|
 | GitHub | `jmvegas021/roa-web` |
 | Branch | `main` |
-| Site | `https://roa-web-tau.vercel.app` |
+| Site | `https://www.kevinshoun.com` |
 | Feed | `{site}/blog/feed.json` |
 | Live index | `{site}/blog` |
 | Live post | `{site}/blog/{slug}` |
@@ -94,12 +94,12 @@ Author defaults to `Kevin Shoun`. Set `priority` 1–10 (flagship comparison/tim
 
 ### 2. Inventory
 
-`GET https://roa-web-tau.vercel.app/blog/feed.json`
+`GET https://www.kevinshoun.com/blog/feed.json`
 
 Expect `{ slug, title, url, tags, category, publishedAt, updatedAt, description }[]`.
 
 - If title or slug already exists → stop creating; offer Mode B.
-- Pick 2–4 internal links from the feed plus evergreen pages: `/neighborhoods` (anchors `#salado` `#belton` `#temple` `#georgetown` `#harker-heights` `#central-texas`), `/listings`, `/agents/kevin-shoun`, `/contact`.
+- Pick 2–4 internal links from the feed plus evergreen pages: `/neighborhoods`, `/neighborhoods/{market}`, `/listings`, `/agents/kevin-shoun`, and `/contact`.
 
 If the feed 404s or fails: list `content/blog/` on GitHub `main` (or the local checkout). Still refuse duplicates. Do not skip this step.
 
