@@ -12,6 +12,35 @@ export function isPublicMcpMethod(method: string | undefined): boolean {
   return typeof method === "string" && PUBLIC_MCP_METHODS.has(method);
 }
 
+export const PUBLIC_MCP_TOOLS = new Set([
+  "list_blog_posts",
+  "suggest_next_topic",
+  "get_blog_post",
+  "list_hero_images",
+  "list_post_images",
+]);
+
+export function isPublicMcpRequest(
+  method: string | undefined,
+  toolName?: string
+): boolean {
+  if (isPublicMcpMethod(method)) return true;
+  return method === "tools/call" && !!toolName && PUBLIC_MCP_TOOLS.has(toolName);
+}
+
+export function mcpToolNameFromBody(body: unknown): string | undefined {
+  if (!body || typeof body !== "object") return undefined;
+  const params = (body as { params?: { name?: unknown } }).params;
+  return typeof params?.name === "string" ? params.name : undefined;
+}
+
+export function jsonRpcId(body: unknown): string | number | null {
+  if (!body || typeof body !== "object" || !("id" in body)) return null;
+  const id = (body as { id?: unknown }).id;
+  if (typeof id === "string" || typeof id === "number") return id;
+  return null;
+}
+
 interface JsonRpcRequest {
   jsonrpc?: string;
   id?: string | number | null;

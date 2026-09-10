@@ -22,8 +22,8 @@ Kevin does **not** install Git, Node, a PAT, or a local script. One-time in Clau
 2. Settings → Connectors → Add custom connector
    - Name: `Kevin Shoun Blog`
    - URL: `https://www.kevinshoun.com/api/blog/mcp` (no trailing space, include `www`)
-   - Authentication: **None**
-   - Header: `Authorization: Bearer <the secret>`
+   - Authentication: **None** (not OAuth — do not click Connect)
+   - Header: `Authorization: Bearer <the secret>` (required for publish/upload; listing works without it)
 3. Restart Claude.
 
 Do not put the secret in this skill file.

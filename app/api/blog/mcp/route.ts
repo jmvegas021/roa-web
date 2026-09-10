@@ -1,11 +1,10 @@
-import { handleMcpRequest, isPublicMcpMethod } from "@/lib/blog-agent/mcp-server";
+import { handleMcpRequest, isPublicMcpRequest, jsonRpcId, mcpToolNameFromBody } from "@/lib/blog-agent/mcp-server";
 import { MCP_TOOLS } from "@/lib/blog-agent/mcp-tools";
 import {
   corsHeaders,
   getPublishSecret,
   isAuthorizedPublishRequest,
   jsonResponse,
-  unauthorizedResponse,
 } from "@/lib/blog-agent/publish-auth";
 import { clientKey, isRateLimited } from "@/lib/blog-agent/rate-limit";
 
@@ -50,8 +49,23 @@ export async function POST(request: Request) {
     body && typeof body === "object" && "method" in body
       ? (body as { method?: unknown }).method
       : undefined;
-  if (!isPublicMcpMethod(typeof method === "string" ? method : undefined)) {
-    if (!isAuthorizedPublishRequest(request)) return unauthorizedResponse();
+  const methodName = typeof method === "string" ? method : undefined;
+  if (!isPublicMcpRequest(methodName, mcpToolNameFromBody(body))) {
+    if (!isAuthorizedPublishRequest(request)) {
+      return jsonResponse({
+        jsonrpc: "2.0",
+        id: jsonRpcId(body),
+        result: {
+          content: [
+            {
+              type: "text",
+              text: "Publish, upload, and delete need the connector header Authorization: Bearer <BLOG_PUBLISH_SECRET>. Set Authentication to None, then add that header. Do not click Connect or use OAuth.",
+            },
+          ],
+          isError: true,
+        },
+      });
+    }
     if (isRateLimited(`mcp:${clientKey(request)}`)) {
       return jsonResponse({ error: "Too many requests." }, 429);
     }
