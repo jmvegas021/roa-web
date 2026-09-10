@@ -28,6 +28,14 @@ const nextConfig: NextConfig = {
             },
           ];
         },
+        async rewrites() {
+          return [
+            {
+              source: "/api/blog/mcp/:key",
+              destination: "/api/blog/mcp?key=:key",
+            },
+          ];
+        },
       }),
   outputFileTracingIncludes: {
     "/blog": blogMarkdown,

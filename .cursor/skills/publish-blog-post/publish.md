@@ -21,9 +21,8 @@ Kevin does **not** install Git, Node, a PAT, or a local script. One-time in Clau
 1. Ask the site operator for `BLOG_PUBLISH_SECRET`.
 2. Settings → Connectors → Add custom connector
    - Name: `Kevin Shoun Blog`
-   - URL: `https://www.kevinshoun.com/api/blog/mcp` (no trailing space, include `www`)
-   - Authentication: **None** (not OAuth — do not click Connect)
-   - Header: `Authorization: Bearer <the secret>` (required for publish/upload; listing works without it)
+   - URL: `https://www.kevinshoun.com/api/blog/mcp?key=<BLOG_PUBLISH_SECRET>` (secret in the URL; Claude.ai/Cowork does not send custom headers)
+   - Authentication: **None** (do not click Connect, do not use OAuth, do not add an Authorization header)
 3. Restart Claude.
 
 Do not put the secret in this skill file.
@@ -92,7 +91,7 @@ curl -T ./hero.webp '<putUrl>'
 
 If PUT/network fails, fall back to `upload_blog_image` + `imageUrl` of the original public source. Do not ask Kevin to host a file. Do not shrink and type base64.
 
-Writes need the connector header `Authorization: Bearer <secret>`. Auth None, not OAuth. Do not click Connect.
+Writes need `?key=<BLOG_PUBLISH_SECRET>` on the connector URL. Claude.ai/Cowork does not send Authorization. Auth None, not OAuth. Do not click Connect.
 
 If `create_blog_image_upload` is missing, the connector is stale: remove **Kevin Shoun Blog** and add it again.
 

@@ -5,13 +5,24 @@ export function getPublishSecret(): string | undefined {
   return value || undefined;
 }
 
+export function extractPublishToken(request: Request): string {
+  const header = request.headers.get("authorization") ?? "";
+  if (header.toLowerCase().startsWith("bearer ")) {
+    return header.slice(7).trim();
+  }
+  const apiKey = request.headers.get("x-api-key")?.trim();
+  if (apiKey) return apiKey;
+  try {
+    return new URL(request.url).searchParams.get("key")?.trim() ?? "";
+  } catch {
+    return "";
+  }
+}
+
 export function isAuthorizedPublishRequest(request: Request): boolean {
   const secret = getPublishSecret();
   if (!secret) return false;
-  const header = request.headers.get("authorization") ?? "";
-  const token = header.toLowerCase().startsWith("bearer ")
-    ? header.slice(7).trim()
-    : request.headers.get("x-api-key")?.trim() ?? "";
+  const token = extractPublishToken(request);
   if (!token) return false;
   return safeEqual(token, secret);
 }

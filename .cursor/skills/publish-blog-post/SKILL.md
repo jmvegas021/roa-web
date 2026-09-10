@@ -29,7 +29,7 @@ Read supporting files when needed (one level deep):
 | Key | Value |
 |-----|--------|
 | Publish | Kevin Shoun Blog MCP — create/edit/delete posts, upload and swap heroes |
-| MCP URL | `https://www.kevinshoun.com/api/blog/mcp` |
+| MCP URL | `https://www.kevinshoun.com/api/blog/mcp?key=<BLOG_PUBLISH_SECRET>` |
 | Site | `https://www.kevinshoun.com` |
 | Feed | `{site}/blog/feed.json` |
 | Live index | `{site}/blog` |

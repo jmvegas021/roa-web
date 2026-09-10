@@ -59,7 +59,7 @@ export async function POST(request: Request) {
           content: [
             {
               type: "text",
-              text: "Publish, upload, and delete need the connector header Authorization: Bearer <BLOG_PUBLISH_SECRET>. Set Authentication to None, then add that header. Do not click Connect or use OAuth.",
+              text: "Publish and upload need the secret in the connector URL: https://www.kevinshoun.com/api/blog/mcp?key=<BLOG_PUBLISH_SECRET>. Claude.ai/Cowork does not send Authorization headers. Authentication: None. Do not click Connect.",
             },
           ],
           isError: true,
