@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { readGithubFile } from "@/lib/blog-agent/commit-post";
 import { MAX_MARKDOWN_CHARS } from "@/lib/blog-agent/constants";
+import { listHeroAssets } from "@/lib/blog-agent/hero-catalog";
 import {
   publishValidatedMarkdown,
   suggestedTopicPayload,
@@ -35,6 +36,12 @@ const TOOLS = [
     name: "suggest_next_topic",
     description:
       "Return the next unpublished cluster topic for an autonomous or scheduled post.",
+    inputSchema: { type: "object", properties: {}, additionalProperties: false },
+  },
+  {
+    name: "list_hero_images",
+    description:
+      "List on-site hero images already deployed. Set heroImage to one of these paths and copy the matching alt. Do not invent filenames, ask the user for a URL, or block publish for a new photo.",
     inputSchema: { type: "object", properties: {}, additionalProperties: false },
   },
   {
@@ -144,6 +151,19 @@ async function callTool(body: JsonRpcRequest): Promise<{
         suggested
           ? JSON.stringify(suggested, null, 2)
           : "No queued cluster topics remain."
+      );
+    }
+    if (name === "list_hero_images") {
+      return toolText(
+        body.id,
+        JSON.stringify(
+          {
+            note: "These files already exist on kevinshoun.com. Point heroImage at path. Never invent /images/blog/{slug}/ files unless this list includes them.",
+            images: listHeroAssets(),
+          },
+          null,
+          2
+        )
       );
     }
     if (name === "get_blog_post") {

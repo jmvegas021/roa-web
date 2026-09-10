@@ -22,7 +22,7 @@ Kevin does **not** install Git, Node, a PAT, or a local script. One-time in Clau
    - Name: `Kevin Shoun Blog`
    - URL: `https://www.kevinshoun.com/api/blog/mcp`
    - Header: `Authorization: Bearer <the secret>`
-3. Restart Claude. You should see `list_blog_posts`, `suggest_next_topic`, `get_blog_post`, `publish_blog_post`.
+3. Restart Claude. You should see `list_blog_posts`, `suggest_next_topic`, `list_hero_images`, `get_blog_post`, `publish_blog_post`.
 
 Do not put the secret in this skill file. Do not ask Kevin for Admin GitHub, a PAT, or Vercel login.
 
@@ -34,6 +34,7 @@ Use the **Kevin Shoun Blog** connector. Never GitHub MCP. Never the Anthropic Gi
 
 ```
 list_blog_posts
+list_hero_images
 ```
 
 Existing post source (edit mode):

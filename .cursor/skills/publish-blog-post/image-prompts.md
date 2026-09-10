@@ -31,7 +31,9 @@ Keep the frame specific to the post’s place. A relocation piece to Belton shou
 
 ## When no image tool exists
 
-Point `heroImage` at an existing site asset. Do not copy files out of `public/images/neighborhoods/` unless you are writing a *new* file under `public/images/blog/{slug}/` (allowlisted). Referencing the existing public path is enough.
+Call `list_hero_images` on the Kevin Shoun Blog connector. Point `heroImage` at one of those paths and use the matching `alt`. Do not invent `/images/blog/{slug}/…` files, do not ask the user for a URL, and do not block publish.
+
+Do not copy files out of `public/images/neighborhoods/` unless you are writing a *new* file under `public/images/blog/{slug}/` (this MCP cannot upload binaries). Referencing the existing public path is enough.
 
 | Post is about | `heroImage` |
 |---------------|-------------|

@@ -28,7 +28,7 @@ Read supporting files when needed (one level deep):
 
 | Key | Value |
 |-----|--------|
-| Publish | Kevin Shoun Blog MCP — `list_blog_posts`, `get_blog_post`, `publish_blog_post` |
+| Publish | Kevin Shoun Blog MCP — `list_blog_posts`, `list_hero_images`, `get_blog_post`, `publish_blog_post` |
 | MCP URL | `https://www.kevinshoun.com/api/blog/mcp` |
 | Site | `https://www.kevinshoun.com` |
 | Feed | `{site}/blog/feed.json` |

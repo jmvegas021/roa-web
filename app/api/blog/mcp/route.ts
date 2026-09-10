@@ -26,6 +26,7 @@ export function GET(request: Request) {
     tools: [
       "list_blog_posts",
       "suggest_next_topic",
+      "list_hero_images",
       "get_blog_post",
       "publish_blog_post",
     ],
