@@ -21,7 +21,7 @@ Kevin does **not** install Git, Node, a PAT, or a local script. One-time in Clau
 1. Ask the site operator for `BLOG_PUBLISH_SECRET`.
 2. Settings → Connectors → Add custom connector
    - Name: `Kevin Shoun Blog`
-   - URL: `https://www.kevinshoun.com/api/blog/mcp`
+   - URL: `https://www.kevinshoun.com/api/blog/mcp` (no trailing space, include `www`)
    - Authentication: **None**
    - Header: `Authorization: Bearer <the secret>`
 3. Restart Claude.

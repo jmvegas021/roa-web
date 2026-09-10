@@ -1,6 +1,17 @@
 import { callBlogTool } from "@/lib/blog-agent/mcp-handlers";
 import { MCP_TOOLS } from "@/lib/blog-agent/mcp-tools";
 
+export const PUBLIC_MCP_METHODS = new Set([
+  "initialize",
+  "ping",
+  "notifications/initialized",
+  "tools/list",
+]);
+
+export function isPublicMcpMethod(method: string | undefined): boolean {
+  return typeof method === "string" && PUBLIC_MCP_METHODS.has(method);
+}
+
 interface JsonRpcRequest {
   jsonrpc?: string;
   id?: string | number | null;
@@ -34,7 +45,7 @@ export async function handleMcpRequest(body: JsonRpcRequest): Promise<{
           result: {
             protocolVersion: body.params?.protocolVersion ?? "2025-03-26",
             capabilities: { tools: { listChanged: false } },
-            serverInfo: { name: "kevin-blog", version: "1.1.0" },
+            serverInfo: { name: "kevin-blog", version: "1.2.0" },
           },
         },
       };

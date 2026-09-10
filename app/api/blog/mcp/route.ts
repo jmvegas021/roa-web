@@ -1,4 +1,4 @@
-import { handleMcpRequest } from "@/lib/blog-agent/mcp-server";
+import { handleMcpRequest, isPublicMcpMethod } from "@/lib/blog-agent/mcp-server";
 import { MCP_TOOLS } from "@/lib/blog-agent/mcp-tools";
 import {
   corsHeaders,
@@ -16,11 +16,10 @@ export function OPTIONS() {
   return new Response(null, { status: 204, headers: corsHeaders() });
 }
 
-export function GET(request: Request) {
+export function GET() {
   if (!getPublishSecret()) {
     return jsonResponse({ error: "BLOG_PUBLISH_SECRET is not configured." }, 503);
   }
-  if (!isAuthorizedPublishRequest(request)) return unauthorizedResponse();
   return jsonResponse({
     name: "kevin-blog",
     status: "ok",
@@ -28,13 +27,16 @@ export function GET(request: Request) {
   });
 }
 
+export function HEAD() {
+  if (!getPublishSecret()) {
+    return new Response(null, { status: 503, headers: corsHeaders() });
+  }
+  return new Response(null, { status: 200, headers: corsHeaders() });
+}
+
 export async function POST(request: Request) {
   if (!getPublishSecret()) {
     return jsonResponse({ error: "BLOG_PUBLISH_SECRET is not configured." }, 503);
-  }
-  if (!isAuthorizedPublishRequest(request)) return unauthorizedResponse();
-  if (isRateLimited(`mcp:${clientKey(request)}`)) {
-    return jsonResponse({ error: "Too many requests." }, 429);
   }
 
   let body: unknown;
@@ -42,6 +44,17 @@ export async function POST(request: Request) {
     body = await request.json();
   } catch {
     return jsonResponse({ error: "JSON-RPC body required." }, 400);
+  }
+
+  const method =
+    body && typeof body === "object" && "method" in body
+      ? (body as { method?: unknown }).method
+      : undefined;
+  if (!isPublicMcpMethod(typeof method === "string" ? method : undefined)) {
+    if (!isAuthorizedPublishRequest(request)) return unauthorizedResponse();
+    if (isRateLimited(`mcp:${clientKey(request)}`)) {
+      return jsonResponse({ error: "Too many requests." }, 429);
+    }
   }
 
   const handled = await handleMcpRequest(
