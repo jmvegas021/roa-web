@@ -1,8 +1,10 @@
 ---
-title: "Things to Do in Salado, Texas: A Local's Guide"
-description: A guide to the best things to do in Salado, Texas — Salado Creek, Main Street's galleries and wineries, and the history behind Bell County's village.
+title: 'Things to Do in Salado, Texas: A Local''s Guide'
+description: >-
+  A guide to the best things to do in Salado, Texas — Salado Creek, Main
+  Street's galleries and wineries, and the history behind Bell County's village.
 slug: things-to-do-in-salado-texas
-publishedAt: "2026-08-14"
+publishedAt: '2026-08-14'
 author: Kevin Shoun
 tags:
   - salado
@@ -11,8 +13,10 @@ tags:
 category: guides
 featured: false
 priority: 5
-heroImage: /images/neighborhoods/salado.webp
-heroAlt: Salado Creek and the oak-shaded storefronts of Main Street in Salado, Texas.
+heroImage: /images/blog/things-to-do-in-salado-texas/salado-saloon-hero.webp
+heroAlt: >-
+  White two-story historic building with a Saloon sign, wraparound porches, and
+  rocking chairs, shaded by trees in Salado, Texas
 keywords:
   - things to do in Salado Texas
   - Salado Creek
@@ -20,8 +24,8 @@ keywords:
   - Salado Texas attractions
   - Bell County day trip
   - moving to Salado Texas
+updatedAt: '2026-09-10'
 ---
-
 Salado sits on the banks of a spring-fed creek eight miles north of Belton, and its one-mile Main Street holds more of the village's life than its size suggests. What draws people back — first for a Saturday, later for good — is the same short list: the creek, the shops, the history, and the quiet.
 
 ## Salado Creek and Pace Park
