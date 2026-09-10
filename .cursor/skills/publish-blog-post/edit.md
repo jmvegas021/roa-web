@@ -7,18 +7,18 @@ Same skill, second mode. Apply only what the user asked. **Preserve or improve S
 From title or URL:
 
 - URL or path `/blog/{slug}` → use that slug (strip query/hash).
-- Title → case-insensitive match against `GET {site}/blog/feed.json` (`title` field). Also compare a slugified title to `slug`.
+- Title → case-insensitive match against `list_blog_posts` or `GET {site}/blog/feed.json` (`title` field). Also compare a slugified title to `slug`.
   - **One match** → proceed.
   - **Several** → list `title` + `url` and ask which one.
   - **None** → say so. Do not create a new post unless they then ask to create.
 
-If the feed is down: list files in `content/blog/` on GitHub `main` (or locally) and match the same way. Do not skip inventory.
+If the feed is down: `list_blog_posts` on the Kevin Shoun Blog connector, or list locally, and match the same way. Do not skip inventory. Do not use GitHub MCP.
 
 ## 2. Fetch source
 
-Get **`content/blog/{slug}.md` from GitHub `main`** (raw Markdown), not the rendered HTML at `/blog/{slug}`.
+`get_blog_post` with `slug`. Use the raw Markdown, not the rendered HTML at `/blog/{slug}`.
 
-If the repo is open locally, that file is acceptable **after** confirming it matches `main` (or fetching from GitHub anyway). Do not edit a stale local copy that differs from `main`.
+If the repo is open locally, that file is acceptable **after** confirming it matches production (or fetching via `get_blog_post` anyway). Do not edit a stale local copy that differs from live.
 
 If the file does not exist: stop. Tell the user. Do not create unless they switch to Mode A.
 
@@ -36,11 +36,11 @@ If the file does not exist: stop. Tell the user. Do not create unless they switc
 
 ## 4. Images
 
-Replace or add under `public/images/blog/{slug}/` only if the edit needs it. Keep the existing `heroImage` otherwise. See [image-prompts.md](image-prompts.md).
+Keep the existing `heroImage` unless the edit needs a new hero. Prefer a neighborhood fallback over blocking on an image tool. See [image-prompts.md](image-prompts.md).
 
 ## 5. Commit
 
-Same allowlist and `main` path as [publish.md](publish.md). Typical files: the Markdown, plus new images if any. Do not commit if the [seo.md](seo.md) Edit gates failed.
+`publish_blog_post` with `mode: edit` and the full Markdown. See [publish.md](publish.md). Do not call GitHub MCP. Do not commit if the [seo.md](seo.md) Edit gates failed.
 
 ## 6. Handoff
 

@@ -1,0 +1,172 @@
+{
+  "topics": [
+    {
+      "id": "fort-cavazos-commute-by-town",
+      "title": "Fort Cavazos commute from Salado, Belton, and Harker Heights",
+      "primaryKeyword": "Fort Cavazos commute",
+      "secondaries": [
+        "PCS Central Texas",
+        "Harker Heights military housing",
+        "Belton to Fort Cavazos"
+      ],
+      "category": "relocation",
+      "place": "harker-heights",
+      "status": "queued",
+      "source": "seed"
+    },
+    {
+      "id": "selling-creek-side-salado-estate",
+      "title": "Selling a creek-side estate in Salado",
+      "primaryKeyword": "selling a home in Salado",
+      "secondaries": [
+        "Salado Creek homes",
+        "luxury listing Salado",
+        "Bell County sellers"
+      ],
+      "category": "guides",
+      "place": "salado",
+      "status": "queued",
+      "source": "seed"
+    },
+    {
+      "id": "temple-medical-corridor-relocation",
+      "title": "Relocating to Temple for the medical corridor",
+      "primaryKeyword": "moving to Temple TX",
+      "secondaries": [
+        "Temple medical jobs housing",
+        "Baylor Scott White Temple",
+        "Bell County relocation"
+      ],
+      "category": "relocation",
+      "place": "temple",
+      "status": "queued",
+      "source": "seed"
+    },
+    {
+      "id": "living-near-lake-belton",
+      "title": "Living near Lake Belton",
+      "primaryKeyword": "Lake Belton homes",
+      "secondaries": [
+        "Belton TX lake living",
+        "buying on Lake Belton",
+        "Bell County waterfront"
+      ],
+      "category": "neighborhoods",
+      "place": "belton",
+      "status": "queued",
+      "source": "seed"
+    },
+    {
+      "id": "georgetown-square-vs-i35",
+      "title": "Georgetown square living versus the I-35 corridor",
+      "primaryKeyword": "buying in Georgetown TX",
+      "secondaries": [
+        "Georgetown square homes",
+        "Williamson County relocation",
+        "Georgetown vs Bell County"
+      ],
+      "category": "neighborhoods",
+      "place": "georgetown",
+      "status": "queued",
+      "source": "seed"
+    },
+    {
+      "id": "harker-heights-pcs-landing",
+      "title": "Buying in Harker Heights for a PCS",
+      "primaryKeyword": "Harker Heights military relocation",
+      "secondaries": [
+        "PCS to Fort Cavazos",
+        "Harker Heights homes",
+        "military buyer Central Texas"
+      ],
+      "category": "relocation",
+      "place": "harker-heights",
+      "status": "queued",
+      "source": "seed"
+    },
+    {
+      "id": "bell-county-buyer-conditions",
+      "title": "How buyers should read Bell County conditions",
+      "primaryKeyword": "Bell County housing market",
+      "secondaries": [
+        "Salado Belton Temple market",
+        "Central Texas buyers",
+        "listing strategy Bell County"
+      ],
+      "category": "market",
+      "place": "central-texas",
+      "status": "queued",
+      "source": "seed"
+    },
+    {
+      "id": "austin-to-salado-move",
+      "title": "Moving from Austin to Salado",
+      "primaryKeyword": "moving to Salado from Austin",
+      "secondaries": [
+        "Salado TX relocation",
+        "Austin to Bell County",
+        "creek-side living Salado"
+      ],
+      "category": "relocation",
+      "place": "salado",
+      "status": "queued",
+      "source": "seed"
+    },
+    {
+      "id": "central-texas-land-acreage",
+      "title": "Buying land and acreage in Central Texas",
+      "primaryKeyword": "Central Texas acreage",
+      "secondaries": [
+        "Bell County land",
+        "buying ranch land Texas",
+        "rural utilities due diligence"
+      ],
+      "category": "guides",
+      "place": "central-texas",
+      "status": "queued",
+      "source": "seed"
+    },
+    {
+      "id": "downtown-belton-living",
+      "title": "Living near downtown Belton",
+      "primaryKeyword": "downtown Belton homes",
+      "secondaries": [
+        "Belton TX neighborhoods",
+        "Bell County seat living",
+        "buying in Belton"
+      ],
+      "category": "neighborhoods",
+      "place": "belton",
+      "status": "queued",
+      "source": "seed"
+    },
+    {
+      "id": "williamson-vs-bell-home-base",
+      "title": "Williamson County versus Bell County as a home base",
+      "primaryKeyword": "Bell County vs Williamson County",
+      "secondaries": [
+        "Georgetown vs Temple",
+        "Central Texas relocation",
+        "I-35 housing corridor"
+      ],
+      "category": "guides",
+      "place": "georgetown",
+      "status": "queued",
+      "source": "seed"
+    },
+    {
+      "id": "listing-in-temple",
+      "title": "What to know before listing a home in Temple",
+      "primaryKeyword": "selling a home in Temple TX",
+      "secondaries": [
+        "Temple TX sellers",
+        "medical corridor housing",
+        "Bell County listing strategy"
+      ],
+      "category": "guides",
+      "place": "temple",
+      "status": "queued",
+      "source": "seed"
+    }
+  ]
+}

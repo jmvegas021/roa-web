@@ -1,65 +1,76 @@
 # Publish
 
-Direct commit to `main` on `jmvegas021/roa-web`. Vercel production deploys on that push. No PR. No Vercel login. No `.env`.
+Claude talks to **kevinshoun.com**, never GitHub. That is what avoids the 403 from GitHub MCP in Desktop/Cowork.
 
 Do not commit if the [seo.md](seo.md) checklist failed. Revise the Markdown first.
 
 ## Path allowlist
 
-Commit **only**:
+The server will only write:
 
 - `content/blog/{slug}.md`
-- `public/images/blog/{slug}/*`
+- `content/editorial/cluster.json` (follow-up topics)
 
-Refuse anything else (layouts, env, `lib/`, other `public/` trees, skill files). If the user asks to “just update the header too”, refuse that part.
+Refuse to ask it to touch layouts, env, `lib/`, or other `public/` trees.
 
-## Prefer GitHub file API (Desktop / Agent / any host with GitHub)
+## Kevin’s computer (no setup script)
 
-This is the default even if a local clone has unrelated dirty files.
+Kevin does **not** install Git, Node, a PAT, or a local script. One-time in Claude Desktop or Cowork:
 
-1. Confirm the GitHub connector can write `jmvegas021/roa-web`.
-2. Create or update `content/blog/{slug}.md` on branch `main`.
-   - Create: omit existing-file SHA.
-   - Update: fetch the current file, send its SHA with the new content.
-3. If there are new binaries under `public/images/blog/{slug}/`, commit each on `main` (base64 for GitHub Contents API). Skip this when using a neighborhood fallback path.
-4. Prefer one commit that includes all allowlisted files if the host can push multiple files; otherwise sequential commits on `main` are acceptable.
-5. Commit messages, sentence case, why-focused:
-   - Create: `Publish blog post: Buying in Salado vs Belton.`
-   - Edit: `Update blog post: Buying in Salado vs Belton — Fort Cavazos commute.`
+1. Ask the site operator for `BLOG_PUBLISH_SECRET` (they generate it).
+2. Settings → Connectors → Add custom connector
+   - Name: `Kevin Shoun Blog`
+   - URL: `https://www.kevinshoun.com/api/blog/mcp`
+   - Header: `Authorization: Bearer <the secret>`
+3. Restart Claude. You should see `list_blog_posts`, `suggest_next_topic`, `get_blog_post`, `publish_blog_post`.
 
-Do not force-push. Do not change Git config. Do not skip hooks on a local commit unless the user explicitly asks.
+Do not put the secret in this skill file. Do not ask Kevin for Admin GitHub, a PAT, or Vercel login.
 
-## Local git (Cursor / Claude Code)
+## Publish tools (required)
 
-Use only when GitHub write tools are missing but this repo is the open workspace.
+Use the **Kevin Shoun Blog** connector. Never GitHub MCP. Never the Anthropic GitHub connector.
 
-1. Leave unrelated WIP unstaged. The tree may already have other edits — ignore them.
-2. Write only allowlisted files.
-3. Stage exact paths, never the whole repo:
+### Inventory / fetch
 
-```bash
-git add -- "content/blog/{slug}.md" "public/images/blog/{slug}"
-git status
-git diff --cached
+```
+list_blog_posts
 ```
 
-4. If `git status` shows any staged file outside the allowlist, unstage it and stop.
-5. Confirm `HEAD` is `main` (or that `origin/main` is the push target). Do not mix this commit onto a feature branch.
-6. Commit, then `git push origin main`.
+Existing post source (edit mode):
 
-## No GitHub
+```
+get_blog_post
+  slug: buying-in-salado-vs-belton
+```
 
-Return the full Markdown (and note image paths) in the reply. State clearly: **not published**. Do not invent a live URL as if Vercel already built it.
+Public fallback if the connector is down: `GET https://www.kevinshoun.com/blog/feed.json` (titles/slugs only — not the Markdown body).
 
-## After a successful push
+### Commit (create or edit)
 
-- Canonical / live URL: `https://www.kevinshoun.com/blog/{slug}`
-- Vercel often needs 1–2 minutes. If the URL 404s immediately, say so.
-- `feed.json` may lag until the deploy finishes. Do not re-fetch it as proof of failure within that window.
+```
+publish_blog_post
+  markdown: <full Markdown file, including frontmatter>
+  mode: create
+  followUps:
+    - Follow-up topic one
+    - Follow-up topic two
+    - Follow-up topic three
+```
+
+Use `mode: edit` when updating a live slug. Set `updatedAt` to today. Do not change `slug` unless the user confirmed.
+
+If `publish_blog_post` is missing, POST the same JSON to `https://www.kevinshoun.com/api/blog/publish` with `Authorization: Bearer <secret>` from the connector env (do not invent a secret). If you cannot call HTTP either, return the Markdown and say **not published**.
+
+On success, hand off `canonicalUrl`. Vercel often needs 1–2 minutes.
+
+## Cursor / Claude Code with the repo open
+
+Still prefer `publish_blog_post` so Cowork and Desktop behave the same. Local `git add` is a last resort and only for `content/blog/{slug}.md` (never `git add -A`).
 
 ## Never
 
+- GitHub MCP (`push_files`, `create_or_update_file`, `get_file_contents`)
+- Anthropic GitHub connector
 - Commit `.env`, credentials, or `node_modules`
-- `git add -A`, `git add .`, or `git commit -a`
-- Open a PR “for safety” unless the user asks — the contract is direct `main`
 - Request Admin or Vercel team access
+- Put `BLOG_PUBLISH_SECRET` or `BLOG_GITHUB_TOKEN` in chat logs if you can avoid it

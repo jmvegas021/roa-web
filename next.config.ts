@@ -35,6 +35,11 @@ const nextConfig: NextConfig = {
     "/blog/rss.xml": blogMarkdown,
     "/blog/feed.json": blogMarkdown,
     "/sitemap.xml": blogMarkdown,
+    "/api/blog/publish": [
+      "./content/blog/**/*",
+      "./content/editorial/**/*",
+    ],
+    "/api/blog/mcp": ["./content/blog/**/*", "./content/editorial/**/*"],
   },
   images: {
     unoptimized: isStaticExport,

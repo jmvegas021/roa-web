@@ -63,7 +63,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
 export const TESTIMONIALS = [
   {
     quote:
-      "Kevin’s guidance through our Belton purchase was precise, discreet, and entirely without pressure. We felt represented — not sold to.",
+      "Kevin’s guidance through our Belton purchase was precise and entirely without pressure. We felt represented — not sold to.",
     name: "A. & R. Morrison",
     detail: "Belton buyers",
   },

@@ -12,6 +12,8 @@
     "verify:static": "node scripts/verify-deploy.mjs",
     "test:idx": "node scripts/test-idx.mjs",
     "test:seo": "tsx --test tests/seo/*.test.ts",
+    "test:blog-agent": "tsx --test tests/blog-agent/*.test.ts",
+    "blog:publish": "tsx scripts/blog-agent/run.ts",
     "lint": "eslint app components lib"
   },
   "dependencies": {

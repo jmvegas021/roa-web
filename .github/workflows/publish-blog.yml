@@ -1,0 +1,53 @@
+name: Publish scheduled blog post
+
+on:
+  schedule:
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: Optional cluster topic id (skips cooldown)
+        required: false
+        type: string
+
+concurrency:
+  group: publish-blog
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Draft next cluster post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
+          FORCE_TOPIC: ${{ inputs.topic }}
+        run: npm run blog:publish
+      - name: Commit allowlisted blog files
+        run: |
+          git add -- "content/editorial/cluster.json"
+          git add -- content/blog/*.md
+          if git diff --cached --quiet; then
+            echo "No blog files to publish."
+            exit 0
+          fi
+          extra="$(git diff --cached --name-only | grep -Ev '^(content/blog/[^/]+\.md|content/editorial/cluster\.json)$' || true)"
+          if [ -n "$extra" ]; then
+            echo "Refusing to commit paths outside the allowlist:"
+            echo "$extra"
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Publish scheduled blog post."
+          git push origin HEAD:main

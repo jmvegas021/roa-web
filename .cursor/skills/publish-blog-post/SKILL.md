@@ -1,20 +1,19 @@
 ---
 name: publish-blog-post
 description: >-
-  Creates or edits Kevin Shoun blog posts as Markdown in jmvegas021/roa-web
+  Creates or edits Kevin Shoun blog posts as Markdown on kevinshoun.com
   with required SEO (primary keyword, meta description, FAQ, BlogPosting and
-  FAQPage schema, internal links) and commits only content/blog/ and
-  public/images/blog/ to main so Vercel deploys at /blog. Use when the user
-  asks to write a blog post, publish a journal piece, optimize keywords or
-  FAQ schema, update the post, edit the article at a URL, or change the blog
-  titled something. Also use for "write a journal post", "publish to the
-  blog", "SEO the Salado article", "add FAQ", "fix the Salado vs Belton
-  article", or similar create/edit requests.
+  FAQPage schema, internal links) via the site MCP/HTTP publish API so Vercel
+  deploys at /blog. Use when the user asks to write a blog post, publish a
+  journal piece, optimize keywords or FAQ schema, update the post, edit the
+  article at a URL, or change the blog titled something. Also use for "write
+  a journal post", "publish to the blog", "SEO the Salado article", "add FAQ",
+  "fix the Salado vs Belton article", or similar create/edit requests.
 ---
 
 # Publish blog post
 
-Portable skill for Claude Desktop, Claude Agent, Claude Code, and Cursor. Writes Kevin Shoun blog posts to `/blog`. GitHub Write on `jmvegas021/roa-web` is what goes live. This skill contains no Vercel, Git, or Resend secrets.
+Portable skill for Claude Desktop, Claude Agent, Claude Code, Cowork, and Cursor. Writes Kevin Shoun blog posts to `/blog`. The **Kevin Shoun Blog** connector (`list_blog_posts`, `publish_blog_post`) on kevinshoun.com is what goes live. Do not use GitHub MCP or the Anthropic GitHub connector. This skill contains no Vercel, Git, or Resend secrets.
 
 Read supporting files when needed (one level deep):
 
@@ -22,15 +21,15 @@ Read supporting files when needed (one level deep):
 - [frontmatter.md](frontmatter.md) — fields, YAML example, slug rules
 - [voice.md](voice.md) — brand voice (luxury editorial, not keyword stuffing)
 - [image-prompts.md](image-prompts.md) — hero photography
-- [publish.md](publish.md) — commit to `main`, path allowlist
+- [publish.md](publish.md) — site MCP/HTTP commit to `main`, path allowlist
 - [edit.md](edit.md) — resolve title/URL, patch, bump `updatedAt`
 
 ## Constants
 
 | Key | Value |
 |-----|--------|
-| GitHub | `jmvegas021/roa-web` |
-| Branch | `main` |
+| Publish | Kevin Shoun Blog MCP — `list_blog_posts`, `get_blog_post`, `publish_blog_post` |
+| MCP URL | `https://www.kevinshoun.com/api/blog/mcp` |
 | Site | `https://www.kevinshoun.com` |
 | Feed | `{site}/blog/feed.json` |
 | Live index | `{site}/blog` |
@@ -38,7 +37,7 @@ Read supporting files when needed (one level deep):
 | Markdown | `content/blog/{slug}.md` |
 | Images | `public/images/blog/{slug}/` |
 
-Allowlist (commit these prefixes only): `content/blog/` and `public/images/blog/`.
+Allowlist (server writes these prefixes only): `content/blog/` and `content/editorial/cluster.json`.
 
 ## Mode
 
@@ -55,10 +54,11 @@ If unclear, ask one question: create or edit?
 - Do not touch any path outside the allowlist. Do not commit `.env` or unrelated WIP. Never `git add -A` / `git add .`.
 - Do not create a duplicate slug. If the slug or title already exists, offer edit instead.
 - Do not change `slug` or `publishedAt` unless the user explicitly confirms (slug change is a redirect risk — refuse until they confirm).
-- Do not skip inventory (feed or GitHub `content/blog/` listing).
+- Do not skip inventory (`list_blog_posts` or `{site}/blog/feed.json`).
 - Do not skip FAQ, `keywords`, or internal links on create.
 - Do not call Cursor-only image tools as the only image path. Desktop/Agent will not have them. Never block publish on a missing image tool.
-- Do not enable or request Vercel login, Admin GitHub, or `.env` access.
+- Do not use GitHub MCP or the Anthropic GitHub connector.
+- Do not enable or request Vercel login, a PAT, Admin GitHub, or `.env` access.
 - Plain Markdown only (no MDX/JSX). Quote ISO dates in frontmatter (`"YYYY-MM-DD"`).
 - Voice stays luxury editorial. Never stuff title, slug, alt, or body with keywords.
 
@@ -101,7 +101,7 @@ Expect `{ slug, title, url, tags, category, publishedAt, updatedAt, description 
 - If title or slug already exists → stop creating; offer Mode B.
 - Pick 2–4 internal links from the feed plus evergreen pages: `/neighborhoods`, `/neighborhoods/{market}`, `/listings`, `/agents/kevin-shoun`, and `/contact`.
 
-If the feed 404s or fails: list `content/blog/` on GitHub `main` (or the local checkout). Still refuse duplicates. Do not skip this step.
+If the feed 404s or fails: `list_blog_posts` on the Kevin Shoun Blog connector, or list the local checkout. Still refuse duplicates. Do not skip this step.
 
 ### 3. Brief → draft
 
@@ -126,7 +126,7 @@ Read [image-prompts.md](image-prompts.md). Generate a hero if the host can; othe
 
 ### 5. Commit to `main`
 
-If [seo.md](seo.md) failed, stop. Read [publish.md](publish.md). Prefer GitHub create/update on `main`. If GitHub is unavailable, return the full Markdown and say it was not published.
+If [seo.md](seo.md) failed, stop. Read [publish.md](publish.md). Call `publish_blog_post` with the full Markdown. If that tool is missing, return the full Markdown and say it was not published.
 
 ### 6. Handoff
 
@@ -156,14 +156,14 @@ Follow-up cluster (internal-link later):
 
 Triggers: “update this post”, “edit [title]”, “change https://…/blog/…”, “fix the Salado vs Belton article.”
 
-Follow [edit.md](edit.md) and the Edit gates in [seo.md](seo.md): resolve from title or URL → fetch `content/blog/{slug}.md` from GitHub (not rendered HTML) → apply only the requested edits → **preserve or improve SEO** (do not wipe title/description/keywords unless asked; refresh those plus FAQ if the topic moved) → never change `slug` without explicit confirm → set `updatedAt` to today → commit allowlisted paths only after SEO edit gates pass → hand off canonical URL + a short diff summary.
+Follow [edit.md](edit.md) and the Edit gates in [seo.md](seo.md): resolve from title or URL → `get_blog_post` for `content/blog/{slug}.md` (not rendered HTML) → apply only the requested edits → **preserve or improve SEO** (do not wipe title/description/keywords unless asked; refresh those plus FAQ if the topic moved) → never change `slug` without explicit confirm → set `updatedAt` to today → `publish_blog_post` with `mode: edit` after SEO edit gates pass → hand off canonical URL + a short diff summary.
 
 ## Hosts
 
 | Host | Publish path |
 |------|----------------|
-| Claude Desktop / Agent + GitHub Write | GitHub create/update file on `main` |
-| Cursor / Claude Code, repo open | Write files, `git add` allowlisted paths only, commit, `git push origin main` |
-| Skill only (no GitHub) | Draft Markdown in the reply. Do not claim it is live. |
+| Claude Desktop / Cowork / Agent | Kevin Shoun Blog connector `publish_blog_post` |
+| Cursor / Claude Code, repo open | Same connector; local git only as a last resort on allowlisted paths |
+| Skill only (no connector) | Draft Markdown in the reply. Do not claim it is live. Do not use GitHub MCP. |
 
 Do not use Cursor `GenerateImage` as the only image method.
