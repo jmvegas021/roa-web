@@ -6,6 +6,7 @@ import {
   detectImageExtension,
   gitBlogImagePath,
   isSiteImagePath,
+  matchingImageFilename,
   publicBlogImagePath,
   sanitizeImageFilename,
 } from "@/lib/blog-agent/image-paths";
@@ -34,6 +35,12 @@ test("sanitizes image filenames and public paths", () => {
   assert.throws(() => sanitizeImageFilename("../secret.png"));
   assert.equal(isSiteImagePath("/images/neighborhoods/salado.webp"), true);
   assert.equal(isSiteImagePath("https://example.com/x.webp"), false);
+});
+
+test("matchingImageFilename rewrites the extension to the detected kind", () => {
+  assert.equal(matchingImageFilename("hero.webp", "jpg"), "hero.jpg");
+  assert.equal(matchingImageFilename("hero.jpeg", "jpg"), "hero.jpg");
+  assert.equal(matchingImageFilename("lake-shore.jpg", "webp"), "lake-shore.webp");
 });
 
 test("detects jpeg magic bytes", () => {

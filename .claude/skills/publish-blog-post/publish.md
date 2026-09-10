@@ -41,7 +41,7 @@ Never GitHub MCP. Never the Anthropic GitHub connector.
 | Delete a post | `delete_blog_post` (`confirm: true`) |
 | Stock photos | `list_hero_images` |
 | Photos already on this post | `list_post_images` |
-| Add Kevin’s photo | `upload_blog_image` (base64 `data`, optional `setAsHero` + `alt`) |
+| Add a photo | `upload_blog_image` (`imageUrl` https preferred; `data` only for tiny files) |
 | Point hero at an existing path | `set_post_hero` |
 | Remove an uploaded photo | `delete_blog_image` (`confirm: true`) |
 
@@ -59,21 +59,24 @@ Use `mode: edit` on a live slug. Set `updatedAt` to today. Do not change `slug` 
 
 ### Images
 
-If Kevin attaches or describes a new photo:
+If the photo already has a public https URL (Library of Congress, Wikimedia, a CDN), fetch it on the server:
 
 ```
 upload_blog_image
   slug: things-to-do-in-salado-texas
-  data: <base64 or data:image/webp;base64,...>
-  mediaType: image/webp
-  filename: hero.webp
-  alt: Salado Creek at low water under live oaks
+  imageUrl: https://tile.loc.gov/image-services/iiif/service:pnp:highsm:29700:29760/full/1600,/0/default.jpg
+  filename: hero.jpg
+  alt: The white two-story galleried porch of the historic Stagecoach Inn beneath shade trees in Salado, Texas
   setAsHero: true
 ```
 
-Max ~1.2MB decoded. webp/jpeg/png only. For an in-body still, omit `setAsHero` and insert `![alt](/images/blog/{slug}/{filename})` then `publish_blog_post` mode edit.
+Do **not** paste base64 for files larger than ~20KB — the tool call will corrupt. `data` is only a fallback for tiny files. Omit `mediaType` when using `imageUrl`; the server reads the bytes. Max ~1.2MB decoded. webp/jpeg/png only. The server fixes the filename extension to match the bytes.
 
-If there is no new file, `list_hero_images` then `set_post_hero`. Do not invent paths. Do not ask Kevin for a URL when a stock photo or upload will do.
+If `upload_blog_image` does not show `imageUrl`, the connector is stale: remove **Kevin Shoun Blog** and add it again, then restart Claude.
+
+For an in-body still, omit `setAsHero` and insert `![alt](/images/blog/{slug}/{filename})` then `publish_blog_post` mode edit.
+
+If there is no new file, `list_hero_images` then `set_post_hero`. Do not invent paths. Do not ask Kevin to host a file just to get a URL.
 
 On success, hand off `canonicalUrl`. Vercel often needs 1–2 minutes.
 

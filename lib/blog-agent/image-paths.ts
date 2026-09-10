@@ -27,6 +27,17 @@ export function gitBlogImageDir(slug: string): string {
   return `${BLOG_IMAGE_PREFIX}${assertBlogSlug(slug)}`;
 }
 
+export function matchingImageFilename(
+  filename: string,
+  detected: (typeof ALLOWED_IMAGE_EXTENSIONS)[number]
+): string {
+  const ext = filename.split(".").pop() ?? "";
+  const kind = ext === "jpeg" ? "jpg" : ext;
+  const actual = detected === "jpeg" ? "jpg" : detected;
+  if (kind === actual) return filename.replace(/\.jpeg$/, ".jpg");
+  return `${filename.replace(/\.[^.]+$/, "")}.${actual}`;
+}
+
 export function sanitizeImageFilename(filename: string): string {
   const trimmed = filename.trim().toLowerCase();
   if (trimmed.includes("..") || trimmed.includes("/") || trimmed.includes("\\")) {

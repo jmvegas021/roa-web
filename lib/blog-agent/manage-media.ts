@@ -6,6 +6,7 @@ import {
   readGithubFile,
 } from "./commit-post";
 import { PLACE_HEROES } from "./constants";
+import { fetchPublicImage } from "./fetch-public-image";
 import {
   assertBlogSlug,
   decodeImageData,
@@ -14,6 +15,7 @@ import {
   gitBlogImageDir,
   gitBlogImagePath,
   isSiteImagePath,
+  matchingImageFilename,
   publicBlogImagePath,
   sanitizeImageFilename,
 } from "./image-paths";
@@ -36,14 +38,17 @@ export async function listPostImages(slug: string) {
 
 export async function uploadBlogImage(input: {
   slug: string;
-  data: string;
+  data?: string;
+  imageUrl?: string;
   mediaType?: string;
   filename?: string;
   alt?: string;
   setAsHero?: boolean;
 }): Promise<{ path: string; gitPath: string; sha: string; files: string[]; heroUpdated: boolean }> {
   const slug = assertBlogSlug(input.slug);
-  const buffer = decodeImageData(input.data);
+  const buffer = input.imageUrl
+    ? await fetchPublicImage(input.imageUrl)
+    : decodeImageData(input.data ?? "");
   const detected = detectImageExtension(buffer);
   if (input.mediaType) {
     const declared = extensionForMediaType(input.mediaType);
@@ -51,16 +56,14 @@ export async function uploadBlogImage(input: {
       throw new Error(`mediaType ${input.mediaType} does not match the file bytes (${detected}).`);
     }
   }
-  const filename = input.filename
-    ? sanitizeImageFilename(input.filename)
-    : input.setAsHero
-      ? `hero.${detected}`
-      : `image.${detected}`;
-  const fileExt = filename.split(".").pop();
-  const fileKind = fileExt === "jpeg" ? "jpg" : fileExt;
-  if (fileKind !== detected) {
-    throw new Error(`Filename extension .${fileExt} does not match the file bytes (.${detected}).`);
-  }
+  const filename = matchingImageFilename(
+    input.filename
+      ? sanitizeImageFilename(input.filename)
+      : input.setAsHero
+        ? `hero.${detected}`
+        : `image.${detected}`,
+    detected
+  );
 
   const gitPath = gitBlogImagePath(slug, filename);
   const publicPath = publicBlogImagePath(slug, filename);

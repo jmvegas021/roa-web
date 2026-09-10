@@ -12,14 +12,41 @@ export const slugArgsSchema = z.object({
   slug: z.string().min(1).max(80),
 });
 
-export const uploadArgsSchema = z.object({
-  slug: z.string().min(1).max(80),
-  data: z.string().min(32),
-  mediaType: z.string().min(8).max(40).optional(),
-  filename: z.string().min(6).max(80).optional(),
-  alt: z.string().min(8).max(180).optional(),
-  setAsHero: z.boolean().optional(),
-});
+export const uploadArgsSchema = z
+  .object({
+    slug: z.string().min(1).max(80),
+    data: z.string().min(32).optional(),
+    imageUrl: z
+      .string()
+      .max(2000)
+      .refine((value) => {
+        try {
+          const parsed = new URL(value);
+          return parsed.protocol === "https:" && !parsed.username && !parsed.password;
+        } catch {
+          return false;
+        }
+      }, "imageUrl must be a public https URL with no credentials.")
+      .optional(),
+    mediaType: z.string().min(8).max(40).optional(),
+    filename: z.string().min(6).max(80).optional(),
+    alt: z.string().min(8).max(180).optional(),
+    setAsHero: z.boolean().optional(),
+  })
+  .superRefine((value, ctx) => {
+    if (!value.data && !value.imageUrl) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Pass imageUrl (https) or data (base64), not neither.",
+      });
+    }
+    if (value.data && value.imageUrl) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Pass imageUrl or data, not both.",
+      });
+    }
+  });
 
 export const setHeroArgsSchema = z.object({
   slug: z.string().min(1).max(80),
@@ -118,18 +145,23 @@ export const MCP_TOOLS = [
   {
     name: "upload_blog_image",
     description:
-      "Upload a webp/jpeg/png for a slug (base64 in data). Optional setAsHero+alt updates the post hero in the same commit. Max ~1.2MB decoded.",
+      "Add a webp/jpeg/png to a post. Prefer imageUrl (https). data (base64) is a fallback for tiny files. Optional setAsHero+alt. Max ~1.2MB decoded.",
     inputSchema: {
       type: "object",
       properties: {
         slug: { type: "string" },
+        imageUrl: {
+          type: "string",
+          description:
+            "Public https URL of the image. The server downloads it. Prefer this over base64.",
+        },
         data: { type: "string", description: "Raw base64 or a data:image/...;base64 URL" },
         mediaType: { type: "string", description: "image/webp, image/jpeg, or image/png" },
         filename: { type: "string", description: "hero.webp or lake-shore.jpg" },
         alt: { type: "string" },
         setAsHero: { type: "boolean" },
       },
-      required: ["slug", "data"],
+      required: ["slug"],
       additionalProperties: false,
     },
   },
