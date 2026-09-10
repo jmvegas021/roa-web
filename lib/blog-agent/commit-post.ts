@@ -1,4 +1,5 @@
 import {
+  BLOG_IMAGE_PREFIX,
   BLOG_MARKDOWN_PREFIX,
   CLUSTER_FILE_PATH,
   DEFAULT_GITHUB_BRANCH,
@@ -47,7 +48,10 @@ export function blogMarkdownPath(slug: string): string {
 
 export function isAllowlistedPath(filePath: string): boolean {
   if (filePath === CLUSTER_FILE_PATH) return true;
-  return /^content\/blog\/[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.test(filePath);
+  if (/^content\/blog\/[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.test(filePath)) return true;
+  return new RegExp(
+    `^${BLOG_IMAGE_PREFIX}[a-z0-9]+(?:-[a-z0-9]+)*\\/[a-z0-9]+(?:-[a-z0-9]+)*\\.(webp|jpg|jpeg|png)$`
+  ).test(filePath);
 }
 
 export async function githubFileExists(filePath: string): Promise<boolean> {
@@ -112,9 +116,24 @@ export async function commitAllowlistedFiles(
 
   const treeItems = [];
   for (const file of files) {
+    if (file.delete) {
+      treeItems.push({
+        path: file.path,
+        mode: "100644",
+        type: "blob",
+        sha: null,
+      });
+      continue;
+    }
+    if (file.content === undefined) {
+      throw new Error(`Missing content for ${file.path}.`);
+    }
     const blob = await githubJson<GitShaResponse>("/git/blobs", {
       method: "POST",
-      body: JSON.stringify({ content: file.content, encoding: "utf-8" }),
+      body: JSON.stringify({
+        content: file.content,
+        encoding: file.encoding ?? "utf-8",
+      }),
     });
     if (!blob.sha) throw new Error(`Blob create failed for ${file.path}.`);
     treeItems.push({
@@ -151,6 +170,30 @@ export async function commitAllowlistedFiles(
   }
 
   return { sha: commit.sha, files: files.map((file) => file.path) };
+}
+
+export async function listGithubContents(
+  dirPath: string
+): Promise<{ name: string; type: string; path: string }[]> {
+  const response = await githubRequest(
+    `/contents/${dirPath}?ref=${encodeURIComponent(getGithubBranch())}`
+  );
+  if (response.status === 404) return [];
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(`GitHub list ${dirPath} failed: ${response.status} ${detail.slice(0, 300)}`);
+  }
+  const entries = (await response.json()) as {
+    name?: string;
+    type?: string;
+    path?: string;
+  }[];
+  if (!Array.isArray(entries)) return [];
+  return entries.flatMap((entry) =>
+    entry.name && entry.path
+      ? [{ name: entry.name, type: entry.type ?? "file", path: entry.path }]
+      : []
+  );
 }
 
 async function githubJson<T>(path: string, init?: RequestInit): Promise<T> {

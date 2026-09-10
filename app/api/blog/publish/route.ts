@@ -12,7 +12,7 @@ import { publishValidatedMarkdown } from "@/lib/blog-agent/publish-markdown";
 import { clientKey, isRateLimited } from "@/lib/blog-agent/rate-limit";
 
 export const runtime = "nodejs";
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 export function OPTIONS() {
   return new Response(null, { status: 204, headers: corsHeaders() });

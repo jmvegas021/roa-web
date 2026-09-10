@@ -29,11 +29,13 @@ Aspect: 16:9 landscape. High detail, magazine print quality.
 
 Keep the frame specific to the post’s place. A relocation piece to Belton should not use a generic Austin skyline.
 
-## When no image tool exists
+## When Kevin provides a photo
 
-Call `list_hero_images` on the Kevin Shoun Blog connector. Point `heroImage` at one of those paths and use the matching `alt`. Do not invent `/images/blog/{slug}/…` files, do not ask the user for a URL, and do not block publish.
+Use `upload_blog_image` on the Kevin Shoun Blog connector (base64 `data`, `setAsHero: true`, honest `alt`). Do not tell him the MCP cannot accept images.
 
-Do not copy files out of `public/images/neighborhoods/` unless you are writing a *new* file under `public/images/blog/{slug}/` (this MCP cannot upload binaries). Referencing the existing public path is enough.
+If he has no file, call `list_hero_images` or `list_post_images` and `set_post_hero`.
+
+Do not invent `/images/blog/{slug}/…` files. Do not ask for a public URL. Do not block publish: fall back to a neighborhood photo from `list_hero_images`.
 
 | Post is about | `heroImage` |
 |---------------|-------------|

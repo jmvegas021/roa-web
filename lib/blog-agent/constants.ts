@@ -2,6 +2,9 @@ import type { PlaceHero } from "./types";
 
 export const CLUSTER_FILE_PATH = "content/editorial/cluster.json";
 export const BLOG_MARKDOWN_PREFIX = "content/blog/";
+export const BLOG_IMAGE_PREFIX = "public/images/blog/";
+export const MAX_IMAGE_BYTES = 1_200_000;
+export const ALLOWED_IMAGE_EXTENSIONS = ["webp", "jpg", "jpeg", "png"] as const;
 export const COOLDOWN_DAYS = 6;
 export const MIN_WORD_COUNT = 900;
 export const MAX_WORD_COUNT = 1600;

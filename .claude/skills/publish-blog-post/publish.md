@@ -10,68 +10,76 @@ The server will only write:
 
 - `content/blog/{slug}.md`
 - `content/editorial/cluster.json` (follow-up topics)
+- `public/images/blog/{slug}/*.{webp,jpg,jpeg,png}`
 
-Refuse to ask it to touch layouts, env, `lib/`, or other `public/` trees.
+Refuse layouts, env, `lib/`, logos, and other `public/` trees.
 
 ## Kevin’s computer (no setup script)
 
 Kevin does **not** install Git, Node, a PAT, or a local script. One-time in Claude Desktop or Cowork:
 
-1. Ask the site operator for `BLOG_PUBLISH_SECRET` (they generate it).
+1. Ask the site operator for `BLOG_PUBLISH_SECRET`.
 2. Settings → Connectors → Add custom connector
    - Name: `Kevin Shoun Blog`
    - URL: `https://www.kevinshoun.com/api/blog/mcp`
+   - Authentication: **None**
    - Header: `Authorization: Bearer <the secret>`
-3. Restart Claude. You should see `list_blog_posts`, `suggest_next_topic`, `list_hero_images`, `get_blog_post`, `publish_blog_post`.
+3. Restart Claude.
 
-Do not put the secret in this skill file. Do not ask Kevin for Admin GitHub, a PAT, or Vercel login.
+Do not put the secret in this skill file.
 
-## Publish tools (required)
+## Tools
 
-Use the **Kevin Shoun Blog** connector. Never GitHub MCP. Never the Anthropic GitHub connector.
+Never GitHub MCP. Never the Anthropic GitHub connector.
 
-### Inventory / fetch
+| Kevin wants | Tool |
+|---|---|
+| See what is live | `list_blog_posts` |
+| Next scheduled topic | `suggest_next_topic` |
+| Read a post | `get_blog_post` |
+| Write or rewrite a post | `publish_blog_post` (`mode: create` or `edit`) |
+| Delete a post | `delete_blog_post` (`confirm: true`) |
+| Stock photos | `list_hero_images` |
+| Photos already on this post | `list_post_images` |
+| Add Kevin’s photo | `upload_blog_image` (base64 `data`, optional `setAsHero` + `alt`) |
+| Point hero at an existing path | `set_post_hero` |
+| Remove an uploaded photo | `delete_blog_image` (`confirm: true`) |
 
-```
-list_blog_posts
-list_hero_images
-```
+Public fallback if the connector is down: `GET https://www.kevinshoun.com/blog/feed.json` (titles only).
 
-Existing post source (edit mode):
-
-```
-get_blog_post
-  slug: buying-in-salado-vs-belton
-```
-
-Public fallback if the connector is down: `GET https://www.kevinshoun.com/blog/feed.json` (titles/slugs only — not the Markdown body).
-
-### Commit (create or edit)
+### Create or edit copy
 
 ```
 publish_blog_post
-  markdown: <full Markdown file, including frontmatter>
+  markdown: <full Markdown file>
   mode: create
-  followUps:
-    - Follow-up topic one
-    - Follow-up topic two
-    - Follow-up topic three
 ```
 
-Use `mode: edit` when updating a live slug. Set `updatedAt` to today. Do not change `slug` unless the user confirmed.
+Use `mode: edit` on a live slug. Set `updatedAt` to today. Do not change `slug` unless the user confirmed.
 
-If `publish_blog_post` is missing, POST the same JSON to `https://www.kevinshoun.com/api/blog/publish` with `Authorization: Bearer <secret>` from the connector env (do not invent a secret). If you cannot call HTTP either, return the Markdown and say **not published**.
+### Images
+
+If Kevin attaches or describes a new photo:
+
+```
+upload_blog_image
+  slug: things-to-do-in-salado-texas
+  data: <base64 or data:image/webp;base64,...>
+  mediaType: image/webp
+  filename: hero.webp
+  alt: Salado Creek at low water under live oaks
+  setAsHero: true
+```
+
+Max ~1.2MB decoded. webp/jpeg/png only. For an in-body still, omit `setAsHero` and insert `![alt](/images/blog/{slug}/{filename})` then `publish_blog_post` mode edit.
+
+If there is no new file, `list_hero_images` then `set_post_hero`. Do not invent paths. Do not ask Kevin for a URL when a stock photo or upload will do.
 
 On success, hand off `canonicalUrl`. Vercel often needs 1–2 minutes.
-
-## Cursor / Claude Code with the repo open
-
-Still prefer `publish_blog_post` so Cowork and Desktop behave the same. Local `git add` is a last resort and only for `content/blog/{slug}.md` (never `git add -A`).
 
 ## Never
 
 - GitHub MCP (`push_files`, `create_or_update_file`, `get_file_contents`)
 - Anthropic GitHub connector
-- Commit `.env`, credentials, or `node_modules`
-- Request Admin or Vercel team access
-- Put `BLOG_PUBLISH_SECRET` or `BLOG_GITHUB_TOKEN` in chat logs if you can avoid it
+- `delete_blog_post` without the user asking to delete
+- Put `BLOG_PUBLISH_SECRET` or `BLOG_GITHUB_TOKEN` in chat

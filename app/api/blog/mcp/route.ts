@@ -1,4 +1,5 @@
 import { handleMcpRequest } from "@/lib/blog-agent/mcp-server";
+import { MCP_TOOLS } from "@/lib/blog-agent/mcp-tools";
 import {
   corsHeaders,
   getPublishSecret,
@@ -9,7 +10,7 @@ import {
 import { clientKey, isRateLimited } from "@/lib/blog-agent/rate-limit";
 
 export const runtime = "nodejs";
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 export function OPTIONS() {
   return new Response(null, { status: 204, headers: corsHeaders() });
@@ -23,13 +24,7 @@ export function GET(request: Request) {
   return jsonResponse({
     name: "kevin-blog",
     status: "ok",
-    tools: [
-      "list_blog_posts",
-      "suggest_next_topic",
-      "list_hero_images",
-      "get_blog_post",
-      "publish_blog_post",
-    ],
+    tools: MCP_TOOLS.map((tool) => tool.name),
   });
 }
 

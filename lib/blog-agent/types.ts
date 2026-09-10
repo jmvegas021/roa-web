@@ -38,7 +38,9 @@ export type ValidateResult = ValidateSuccess | ValidateFailure;
 
 export interface GithubRepoFile {
   path: string;
-  content: string;
+  content?: string;
+  encoding?: "utf-8" | "base64";
+  delete?: boolean;
 }
 
 export interface PlaceHero {

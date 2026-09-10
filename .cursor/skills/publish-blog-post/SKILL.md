@@ -28,7 +28,7 @@ Read supporting files when needed (one level deep):
 
 | Key | Value |
 |-----|--------|
-| Publish | Kevin Shoun Blog MCP — `list_blog_posts`, `list_hero_images`, `get_blog_post`, `publish_blog_post` |
+| Publish | Kevin Shoun Blog MCP — create/edit/delete posts, upload and swap heroes |
 | MCP URL | `https://www.kevinshoun.com/api/blog/mcp` |
 | Site | `https://www.kevinshoun.com` |
 | Feed | `{site}/blog/feed.json` |
@@ -37,7 +37,7 @@ Read supporting files when needed (one level deep):
 | Markdown | `content/blog/{slug}.md` |
 | Images | `public/images/blog/{slug}/` |
 
-Allowlist (server writes these prefixes only): `content/blog/` and `content/editorial/cluster.json`.
+Allowlist (server writes these prefixes only): `content/blog/`, `content/editorial/cluster.json`, and `public/images/blog/`.
 
 ## Mode
 
