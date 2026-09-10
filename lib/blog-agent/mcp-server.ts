@@ -74,7 +74,7 @@ export async function handleMcpRequest(body: JsonRpcRequest): Promise<{
           result: {
             protocolVersion: body.params?.protocolVersion ?? "2025-03-26",
             capabilities: { tools: { listChanged: false } },
-            serverInfo: { name: "kevin-blog", version: "1.2.0" },
+            serverInfo: { name: "kevin-blog", version: "1.3.0" },
           },
         },
       };

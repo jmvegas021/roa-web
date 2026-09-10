@@ -122,7 +122,7 @@ Run the Create gates in [seo.md](seo.md). If any fail, revise. Do not commit yet
 
 ### 4. Images
 
-Read [image-prompts.md](image-prompts.md). Generate a hero if the host can; if the photo already has a public https URL, `upload_blog_image` with `imageUrl` (never large base64). Otherwise point `heroImage` at an existing neighborhood photo. **Always set `heroImage`** (OG, Twitter, and BlogPosting image use it). `heroAlt` min 8 characters, descriptive of the photo, not stuffed. Publish without new binaries if needed.
+Read [image-prompts.md](image-prompts.md). If the photo has a public https URL, `upload_blog_image` with `imageUrl`. If it is a local file, `create_blog_image_upload` then PUT the bytes. Never type base64. Otherwise point `heroImage` at an existing neighborhood photo. **Always set `heroImage`**. `heroAlt` min 8 characters, descriptive of the photo, not stuffed. Publish without new binaries if needed.
 
 ### 5. Commit to `main`
 

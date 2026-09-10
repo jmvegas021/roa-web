@@ -6,10 +6,8 @@ import {
   readGithubFile,
 } from "./commit-post";
 import { PLACE_HEROES } from "./constants";
-import { fetchPublicImage } from "./fetch-public-image";
 import {
   assertBlogSlug,
-  decodeImageData,
   detectImageExtension,
   extensionForMediaType,
   gitBlogImageDir,
@@ -19,6 +17,7 @@ import {
   publicBlogImagePath,
   sanitizeImageFilename,
 } from "./image-paths";
+import { resolveUploadBuffer } from "./resolve-upload-buffer";
 import { patchFrontmatter } from "./patch-frontmatter";
 import { todayCentralIso } from "./publish-markdown";
 import { validatePost } from "./validate-post";
@@ -40,15 +39,16 @@ export async function uploadBlogImage(input: {
   slug: string;
   data?: string;
   imageUrl?: string;
+  file?: { data: string; mimeType?: string; mediaType?: string };
+  image?: { data: string; mimeType?: string; mediaType?: string };
+  buffer?: Buffer;
   mediaType?: string;
   filename?: string;
   alt?: string;
   setAsHero?: boolean;
 }): Promise<{ path: string; gitPath: string; sha: string; files: string[]; heroUpdated: boolean }> {
   const slug = assertBlogSlug(input.slug);
-  const buffer = input.imageUrl
-    ? await fetchPublicImage(input.imageUrl)
-    : decodeImageData(input.data ?? "");
+  const buffer = await resolveUploadBuffer(input);
   const detected = detectImageExtension(buffer);
   if (input.mediaType) {
     const declared = extensionForMediaType(input.mediaType);

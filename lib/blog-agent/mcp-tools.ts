@@ -12,6 +12,15 @@ export const slugArgsSchema = z.object({
   slug: z.string().min(1).max(80),
 });
 
+const packedImageSchema = z
+  .object({
+    data: z.string().min(32),
+    mimeType: z.string().min(8).max(40).optional(),
+    mediaType: z.string().min(8).max(40).optional(),
+    type: z.string().optional(),
+  })
+  .optional();
+
 export const uploadArgsSchema = z
   .object({
     slug: z.string().min(1).max(80),
@@ -28,22 +37,42 @@ export const uploadArgsSchema = z
         }
       }, "imageUrl must be a public https URL with no credentials.")
       .optional(),
+    file: packedImageSchema,
+    image: packedImageSchema,
     mediaType: z.string().min(8).max(40).optional(),
     filename: z.string().min(6).max(80).optional(),
     alt: z.string().min(8).max(180).optional(),
     setAsHero: z.boolean().optional(),
   })
   .superRefine((value, ctx) => {
-    if (!value.data && !value.imageUrl) {
+    const sources = [value.data, value.imageUrl, value.file?.data, value.image?.data].filter(Boolean);
+    if (sources.length === 0) {
       ctx.addIssue({
         code: "custom",
-        message: "Pass imageUrl (https) or data (base64), not neither.",
+        message:
+          "Pass imageUrl, or call create_blog_image_upload and PUT the local file. Do not type large base64.",
       });
     }
-    if (value.data && value.imageUrl) {
+    if (sources.length > 1) {
       ctx.addIssue({
         code: "custom",
-        message: "Pass imageUrl or data, not both.",
+        message: "Pass one image source only.",
+      });
+    }
+  });
+
+export const createUploadArgsSchema = z
+  .object({
+    slug: z.string().min(1).max(80),
+    filename: z.string().min(6).max(80).optional(),
+    alt: z.string().min(8).max(180).optional(),
+    setAsHero: z.boolean().optional(),
+  })
+  .superRefine((value, ctx) => {
+    if (value.setAsHero && (!value.alt || value.alt.trim().length < 8)) {
+      ctx.addIssue({
+        code: "custom",
+        message: "setAsHero requires alt text of at least 8 characters.",
       });
     }
   });
@@ -145,7 +174,7 @@ export const MCP_TOOLS = [
   {
     name: "upload_blog_image",
     description:
-      "Add a webp/jpeg/png to a post. Prefer imageUrl (https). data (base64) is a fallback for tiny files. Optional setAsHero+alt. Max ~1.2MB decoded.",
+      "Commit a webp/jpeg/png into public/images/blog/{slug}/ on GitHub. Prefer imageUrl (public https). For a local Cowork/Desktop file, call create_blog_image_upload and PUT the bytes — do not type base64. Optional setAsHero+alt. Max ~1.2MB.",
     inputSchema: {
       type: "object",
       properties: {
@@ -153,11 +182,29 @@ export const MCP_TOOLS = [
         imageUrl: {
           type: "string",
           description:
-            "Public https URL of the image. The server downloads it. Prefer this over base64.",
+            "Public https URL. The server downloads it and commits it. Use this for Library of Congress, Wikimedia, or any CDN.",
         },
-        data: { type: "string", description: "Raw base64 or a data:image/...;base64 URL" },
-        mediaType: { type: "string", description: "image/webp, image/jpeg, or image/png" },
+        data: {
+          type: "string",
+          description: "Only if the MCP client attached the file. Never type base64 yourself.",
+        },
         filename: { type: "string", description: "hero.webp or lake-shore.jpg" },
+        alt: { type: "string" },
+        setAsHero: { type: "boolean" },
+      },
+      required: ["slug"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "create_blog_image_upload",
+    description:
+      "Start a local-file upload. Returns a putUrl. PUT the raw image bytes (curl -T file putUrl). Commits to public/images/blog/{slug}/. Use this instead of typing base64. Optional setAsHero+alt.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        slug: { type: "string" },
+        filename: { type: "string" },
         alt: { type: "string" },
         setAsHero: { type: "boolean" },
       },

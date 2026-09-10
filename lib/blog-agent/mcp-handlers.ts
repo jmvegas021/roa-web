@@ -8,7 +8,9 @@ import {
   setPostHero,
   uploadBlogImage,
 } from "./manage-media";
+import { createImageUploadTicket } from "./image-upload-ticket";
 import {
+  createUploadArgsSchema,
   deleteImageArgsSchema,
   deletePostArgsSchema,
   publishArgsSchema,
@@ -101,6 +103,26 @@ async function dispatchTool(
         note: result.heroUpdated
           ? "Hero updated. Vercel may take 1–2 minutes."
           : `Insert the markdown image tag in the body, or call set_post_hero with path ${result.path}.`,
+      },
+      null,
+      2
+    );
+  }
+  if (name === "create_blog_image_upload") {
+    const parsed = createUploadArgsSchema.safeParse(args);
+    if (!parsed.success) return fail(parsed.error.message);
+    const ticket = createImageUploadTicket({
+      slug: parsed.data.slug,
+      filename: parsed.data.filename,
+      alt: parsed.data.alt,
+      setAsHero: parsed.data.setAsHero,
+    });
+    return JSON.stringify(
+      {
+        ...ticket,
+        method: "PUT",
+        curl: `curl -T ./hero.webp '${ticket.putUrl}'`,
+        note: "PUT the raw local file bytes within 10 minutes. Do not type base64. Then wait for Vercel.",
       },
       null,
       2

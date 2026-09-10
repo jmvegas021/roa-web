@@ -41,7 +41,7 @@ Never GitHub MCP. Never the Anthropic GitHub connector.
 | Delete a post | `delete_blog_post` (`confirm: true`) |
 | Stock photos | `list_hero_images` |
 | Photos already on this post | `list_post_images` |
-| Add a photo | `upload_blog_image` (`imageUrl` https preferred; `data` only for tiny files) |
+| Add a photo | `upload_blog_image` (`imageUrl`) or `create_blog_image_upload` then PUT the local file |
 | Point hero at an existing path | `set_post_hero` |
 | Remove an uploaded photo | `delete_blog_image` (`confirm: true`) |
 
@@ -59,7 +59,9 @@ Use `mode: edit` on a live slug. Set `updatedAt` to today. Do not change `slug` 
 
 ### Images
 
-If the photo already has a public https URL (Library of Congress, Wikimedia, a CDN), fetch it on the server:
+The server commits images to `public/images/blog/{slug}/` on GitHub (then Vercel deploys them). Never GitHub MCP. Never type base64. Never tell Kevin the MCP cannot accept images.
+
+**Public source (Library of Congress, Wikimedia, a CDN):**
 
 ```
 upload_blog_image
@@ -70,13 +72,33 @@ upload_blog_image
   setAsHero: true
 ```
 
-Do **not** paste base64 for files larger than ~20KB — the tool call will corrupt. `data` is only a fallback for tiny files. Omit `mediaType` when using `imageUrl`; the server reads the bytes. Max ~1.2MB decoded. webp/jpeg/png only. The server fixes the filename extension to match the bytes.
+Do not crop-then-rehost. Use the public https file. The server downloads it and commits it.
 
-If `upload_blog_image` does not show `imageUrl`, the connector is stale: remove **Kevin Shoun Blog** and add it again, then restart Claude.
+**Local file in Cowork/Desktop (Kevin attached a photo, or you cropped one):**
+
+```
+create_blog_image_upload
+  slug: things-to-do-in-salado-texas
+  filename: hero.webp
+  alt: Historic white two-story saloon building with wraparound porches in downtown Salado, Texas
+  setAsHero: true
+```
+
+Then PUT the raw bytes (not base64) to `putUrl`:
+
+```
+curl -T ./hero.webp '<putUrl>'
+```
+
+If PUT/network fails, fall back to `upload_blog_image` + `imageUrl` of the original public source. Do not ask Kevin to host a file. Do not shrink and type base64.
+
+Writes need the connector header `Authorization: Bearer <secret>`. Auth None, not OAuth. Do not click Connect.
+
+If `create_blog_image_upload` is missing, the connector is stale: remove **Kevin Shoun Blog** and add it again.
 
 For an in-body still, omit `setAsHero` and insert `![alt](/images/blog/{slug}/{filename})` then `publish_blog_post` mode edit.
 
-If there is no new file, `list_hero_images` then `set_post_hero`. Do not invent paths. Do not ask Kevin to host a file just to get a URL.
+If there is no new file, `list_hero_images` then `set_post_hero`. Do not invent paths.
 
 On success, hand off `canonicalUrl`. Vercel often needs 1–2 minutes.
 

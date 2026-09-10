@@ -19,6 +19,7 @@ test("list and suggest tools are public; publish and upload stay protected", () 
   assert.equal(isPublicMcpRequest("tools/call", "list_post_images"), true);
   assert.equal(isPublicMcpRequest("tools/call", "publish_blog_post"), false);
   assert.equal(isPublicMcpRequest("tools/call", "upload_blog_image"), false);
+  assert.equal(isPublicMcpRequest("tools/call", "create_blog_image_upload"), false);
   assert.equal(isPublicMcpRequest("tools/call", "set_post_hero"), false);
   assert.equal(isPublicMcpRequest("tools/call", "delete_blog_post"), false);
   assert.equal(mcpToolNameFromBody({ params: { name: "list_blog_posts" } }), "list_blog_posts");

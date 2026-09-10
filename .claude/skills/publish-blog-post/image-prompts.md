@@ -31,7 +31,7 @@ Keep the frame specific to the post’s place. A relocation piece to Belton shou
 
 ## When Kevin provides a photo
 
-Use `upload_blog_image` on the Kevin Shoun Blog connector. Prefer `imageUrl` (public https). The server downloads the file. Use base64 `data` only for tiny files (~20KB). Never paste a 100KB+ base64 string. Optional `setAsHero` + honest `alt`. Do not tell him the MCP cannot accept images.
+Use `upload_blog_image` with `imageUrl` when the photo already has a public https URL. For a local attached file, `create_blog_image_upload` then PUT the bytes to `putUrl`. Never type base64. Never tell him the MCP cannot accept images.
 
 If he has no file and no source URL, call `list_hero_images` or `list_post_images` and `set_post_hero`.
 
