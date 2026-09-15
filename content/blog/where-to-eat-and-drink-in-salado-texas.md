@@ -13,8 +13,10 @@ tags:
 category: guides
 featured: false
 priority: 5
-heroImage: /images/blog/where-to-eat-and-drink-in-salado-texas/hero.jpg
-heroAlt: 'The Stagecoach Inn''s two-story galleried porch and balustrade in Salado, Texas'
+heroImage: /images/blog/where-to-eat-and-drink-in-salado-texas/bar-1859-hero.jpg
+heroAlt: >-
+  Bar 1859's back bar lined with tequila and mezcal, with the venue's
+  illuminated sign, in Salado, Texas
 keywords:
   - Salado Texas restaurants
   - Salado Texas bars
