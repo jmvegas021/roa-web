@@ -1,8 +1,10 @@
 ---
-title: "Buying in Salado vs Belton"
-description: "How Salado and Belton differ for buyers — creek-side estates versus lake living — from the Office of Kevin Shoun in Central Texas."
+title: Buying in Salado vs Belton
+description: >-
+  How Salado and Belton differ for buyers — creek-side estates versus lake
+  living — from the Office of Kevin Shoun in Central Texas.
 slug: buying-in-salado-vs-belton
-publishedAt: "2026-08-13"
+publishedAt: '2026-08-13'
 author: Kevin Shoun
 tags:
   - salado
@@ -12,16 +14,18 @@ tags:
 category: guides
 featured: true
 priority: 8
-heroImage: /images/blog/buying-in-salado-vs-belton/hero.webp
-heroAlt: Live oaks and limestone along Salado Creek in Salado, Texas
+heroImage: /images/blog/buying-in-salado-vs-belton/creek.jpg
+heroAlt: >-
+  Salado Creek's low-water crossing and tree canopy near Main Street in Salado,
+  Texas
 keywords:
   - Salado TX homes
   - Belton TX real estate
   - buying in Salado
   - Lake Belton homes
   - Central Texas relocation
+updatedAt: '2026-09-15'
 ---
-
 Salado and Belton sit a few miles apart on I-35, yet they ask different things of a buyer. One is a creek village with a Main Street cadence. The other is a small city organized around a lake, a courthouse square, and established neighborhoods. Choosing between them is less about which is “better” and more about which daily life you want to own.
 
 This is a character guide — not a price sheet. Markets move. The feel of a place does not.
