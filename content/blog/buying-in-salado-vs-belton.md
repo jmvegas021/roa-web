@@ -91,3 +91,5 @@ Yes — and you should, once. After that, pick a primary search and a comparison
 ### Do I need to live on the creek or the lake to justify the move?
 
 No. Creek and lake explain the character of each town. Plenty of excellent streets sit a few minutes off the water and still deliver the cadence you came for. Setting is a spectrum, not a binary.
+
+*Hero photo: Salado Creek, © Darrylpearson, licensed [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), via Wikimedia Commons.*
