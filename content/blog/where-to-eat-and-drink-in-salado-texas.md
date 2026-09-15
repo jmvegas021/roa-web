@@ -1,8 +1,10 @@
 ---
-title: "Where to Eat and Drink in Salado, Texas: 4 Local Favorites"
-description: "A local's guide to Salado, Texas dining — Bar 1859, Barrow Brewing, Alexander's, and the historic Stagecoach Inn."
+title: 'Where to Eat and Drink in Salado, Texas: 4 Local Favorites'
+description: >-
+  A local's guide to Salado, Texas dining — Bar 1859, Barrow Brewing,
+  Alexander's, and the historic Stagecoach Inn.
 slug: where-to-eat-and-drink-in-salado-texas
-publishedAt: "2026-09-15"
+publishedAt: '2026-09-15'
 author: Kevin Shoun
 tags:
   - salado
@@ -12,7 +14,7 @@ category: guides
 featured: false
 priority: 5
 heroImage: /images/blog/where-to-eat-and-drink-in-salado-texas/hero.jpg
-heroAlt: The Stagecoach Inn's two-story galleried porch and balustrade in Salado, Texas
+heroAlt: 'The Stagecoach Inn''s two-story galleried porch and balustrade in Salado, Texas'
 keywords:
   - Salado Texas restaurants
   - Salado Texas bars
@@ -21,6 +23,7 @@ keywords:
   - Bar 1859 Salado
   - Alexander's Craft Cocktails Salado
   - things to do in Salado Texas
+updatedAt: '2026-09-15'
 ---
 Where to eat and drink in Salado, Texas comes down to four addresses within a few blocks of the creek: a cocktail bar on Main Street, a brewery on Royal Street, a steakhouse at the water's edge, and a dining room that has fed travelers since 1947. None of the four requires a car once you're parked in the village, and together they cover most of what a weekend visit — or a Tuesday night, for people who live here — actually asks for.
 
