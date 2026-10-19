@@ -169,32 +169,32 @@
       "source": "seed"
     },
     {
-      "id": "best-patios-for-an-evening-out-in-salado-texas",
-      "title": "Best patios for an evening out in Salado, Texas",
-      "primaryKeyword": "Best patios for an evening out in Salado, Texas",
+      "id": "best-neighborhoods-near-baylor-scott-and-white-medical-center-in-temple-tx",
+      "title": "Best Neighborhoods Near Baylor Scott and White Medical Center in Temple, TX",
+      "primaryKeyword": "Best Neighborhoods Near Baylor Scott and White Medical Center in Temple, TX",
       "secondaries": [],
-      "category": "guides",
-      "place": "salado",
+      "category": "neighborhoods",
+      "place": "temple",
       "status": "queued",
       "source": "follow-up"
     },
     {
-      "id": "a-date-night-dining-guide-to-salado-and-belton",
-      "title": "A date-night dining guide to Salado and Belton",
-      "primaryKeyword": "A date-night dining guide to Salado and Belton",
+      "id": "harker-heights-neighborhood-guide-best-areas-near-fort-hood",
+      "title": "Harker Heights Neighborhood Guide: Best Areas Near Fort Hood",
+      "primaryKeyword": "Harker Heights Neighborhood Guide: Best Areas Near Fort Hood",
       "secondaries": [],
-      "category": "guides",
-      "place": "salado",
+      "category": "neighborhoods",
+      "place": "harker-heights",
       "status": "queued",
       "source": "follow-up"
     },
     {
-      "id": "seasonal-and-holiday-dining-in-salado-during-the-scottish-festival-and-christmas",
-      "title": "Seasonal and holiday dining in Salado during the Scottish Festival and Christmas Stroll",
-      "primaryKeyword": "Seasonal and holiday dining in Salado during the Scottish Festival and Christmas",
+      "id": "understanding-closing-costs-in-texas-a-buyer-s-breakdown",
+      "title": "Understanding Closing Costs in Texas: A Buyer's Breakdown",
+      "primaryKeyword": "Understanding Closing Costs in Texas: A Buyer's Breakdown",
       "secondaries": [],
       "category": "guides",
-      "place": "salado",
+      "place": "central-texas",
       "status": "queued",
       "source": "follow-up"
     }
