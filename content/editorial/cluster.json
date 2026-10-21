@@ -95,8 +95,9 @@
       ],
       "category": "market",
       "place": "central-texas",
-      "status": "queued",
-      "source": "seed"
+      "status": "published",
+      "source": "seed",
+      "publishedSlug": "how-buyers-should-read-bell-county-conditions"
     },
     {
       "id": "austin-to-salado-move",
@@ -194,6 +195,26 @@
       "primaryKeyword": "Understanding Closing Costs in Texas: A Buyer's Breakdown",
       "secondaries": [],
       "category": "guides",
+      "place": "central-texas",
+      "status": "queued",
+      "source": "follow-up"
+    },
+    {
+      "id": "what-salado-sellers-should-price-for-in-a-balanced-market",
+      "title": "What Salado sellers should price for in a balanced market",
+      "primaryKeyword": "What Salado sellers should price for in a balanced market",
+      "secondaries": [],
+      "category": "market",
+      "place": "salado",
+      "status": "queued",
+      "source": "follow-up"
+    },
+    {
+      "id": "reading-days-on-market-on-a-bell-county-listing",
+      "title": "Reading days-on-market on a Bell County listing",
+      "primaryKeyword": "Reading days-on-market on a Bell County listing",
+      "secondaries": [],
+      "category": "market",
       "place": "central-texas",
       "status": "queued",
       "source": "follow-up"
